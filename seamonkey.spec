@@ -7,7 +7,7 @@
 %define lib_nss_name %mklibname nss %{major_nss}
 #warning : always end release date with 00 
 # (it should be the hour of build but it is not significant for rpm)
-%define releasedate 2007022100
+%define releasedate 2007050900
 %define french_policy 0
 %define dirversion  %{version}
 %define mozillalibdir %{_libdir}/seamonkey-%{dirversion}
@@ -31,7 +31,7 @@
 %define toolkit		 gtk2
 
 # used for enigmail and protozilla sources:
-%define enigmail_version 0.94.2
+%define enigmail_version 0.95.0
 
 %{?_with_enigmail: %global build_enigmail 1}
 
@@ -84,8 +84,8 @@
 
 Name:      seamonkey
 Summary:   SeaMonkey, open-source web browser
-Version:   1.1.1
-Release:   %mkrel 2
+Version:   1.1.2
+Release:   %mkrel 1
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
@@ -100,15 +100,15 @@ Source99:  locale.alias
 
 Source100: %{name}-1.1.be-BY.langpack.xpi
 Source101: %{name}-1.1.ca-AD.langpack.xpi
-Source102: %{name}-1.1.1.cs-CZ.langpack.xpi
-Source103: %{name}-1.1.1.de-AT.langpack.xpi
-Source104: %{name}-1.1.el-GR.langpack.xpi
+Source102: %{name}-1.1.2.cs-CZ.langpack.xpi
+Source103: %{name}-1.1.2.de-AT.langpack.xpi
+Source104: %{name}-1.1.2.el-GR.langpack.xpi
 Source105: %{name}-1.1.en-GB.langpack.xpi
-Source106: %{name}-1.1.1.es-ES.langpack.xpi
+Source106: %{name}-1.1.2.es-ES.langpack.xpi
 Source108: %{name}-1.1.fr-FR.langpack.xpi
 Source109: %{name}-1.1.he-IL.langpack.xpi
-Source110: %{name}-1.1.1.it-IT.langpack.xpi
-Source114: %{name}-1.1.1.pl-PL.langpack.xpi
+Source110: %{name}-1.1.2.it-IT.langpack.xpi
+Source114: %{name}-1.1.2.pl-PL.langpack.xpi
 Source115: %{name}-1.1.ru-RU.langpack.xpi
 
 #Source107: %{name}-1.0.eu-ES.langpack.xpi
