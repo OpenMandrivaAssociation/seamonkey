@@ -1439,6 +1439,9 @@ fi
 %{_datadir}/applications/mandriva-%{name}-news.desktop
 %{_datadir}/applications/mandriva-%{name}-addressbook.desktop
 %dir %{mozillalibdir}
+%{mozillalibdir}/isp/SpamAssassin.sfd
+%{mozillalibdir}/isp/SpamPal.sfd
+
 
 %files irc -f %{_tmppath}/mozilla-chat.list
 %defattr(-,root,root)
