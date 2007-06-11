@@ -95,27 +95,28 @@ Source5:   mozilla-firefox-bookmarks-mdk2006.tar.bz2
 Source6:   mozilla-1.7-libart_lgpl.tar.bz2
 %if %{enable_l10n}
 Source99:  locale.alias
-%define l10ns be-BY ca-AD cs-CZ de-AT el-GR en-GB es-ES fr-FR he-IL it-IT pl-PL ru-RU
-# not up-to-date: eu-ES ka-GE nb-NO ne-NP sv-SE tr-TR
+%define l10ns be-BY ca-AD cs-CZ de-AT el-GR en-GB es-ES fr-FR he-IL it-IT pl-PL ru-RU sv-SE pt-BR
+# not up-to-date: eu-ES ka-GE nb-NO ne-NP tr-TR
 
-Source100: %{name}-1.1.be-BY.langpack.xpi
-Source101: %{name}-1.1.ca-AD.langpack.xpi
+Source100: %{name}-1.1.1.be-BY.langpack.xpi
+Source101: %{name}-1.1.1.ca-AD.langpack.xpi
 Source102: %{name}-1.1.2.cs-CZ.langpack.xpi
 Source103: %{name}-1.1.2.de-AT.langpack.xpi
 Source104: %{name}-1.1.2.el-GR.langpack.xpi
 Source105: %{name}-1.1.en-GB.langpack.xpi
 Source106: %{name}-1.1.2.es-ES.langpack.xpi
-Source108: %{name}-1.1.fr-FR.langpack.xpi
-Source109: %{name}-1.1.he-IL.langpack.xpi
+Source108: %{name}-1.1.1.fr-FR.langpack.xpi
+Source109: %{name}-1.1.1.he-IL.langpack.xpi
 Source110: %{name}-1.1.2.it-IT.langpack.xpi
 Source114: %{name}-1.1.2.pl-PL.langpack.xpi
-Source115: %{name}-1.1.ru-RU.langpack.xpi
+Source115: %{name}-1.1.2.ru-RU.langpack.xpi
+Source116: %{name}-1.1.1.sv-SE.langpack.xpi
+Source118: %{name}-1.1.2.pt-BR.langpack.xpi
 
 #Source107: %{name}-1.0.eu-ES.langpack.xpi
 #Source111: %{name}-1.0.ka-GE.langpack.xpi
 #Source112: %{name}-1.0.nb-NO.langpack.xpi
 #Source113: %{name}-1.0.2.ne-NP.langpack.xpi
-#Source116: %{name}-1.0.sv-SE.langpack.xpi
 #Source117: %{name}-1.0.tr-TR.langpack.xpi
 %endif
 # (fc) 0.9.8-1mdk fix loading of file through command line (contributed by Chmouel) ,
@@ -802,12 +803,13 @@ unzip -o %{SOURCE109}
 unzip -o %{SOURCE110}
 unzip -o %{SOURCE114}
 unzip -o %{SOURCE115}
+unzip -o %{SOURCE116}
+unzip -o %{SOURCE118}
 
 #unzip -o %{SOURCE107}
 #unzip -o %{SOURCE111}
 #unzip -o %{SOURCE112}
 #unzip -o %{SOURCE113}
-#unzip -o %{SOURCE116}
 #unzip -o %{SOURCE117}
 
 for lang in %{l10ns}; do
@@ -1439,9 +1441,7 @@ fi
 %{_datadir}/applications/mandriva-%{name}-news.desktop
 %{_datadir}/applications/mandriva-%{name}-addressbook.desktop
 %dir %{mozillalibdir}
-%{mozillalibdir}/isp/SpamAssassin.sfd
-%{mozillalibdir}/isp/SpamPal.sfd
-
+%{mozillalibdir}/isp
 
 %files irc -f %{_tmppath}/mozilla-chat.list
 %defattr(-,root,root)
