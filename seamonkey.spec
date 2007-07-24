@@ -7,7 +7,7 @@
 %define lib_nss_name %mklibname nss %{major_nss}
 #warning : always end release date with 00 
 # (it should be the hour of build but it is not significant for rpm)
-%define releasedate 2007050900
+%define releasedate 2007071900
 %define french_policy 0
 %define dirversion  %{version}
 %define mozillalibdir %{_libdir}/seamonkey-%{dirversion}
@@ -84,7 +84,7 @@
 
 Name:      seamonkey
 Summary:   SeaMonkey, open-source web browser
-Version:   1.1.2
+Version:   1.1.3
 Release:   %mkrel 1
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
@@ -220,6 +220,7 @@ Conflicts: j2re = 1.4.0-beta3
 Conflicts: j2sdk = 1.4.0-beta3
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
+BuildRequires:	autoconf2.1
 BuildRequires:	libjpeg-devel libpng-devel libIDL-devel
 BuildRequires:  zip tcsh
 %if %{mdkversion} >= 200610
@@ -500,7 +501,6 @@ rm -rf $RPM_BUILD_ROOT
 %patch174 -p1 -b .prdtoa
 %if %build_pie
 %patch178 -p1 -b .pie
-autoconf
 %endif
 
 %patch251 -p1 -b .defaultsize
@@ -540,8 +540,8 @@ tar xjf %{SOURCE24} -C mailnews/base/resources/locale/en-US
 %__perl -p -i -e 's|\-0|\-9|g' config/make-jars.pl
 
 %build
-#needed by patch 182 & 205 & 262
-autoconf
+#needed by patch 178, 182 & 205 & 262
+autoconf-2.13
 
 # needed by patch291
 pushd directory/c-sdk
