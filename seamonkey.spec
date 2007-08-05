@@ -1,13 +1,15 @@
 %define major_nspr 4
 %define epoch_nspr 1
 %define lib_nspr_name %mklibname nspr %{major_nspr}
+%define devel_nspr_name %mklibname nspr
 %define major_nss 3
 %define epoch_nss 1
 %define epoch_mozilla 0
 %define lib_nss_name %mklibname nss %{major_nss}
+%define devel_nss_name %mklibname nss
 #warning : always end release date with 00 
 # (it should be the hour of build but it is not significant for rpm)
-%define releasedate 2007071900
+%define releasedate 2007080500
 %define french_policy 0
 %define dirversion  %{version}
 %define mozillalibdir %{_libdir}/seamonkey-%{dirversion}
@@ -84,7 +86,7 @@
 
 Name:      seamonkey
 Summary:   SeaMonkey, open-source web browser
-Version:   1.1.3
+Version:   1.1.4
 Release:   %mkrel 1
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
@@ -101,17 +103,17 @@ Source99:  locale.alias
 Source100: %{name}-1.1.1.be-BY.langpack.xpi
 Source101: %{name}-1.1.1.ca-AD.langpack.xpi
 Source102: %{name}-1.1.2.cs-CZ.langpack.xpi
-Source103: %{name}-1.1.2.de-AT.langpack.xpi
+Source103: %{name}-1.1.4.de-AT.langpack.xpi
 Source104: %{name}-1.1.2.el-GR.langpack.xpi
 Source105: %{name}-1.1.en-GB.langpack.xpi
-Source106: %{name}-1.1.2.es-ES.langpack.xpi
+Source106: %{name}-1.1.4.es-ES.langpack.xpi
 Source108: %{name}-1.1.1.fr-FR.langpack.xpi
 Source109: %{name}-1.1.1.he-IL.langpack.xpi
 Source110: %{name}-1.1.2.it-IT.langpack.xpi
 Source114: %{name}-1.1.2.pl-PL.langpack.xpi
 Source115: %{name}-1.1.2.ru-RU.langpack.xpi
-Source116: %{name}-1.1.1.sv-SE.langpack.xpi
-Source118: %{name}-1.1.2.pt-BR.langpack.xpi
+Source116: %{name}-1.1.4.sv-SE.langpack.xpi
+Source118: %{name}-1.1.4.pt-BR.langpack.xpi
 
 #Source107: %{name}-1.0.eu-ES.langpack.xpi
 #Source111: %{name}-1.0.ka-GE.langpack.xpi
@@ -294,7 +296,7 @@ facilities. These facilities include threads, thread synchronization,
 normal file and network I/O, interval timing and calendar time, basic
 memory management (malloc and free) and shared library linking.
 
-%package -n %{lib_nspr_name}-devel
+%package -n %{devel_nspr_name}
 Epoch:		%{epoch_nspr}
 Summary:	Netscape Portable Runtime library - development files
 Group:		Development/C++
@@ -303,7 +305,7 @@ Obsoletes:	nspr-devel
 Provides:	nspr-devel = %{version}-%{release}
 Provides:	libnspr-devel = %{version}-%{release}
 
-%description -n %{lib_nspr_name}-devel
+%description -n %{devel_nspr_name}
 Header files for doing development with the Netscape Portable Runtime.
 
 %package -n %{lib_nss_name}
@@ -321,7 +323,7 @@ applications. Applications built with NSS can support SSL v2 and v3,
 TLS, PKCS #5, PKCS #7, PKCS #11, PKCS #12, S/MIME, X.509 v3 certificates,
 and other security standards. 
 
-%package -n %{lib_nss_name}-devel
+%package -n %{devel_nss_name}
 Epoch:		%{epoch_nss}
 Summary:	Network Security Services (NSS) - development files
 Group:		Development/C++
@@ -330,7 +332,7 @@ Requires:	%{lib_nspr_name}-devel = %{epoch_nspr}:%{version}-%{release}
 Provides:	libnss-devel = %{version}-%{release}
 Provides:	nss-devel = %{version}-%{release}
 
-%description -n %{lib_nss_name}-devel
+%description -n %{devel_nss_name}
 Header files to doing development with Network Security Services.
 %endif 
 
@@ -338,7 +340,7 @@ Header files to doing development with Network Security Services.
 Summary:	SeaMonkey development files
 Group:		Development/Other
 Requires:	%{name} = %{epoch_mozilla}:%{version}-%{release}
-Requires:	%{lib_nspr_name}-devel 
+Requires:	%{devel_nspr_name}
 Provides:	mozilla-devel = 0:1.8-1mdk
 Obsoletes:	mozilla-devel
 %description devel
@@ -954,32 +956,7 @@ echo GRE_PATH=%{mozillalibdir} >> $RPM_BUILD_ROOT%{_sysconfdir}/gre.conf
 %endif
 
 # installs menu file
-install -m 755 -d $RPM_BUILD_ROOT%{_menudir}
 install -m 755 -d $RPM_BUILD_ROOT%{_datadir}/applications
-
-cat << EOF >> $RPM_BUILD_ROOT%{_menudir}/%{name}
-?package(%{name}):\
-  icon="seamonkey.png"\
-  needs="x11"\
-  section="Networking/WWW"\
-  title="SeaMonkey"\
-  longtitle="The free and open source web browser"\
-  mimetypes="text/html" \
-  accept_url="true" \
-  multiple_files="false" \
-  command="%{_bindir}/seamonkey" \
-  startup_notify="true" \
-  xdg="true"
-?package(%{name}):\
-  icon="seamonkey.png"\
-  needs="x11"\
-  section="Internet/Web Editors"\
-  title="Mozilla Composer"\
-  longtitle="The free and open source web browser"\
-  command="%{_bindir}/seamonkey -edit" \
-  startup_notify="true" \
-  xdg="true"
-EOF
 
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
@@ -1007,38 +984,6 @@ Type=Application
 StartupNotify=true
 Categories=GTK;Network;WebDevelopment;X-MandrivaLinux-Internet-WebEditors;
 StartupWMClass=Seamonkey-bin
-EOF
-
-
-# installs menu file
-cat << EOF >> $RPM_BUILD_ROOT%{_menudir}/%{name}-mail
-?package(%{name}-mail):\
-  icon="seamonkey.png"\
-  needs="x11"\
-  section="Networking/Mail"\
-  title="SeaMonkey Messenger"\
-  longtitle="The free and open source web browser"\
-  command="%{_bindir}/seamonkey  -mail" \
-  startup_notify="true" \
-  xdg="true"
-?package(%{name}-mail):\
-  icon="seamonkey.png"\
-  needs="x11"\
-  section="Networking/Mail"\
-  title="SeaMonkey AddressBook"\
-  longtitle="The free and open source web browser"\
-  command="%{_bindir}/seamonkey  -addressbook" \
-  startup_notify="true" \
-  xdg="true"
-?package(%{name}-mail):\
-  icon="seamonkey.png"\
-  needs="x11"\
-  section="Networking/News"\
-  title="SeaMonkey News"\
-  longtitle="The free and open source web browser"\
-  command="%{_bindir}/seamonkey  -news" \
-  startup_notify="true" \
-  xdg="true"
 EOF
 
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}-mail.desktop << EOF
@@ -1085,18 +1030,6 @@ EOF
 
 %if %{build_xmlterm}
 # installs menu file
-cat << EOF >> $RPM_BUILD_ROOT%{_menudir}/%{name}-xmlterm
-?package(%{name}-xmlterm):\
-  icon="seamonkey.png"\
-  needs="x11"\
-  section="Terminals"\
-  title="SeaMonkey XTerm"\
-  longtitle="XTerm implemented with Mozilla toolkit"\
-  command="%{_bindir}/seamonkey -terminal" \
-  startup_notify="true" \
-  xdg="true"
-EOF
-
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}-xmlterm.desktop << EOF
 [Desktop Entry]
 Encoding=UTF-8
@@ -1370,7 +1303,6 @@ fi
 %config(noreplace) %{_sysconfdir}/gre.conf
 %endif
 %{_mandir}/man1/*
-%{_menudir}/%{name}
 %{_datadir}/applications/mandriva-%{name}.desktop
 %{_datadir}/applications/mandriva-%{name}-composer.desktop
 %{_miconsdir}/*.png
@@ -1436,7 +1368,6 @@ fi
 
 %files mail -f %{_tmppath}/mozilla-mail.list
 %defattr(-,root,root)
-%{_menudir}/%{name}-mail
 %{_datadir}/applications/mandriva-%{name}-mail.desktop
 %{_datadir}/applications/mandriva-%{name}-news.desktop
 %{_datadir}/applications/mandriva-%{name}-addressbook.desktop
@@ -1607,7 +1538,6 @@ fi
 %{_bindir}/xls
 %{mozillalibdir}/chrome/xmlterm.jar
 %{mozillalibdir}/components/*xmlterm*
-%{_menudir}/%{name}-xmlterm
 %{_datadir}/applications/mandriva-%{name}-xmlterm.desktop
 %endif
 
@@ -1635,7 +1565,7 @@ fi
 %files -n %{lib_nspr_name} -f %{_tmppath}/mozilla-nspr.list
 %defattr(-, root, root)
 
-%files -n %{lib_nspr_name}-devel -f %{_tmppath}/mozilla-nspr-devel.list
+%files -n %{devel_nspr_name} -f %{_tmppath}/mozilla-nspr-devel.list
 %defattr(-, root, root)
 %dir %{mozillaincludedir}
 %dir  %{mozillaincludedir}/nspr
@@ -1649,7 +1579,7 @@ fi
 %defattr(-, root, root)
 %{_libdir}/*.chk
 
-%files -n %{lib_nss_name}-devel -f %{_tmppath}/mozilla-nss-devel.list
+%files -n %{devel_nss_name} -f %{_tmppath}/mozilla-nss-devel.list
 %defattr(-, root, root)
 %dir  %{mozillaincludedir}/nss
 %{_libdir}/pkgconfig/mozilla-nss.pc
