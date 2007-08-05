@@ -33,7 +33,7 @@
 %define toolkit		 gtk2
 
 # used for enigmail and protozilla sources:
-%define enigmail_version 0.95.0
+%define enigmail_version 0.95.3
 
 %{?_with_enigmail: %global build_enigmail 1}
 
