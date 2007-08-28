@@ -960,7 +960,6 @@ install -m 755 -d $RPM_BUILD_ROOT%{_datadir}/applications
 
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=SeaMonkey Navigator
 Comment=Seamonkey Navigator web browser
 Exec=%{_bindir}/seamonkey %u
@@ -974,7 +973,6 @@ EOF
 
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}-composer.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=SeaMonkey Composer
 Comment=Seamonkey Composer HTML editor
 Exec=%{_bindir}/seamonkey -edit %u
@@ -988,7 +986,6 @@ EOF
 
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}-mail.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=SeaMonkey Mail
 Comment=Seamonkey Mail & Newsgroups e-mail client
 Exec=%{_bindir}/seamonkey -mail
@@ -1002,7 +999,6 @@ EOF
 
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}-addressbook.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=SeaMonkey Address Book
 Comment=Seamonkey Address Book
 Exec=%{_bindir}/seamonkey -addressbook
@@ -1016,7 +1012,6 @@ EOF
 
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}-news.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=SeaMonkey News
 Comment=Seamonkey Mail & Newsgroups news reader
 Exec=%{_bindir}/seamonkey -news
@@ -1032,7 +1027,6 @@ EOF
 # installs menu file
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}-xmlterm.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=SeaMonkey XMLTerm
 Comment=Seamonkey XMLTerm terminal emulator implemented with Mozilla toolkit
 Exec=%{_bindir}/seamonkey -terminal
