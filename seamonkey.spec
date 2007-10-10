@@ -963,7 +963,7 @@ cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 Name=SeaMonkey Navigator
 Comment=Seamonkey Navigator web browser
 Exec=%{_bindir}/seamonkey %u
-Icon=seamonkey.png
+Icon=seamonkey
 Terminal=false
 Type=Application
 StartupNotify=true
@@ -976,7 +976,7 @@ cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}-composer.desktop 
 Name=SeaMonkey Composer
 Comment=Seamonkey Composer HTML editor
 Exec=%{_bindir}/seamonkey -edit %u
-Icon=seamonkey.png
+Icon=seamonkey
 Terminal=false
 Type=Application
 StartupNotify=true
@@ -989,7 +989,7 @@ cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}-mail.desktop << E
 Name=SeaMonkey Mail
 Comment=Seamonkey Mail & Newsgroups e-mail client
 Exec=%{_bindir}/seamonkey -mail
-Icon=seamonkey.png
+Icon=seamonkey
 Terminal=false
 Type=Application
 StartupNotify=true
@@ -1002,7 +1002,7 @@ cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}-addressbook.deskt
 Name=SeaMonkey Address Book
 Comment=Seamonkey Address Book
 Exec=%{_bindir}/seamonkey -addressbook
-Icon=seamonkey.png
+Icon=seamonkey
 Terminal=false
 Type=Application
 StartupNotify=true
@@ -1015,7 +1015,7 @@ cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}-news.desktop << E
 Name=SeaMonkey News
 Comment=Seamonkey Mail & Newsgroups news reader
 Exec=%{_bindir}/seamonkey -news
-Icon=seamonkey.png
+Icon=seamonkey
 Terminal=false
 Type=Application
 StartupNotify=true
@@ -1030,7 +1030,7 @@ cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}-xmlterm.desktop <
 Name=SeaMonkey XMLTerm
 Comment=Seamonkey XMLTerm terminal emulator implemented with Mozilla toolkit
 Exec=%{_bindir}/seamonkey -terminal
-Icon=seamonkey.png
+Icon=seamonkey
 Terminal=false
 Type=Application
 StartupNotify=true
