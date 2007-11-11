@@ -1,7 +1,7 @@
 %define major_nspr 4
 %define epoch_nspr 1
 %define lib_nspr_name %mklibname nspr %{major_nspr}
-%define devel_nspr_name %mklibname nspr
+%define devel_nspr_name %mklibname -d nspr
 %define major_nss 3
 %define epoch_nss 1
 %define epoch_mozilla 0
@@ -9,7 +9,7 @@
 %define devel_nss_name %mklibname nss
 #warning : always end release date with 00 
 # (it should be the hour of build but it is not significant for rpm)
-%define releasedate 2007080500
+%define releasedate 2007110500
 %define french_policy 0
 %define dirversion  %{version}
 %define mozillalibdir %{_libdir}/seamonkey-%{dirversion}
@@ -33,7 +33,7 @@
 %define toolkit		 gtk2
 
 # used for enigmail and protozilla sources:
-%define enigmail_version 0.95.3
+%define enigmail_version 0.95.5
 
 %{?_with_enigmail: %global build_enigmail 1}
 
@@ -86,7 +86,7 @@
 
 Name:      seamonkey
 Summary:   SeaMonkey, open-source web browser
-Version:   1.1.4
+Version:   1.1.6
 Release:   %mkrel 1
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
@@ -97,23 +97,26 @@ Source5:   mozilla-firefox-bookmarks-mdk2006.tar.bz2
 Source6:   mozilla-1.7-libart_lgpl.tar.bz2
 %if %{enable_l10n}
 Source99:  locale.alias
-%define l10ns be-BY ca-AD cs-CZ de-AT el-GR en-GB es-ES fr-FR he-IL it-IT pl-PL ru-RU sv-SE pt-BR
+%define l10ns be-BY ca-AD cs-CZ de-AT el-GR en-GB es-ES fr-FR he-IL it-IT ja-JP nl-NL pl-PL ru-RU sv-SE pt-BR ur-PK
 # not up-to-date: eu-ES ka-GE nb-NO ne-NP tr-TR
 
-Source100: %{name}-1.1.1.be-BY.langpack.xpi
-Source101: %{name}-1.1.1.ca-AD.langpack.xpi
-Source102: %{name}-1.1.2.cs-CZ.langpack.xpi
-Source103: %{name}-1.1.4.de-AT.langpack.xpi
+Source100: %{name}-1.1.2.be-BY.langpack.xpi
+Source101: %{name}-1.1.4.ca-AD.langpack.xpi
+Source102: %{name}-1.1.6.cs-CZ.langpack.xpi
+Source103: %{name}-1.1.6.de-AT.langpack.xpi
 Source104: %{name}-1.1.2.el-GR.langpack.xpi
 Source105: %{name}-1.1.en-GB.langpack.xpi
-Source106: %{name}-1.1.4.es-ES.langpack.xpi
-Source108: %{name}-1.1.1.fr-FR.langpack.xpi
-Source109: %{name}-1.1.1.he-IL.langpack.xpi
-Source110: %{name}-1.1.2.it-IT.langpack.xpi
-Source114: %{name}-1.1.2.pl-PL.langpack.xpi
-Source115: %{name}-1.1.2.ru-RU.langpack.xpi
-Source116: %{name}-1.1.4.sv-SE.langpack.xpi
-Source118: %{name}-1.1.4.pt-BR.langpack.xpi
+Source106: %{name}-1.1.6.es-ES.langpack.xpi
+Source108: %{name}-1.1.6.fr-FR.langpack.xpi
+Source109: %{name}-1.1.2.he-IL.langpack.xpi
+Source110: %{name}-1.1.6.it-IT.langpack.xpi
+Source114: %{name}-1.1.6.pl-PL.langpack.xpi
+Source115: %{name}-1.1.6.ru-RU.langpack.xpi
+Source116: %{name}-1.1.5.sv-SE.langpack.xpi
+Source118: %{name}-1.1.6.pt-BR.langpack.xpi
+Source119: %{name}-1.1.6.ja-JP.langpack.xpi
+Source120: %{name}-1.1.4.nl-NL.langpack.xpi
+Source121: %{name}-1.1.4.ur-PK.langpack.xpi
 
 #Source107: %{name}-1.0.eu-ES.langpack.xpi
 #Source111: %{name}-1.0.ka-GE.langpack.xpi
@@ -207,8 +210,6 @@ Patch278:  mozilla-1.7.5-unknownmousebutton.patch
 Patch281:  mozilla-1.6-gnome-uriloader.patch
 # (cjw) from mozilla-firefox package: disable visibility, applied for arch != x86
 Patch292:  mozilla-firefox-1.5-visibility.patch
-# (cjw) patch101 from mozilla-firefox package
-Patch293:  mozilla-firefox-1.5-pango-cairo.patch
 #
 Patch295:  mozilla-1.7.12-pango-direction.patch
 Patch298:  mozilla-1.7.12-g-application-name.patch
@@ -523,7 +524,6 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %if %build_pango
-%patch293 -p1 -b .pango-cairo
 %patch295 -p1 -b .pango-direction
 %endif
 #
@@ -807,6 +807,9 @@ unzip -o %{SOURCE114}
 unzip -o %{SOURCE115}
 unzip -o %{SOURCE116}
 unzip -o %{SOURCE118}
+unzip -o %{SOURCE119}
+unzip -o %{SOURCE120}
+unzip -o %{SOURCE121}
 
 #unzip -o %{SOURCE107}
 #unzip -o %{SOURCE111}
