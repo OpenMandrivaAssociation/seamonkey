@@ -87,7 +87,7 @@
 Name:      seamonkey
 Summary:   SeaMonkey, open-source web browser
 Version:   1.1.6
-Release:   %mkrel 1
+Release:   %mkrel 2
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
@@ -157,11 +157,6 @@ Patch46:   mozilla-1.7-enigmail-package.patch
 # (fc) 1.1-0.branch.1mdk fix spellchecker includes
 Patch47:   mozilla-1.1-spellcheckerinclude.patch
 # (gb) 1.1-4mdk myspell dictionaries are in /usr/share/dict/ooo/
-# (cjw) does not apply to seamonkey 1.1 - disabled
-#Patch53:   mozilla-1.1-system-myspell-dicts.patch.bz2
-# (gb) 1.1-4mdk hack to handle OOo myspell dictionaries file name
-# (cjw) does not apply to seamonkey 1.1 - disabled
-#Patch54:   mozilla-1.7-spellcheck-full-langname.patch.bz2
 # (fc) 1.3-0.alpha.2mdk google is now search engine by default, add mdk bugzilla in search engines list
 Patch59:   mozilla-1.7-search.patch
 # (fc) 1.4-0.alpha.1mdk allow to change UI font (rawhide + ghibo)
@@ -731,12 +726,18 @@ rm -f %{_tmppath}/mozilla-dom-inspector.list
     --install-dir $RPM_BUILD_ROOT%{mozillalibdir} \
     --install-root %{mozillalibdir}
 
+cat >%{_tmppath}/mozilla-spellchecker-exclude.list <<EOF
+dictionaries/en-US.aff
+dictionaries/en-US.dic
+EOF
+
 rm -f %{_tmppath}/mozilla-spellchecker.list
 %{SOURCE25} --package spellcheck \
     --output-file %{_tmppath}/mozilla-spellchecker.list \
     --package-file xpinstall/packager/packages-unix \
     --install-dir $RPM_BUILD_ROOT%{mozillalibdir} \
-    --install-root %{mozillalibdir}
+    --install-root %{mozillalibdir} \
+    --exclude-file=%{_tmppath}/mozilla-spellchecker-exclude.list
 
 %if %build_enigmail
 #hack to get the enigmail stuff to install:
@@ -1067,7 +1068,8 @@ rm -rf $RPM_BUILD_ROOT%{mozillalibdir}/chrome/{cview,embed-sample,layoutdebug,ta
  $RPM_BUILD_ROOT%{mozillalibdir}/{liblockmodule,libtestmodule,libtr\ansmngr}.so \
  $RPM_BUILD_ROOT%{mozillalibdir}/mozilla-installer-bin \
  $RPM_BUILD_ROOT%{mozillalibdir}/extensions \
- $RPM_BUILD_ROOT%{mozillalibdir}/res/samples
+ $RPM_BUILD_ROOT%{mozillalibdir}/res/samples \
+ $RPM_BUILD_ROOT%{mozillalibdir}/dictionaries
 
 # $RPM_BUILD_ROOT%{mozillalibdir}/res/samples/sampleimages
 
@@ -1096,6 +1098,9 @@ ln -s nss.pc %{buildroot}%{_libdir}/pkgconfig/seamonkey-nss.pc
 %multiarch_binaries $RPM_BUILD_ROOT%{_bindir}/seamonkey-config
 %multiarch_includes $RPM_BUILD_ROOT%{_includedir}/seamonkey-%{version}/{mozilla-config.h,js/jsautocfg.h}
 %endif
+
+# myspell dictionaries
+ln -s ../../share/dict/mozilla $RPM_BUILD_ROOT%{mozillalibdir}/dictionaries
 
 %if %build_debug
 export DONT_STRIP=1
@@ -1547,7 +1552,7 @@ fi
 
 %files spellchecker -f %{_tmppath}/mozilla-spellchecker.list
 %defattr(-,root,root)
-#dir %{mozillalibdir}/components/myspell
+%{mozillalibdir}/dictionaries
 
 %if %build_enigmail
 %files enigmail -f %{_tmppath}/mozilla-enigmail.list
