@@ -9,7 +9,7 @@
 %define devel_nss_name %mklibname nss
 #warning : always end release date with 00 
 # (it should be the hour of build but it is not significant for rpm)
-%define releasedate 2007110500
+%define releasedate 2007112800
 %define french_policy 0
 %define dirversion  %{version}
 %define mozillalibdir %{_libdir}/seamonkey-%{dirversion}
@@ -86,8 +86,8 @@
 
 Name:      seamonkey
 Summary:   SeaMonkey, open-source web browser
-Version:   1.1.6
-Release:   %mkrel 2
+Version:   1.1.7
+Release:   %mkrel 1
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
@@ -103,15 +103,15 @@ Source99:  locale.alias
 Source100: %{name}-1.1.2.be-BY.langpack.xpi
 Source101: %{name}-1.1.4.ca-AD.langpack.xpi
 Source102: %{name}-1.1.6.cs-CZ.langpack.xpi
-Source103: %{name}-1.1.6.de-AT.langpack.xpi
+Source103: %{name}-1.1.7.de-AT.langpack.xpi
 Source104: %{name}-1.1.2.el-GR.langpack.xpi
 Source105: %{name}-1.1.en-GB.langpack.xpi
-Source106: %{name}-1.1.6.es-ES.langpack.xpi
+Source106: %{name}-1.1.7.es-ES.langpack.xpi
 Source108: %{name}-1.1.6.fr-FR.langpack.xpi
 Source109: %{name}-1.1.2.he-IL.langpack.xpi
 Source110: %{name}-1.1.6.it-IT.langpack.xpi
-Source114: %{name}-1.1.6.pl-PL.langpack.xpi
-Source115: %{name}-1.1.6.ru-RU.langpack.xpi
+Source114: %{name}-1.1.7.pl-PL.langpack.xpi
+Source115: %{name}-1.1.7.ru-RU.langpack.xpi
 Source116: %{name}-1.1.5.sv-SE.langpack.xpi
 Source118: %{name}-1.1.6.pt-BR.langpack.xpi
 Source119: %{name}-1.1.6.ja-JP.langpack.xpi
