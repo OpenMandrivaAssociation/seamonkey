@@ -1,7 +1,7 @@
 %define major_nspr 4
 %define epoch_nspr 1
 %define lib_nspr_name %mklibname nspr %{major_nspr}
-%define devel_nspr_name %mklibname -d nspr
+%define devel_nspr_name %mklibname -d nspr %{major_nspr}
 %define major_nss 3
 %define epoch_nss 1
 %define epoch_mozilla 0
@@ -87,7 +87,7 @@
 Name:      seamonkey
 Summary:   SeaMonkey, open-source web browser
 Version:   1.1.7
-Release:   %mkrel 1
+Release:   %mkrel 2
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
