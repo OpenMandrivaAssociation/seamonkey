@@ -217,7 +217,6 @@ Epoch:     %{epoch_mozilla}
 Conflicts: j2re = 1.4.0-beta3
 Conflicts: j2sdk = 1.4.0-beta3
 
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 BuildRequires:	autoconf2.1
 BuildRequires:	libjpeg-devel libpng-devel libIDL-devel
 BuildRequires:  zip tcsh
