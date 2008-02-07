@@ -87,7 +87,7 @@
 Name:      seamonkey
 Summary:   SeaMonkey, open-source web browser
 Version:   1.1.7
-Release:   %mkrel 3
+Release:   %mkrel 4
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
@@ -337,7 +337,7 @@ Header files to doing development with Network Security Services.
 Summary:	SeaMonkey development files
 Group:		Development/Other
 Requires:	%{name} = %{epoch_mozilla}:%{version}-%{release}
-Requires:	%{devel_nspr_name}
+Requires:	libnspr-devel
 Provides:	mozilla-devel = 0:1.8-1mdk
 Obsoletes:	mozilla-devel
 %description devel
