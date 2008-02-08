@@ -261,7 +261,7 @@ BuildRequires:	pango >= 1.5.0
 %endif
 
 Group:		Networking/WWW
-Url:		http://www.mozilla.org
+Url:		http://www.seamonkey-project.org/
 Obsoletes:	mozilla-xpcom mozilla-browser mozilla-psm mozilla-ctl mozilla
 Provides:	mozilla-xpcom = 0:1.8-1mdk
 Provides:	mozilla-browser = 0:1.8-1mdk
