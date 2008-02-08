@@ -85,7 +85,7 @@
 %endif
 
 Name:      seamonkey
-Summary:   SeaMonkey, open-source web browser
+Summary:   SeaMonkey, all-in-one internet application suite
 Version:   1.1.8
 Release:   %mkrel 1
 License:   MPL
@@ -272,8 +272,14 @@ Provides:	mozilla = 0:1.8-1mdk
 Obsoletes:	mozilla
 
 %description
-SeaMonkey is an open-source web browser, designed for standards
-compliance, performance and portability. 
+The SeaMonkey project is a community effort to develop the SeaMonkey
+all-in-one internet application suite. Such a software suite was
+previously made popular by Netscape and Mozilla, and the SeaMonkey
+project continues to develop and deliver high-quality updates as well
+as new features and improvements to this concept. Containing an
+Internet browser, email & newsgroup client, HTML editor, IRC chat
+and web development tools, SeaMonkey is sure to appeal to advanced
+users, web developers and corporate users.
 
 %if %{build_nspr_nss}
 %package -n %{lib_nspr_name}
