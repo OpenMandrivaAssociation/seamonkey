@@ -33,7 +33,7 @@
 %define toolkit		 gtk2
 
 # used for enigmail and protozilla sources:
-%define enigmail_version 0.95.5
+%define enigmail_version 0.95.6
 
 %{?_with_enigmail: %global build_enigmail 1}
 
@@ -86,7 +86,7 @@
 
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
-Version:   1.1.8
+Version:   1.1.9
 Release:   %mkrel 1
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
@@ -102,8 +102,8 @@ Source99:  locale.alias
 
 Source100: %{name}-1.1.2.be-BY.langpack.xpi
 Source101: %{name}-1.1.4.ca-AD.langpack.xpi
-Source102: %{name}-1.1.7.cs-CZ.langpack.xpi
-Source103: %{name}-1.1.8.de-AT.langpack.xpi
+Source102: %{name}-1.1.9.cs-CZ.langpack.xpi
+Source103: %{name}-1.1.9.de-AT.langpack.xpi
 Source104: %{name}-1.1.2.el-GR.langpack.xpi
 Source105: %{name}-1.1.en-GB.langpack.xpi
 Source106: %{name}-1.1.8.es-ES.langpack.xpi
@@ -111,7 +111,7 @@ Source108: %{name}-1.1.7.fr-FR.langpack.xpi
 Source109: %{name}-1.1.2.he-IL.langpack.xpi
 Source110: %{name}-1.1.6.it-IT.langpack.xpi
 Source114: %{name}-1.1.8.pl-PL.langpack.xpi
-Source115: %{name}-1.1.8.ru-RU.langpack.xpi
+Source115: %{name}-1.1.9.ru-RU.langpack.xpi
 Source116: %{name}-1.1.8.sv-SE.langpack.xpi
 Source118: %{name}-1.1.7.pt-BR.langpack.xpi
 Source119: %{name}-1.1.7.ja-JP.langpack.xpi
