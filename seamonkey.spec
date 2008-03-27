@@ -618,7 +618,7 @@ BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 MOZ_INTERNAL_LIBART_LGPL=1 ./configure \
 
 BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 make -s export
 #only this part should be parallel (ie use make macro)
-BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 %make -s libs
+BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 make -s libs
 
 %if %build_enigmail
 #cd extensions/ipc
@@ -626,7 +626,7 @@ BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 %make -s libs
 #BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 %make -s
 cd mailnews/extensions/enigmail
 ./makemake -r
-BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 %make -s
+BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 make -s
 (cd lang
  BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 make -s
 )
