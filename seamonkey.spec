@@ -1169,8 +1169,12 @@ if [ "$1" == "2" -a -x %{mozillalibdir}/seamonkey-rebuild-databases.pl ]; then
 fi
 
 %if %{build_nspr_nss}
+%if %mdkversion < 200900
 %post -n %{lib_nspr_name} -p /sbin/ldconfig
+%endif
+%if %mdkversion < 200900
 %postun -n %{lib_nspr_name} -p /sbin/ldconfig
+%endif
 %endif
 
 %post mail
