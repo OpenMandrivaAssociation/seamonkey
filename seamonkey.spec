@@ -1102,10 +1102,8 @@ ln -s nss.pc %{buildroot}%{_libdir}/pkgconfig/seamonkey-nss.pc
 %endif
 
 # multiarch
-%if %mdkversion >= 1020
 %multiarch_binaries $RPM_BUILD_ROOT%{_bindir}/seamonkey-config
 %multiarch_includes $RPM_BUILD_ROOT%{_includedir}/seamonkey-%{version}/{mozilla-config.h,js/jsautocfg.h}
-%endif
 
 # myspell dictionaries
 ln -s ../../share/dict/mozilla $RPM_BUILD_ROOT%{mozillalibdir}/dictionaries
