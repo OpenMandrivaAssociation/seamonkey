@@ -1159,7 +1159,6 @@ if [ "$1" = "0" ]; then
 fi
 
 %postun
-## menu
 %{clean_menus}
 # was this an upgrade?
 if [ "$1" == "2" -a -x %{mozillalibdir}/seamonkey-rebuild-databases.pl ]; then
