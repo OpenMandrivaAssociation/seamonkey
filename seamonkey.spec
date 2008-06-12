@@ -1118,7 +1118,9 @@ rm -f %{_tmppath}/mozilla*.list
 
 
 %post
+%if %mdkversion < 200900
 %{update_menus}
+%endif
 ulimit -c 0
 # run ldconfig before regxpcom
 /sbin/ldconfig >/dev/null 2>/dev/null
@@ -1159,7 +1161,9 @@ if [ "$1" = "0" ]; then
 fi
 
 %postun
+%if %mdkversion < 200900
 %{clean_menus}
+%endif
 # was this an upgrade?
 if [ "$1" == "2" -a -x %{mozillalibdir}/seamonkey-rebuild-databases.pl ]; then
     %{mozillalibdir}/seamonkey-rebuild-databases.pl
@@ -1175,7 +1179,9 @@ fi
 %endif
 
 %post mail
+%if %mdkversion < 200900
 %{update_menus}
+%endif
 # run ldconfig before regxpcom
 /sbin/ldconfig >/dev/null 2>/dev/null
 
@@ -1184,7 +1190,9 @@ if [ -x %{mozillalibdir}/seamonkey-rebuild-databases.pl ]; then
 fi
 
 %postun mail
+%if %mdkversion < 200900
 %{clean_menus}
+%endif
 # run ldconfig before regxpcom
 /sbin/ldconfig >/dev/null 2>/dev/null
 
@@ -1204,14 +1212,18 @@ if [ -x %{mozillalibdir}seamonkey-rebuild-databases.pl ]; then
 fi
 
 %post xmlterm
+%if %mdkversion < 200900
 %{update_menus}
+%endif
 if [ -x %{mozillalibdir}/seamonkey-rebuild-databases.pl ]; then
     %{mozillalibdir}/seamonkey-rebuild-databases.pl
 fi
 
 
 %postun xmlterm
+%if %mdkversion < 200900
 %{clean_menus}
+%endif
 if [ -x %{mozillalibdir}/seamonkey-rebuild-databases.pl ]; then
     %{mozillalibdir}/seamonkey-rebuild-databases.pl
 fi
