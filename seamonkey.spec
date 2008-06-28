@@ -84,10 +84,13 @@
 %define build_ggdefaults	1
 %endif
 
+%define _provides_exceptions libaccessibility.so\\|libappcomps.so\\|libauth.so\\|libautoconfig.so\\|libcaps.so\\|libchrome.so\\|libcomposer.so\\|libcookie.so\\|libdocshell.so\\|libeditor.so\\|libembedcomponents.so\\|libfileview.so\\|libgfx_gtk.so\\|libgfxps.so\\|libgfxpsshar.so\\|libgkgfx.so\\|libgklayout.so\\|libgkplugin.so\\|libgtkembedmoz.so\\|libgtkxtbin.so\\|libhtmlpars.so\\|libi18n.so\\|libimgicon.so\\|libimglib2.so\\|libjar50.so\\|libjsd.so\\|libjsj.so\\|libldap50.so\\|libmork.so\\|libmozfind.so\\|libmozjs.so\\|libmozldap.so\\|libmsgbaseutil.so\\|libnecko.so\\|libnecko2.so\\|libnkgnomevfs.so\\|libnsappshell.so\\|libnsprefm.so\\|libnullplugin.so\\|liboji.so\\|libp3p.so\\|libpermissions.so\\|libpipboot.so\\|libpipnss.so\\|libpippki.so\\|libpref.so\\|libprldap50.so\\|libprofile.so\\|librdf.so\\|libremoteservice.so\\|libschemavalidation.so\\|libsearchservice.so\\|libsql.so\\|libsroaming.so\\|libstoragecomps.so\\|libsystem-pref.so\\|libtransformiix.so\\|libtxmgr.so\\|libtypeaheadfind.so\\|libuconv.so\\|libucvmath.so\\|libuniversalchardet.so\\|libunixprintplugin.so\\|libwallet.so\\|libwalletviewers.so\\|libwebbrwsr.so\\|libwebsrvcs.so\\|libwidget_gtk2.so\\|libxforms.so\\|libxmlextras.so\\|libxpcom.so\\|libxpcom_compat.so\\|libxpcom_compat_c.so\\|libxpcom_core.so\\|libxpconnect.so\\|libxpinstall.so\\|libxpistub.so\\|libxremoteservice\\|libaddrbook.so\\|libbayesflt.so\\|libimpComm4xMail.so\\|libimport.so\\|libimpText.so\\|liblocalmail.so\\|libmailnews.so\\|libmailview.so\\|libmimeemitter.so\\|libmime.so\\|libmsgbaseutil.so\\|libmsgcompose.so\\|libmsgdb.so\\|libmsgimap.so\\|libmsgmdn.so\\|libmsgnews.so\\|libmsgsmime.so\\|libvcard.so\\|libmyspell.so\\|libspellchecker.so\\|libenigmime.so
+%define _requires_exceptions libaccessibility.so\\|libappcomps.so\\|libauth.so\\|libautoconfig.so\\|libcaps.so\\|libchrome.so\\|libcomposer.so\\|libcookie.so\\|libdocshell.so\\|libeditor.so\\|libembedcomponents.so\\|libfileview.so\\|libgfx_gtk.so\\|libgfxps.so\\|libgfxpsshar.so\\|libgkgfx.so\\|libgklayout.so\\|libgkplugin.so\\|libgtkembedmoz.so\\|libgtkxtbin.so\\|libhtmlpars.so\\|libi18n.so\\|libimgicon.so\\|libimglib2.so\\|libjar50.so\\|libjsd.so\\|libjsj.so\\|libldap50.so\\|libmork.so\\|libmozfind.so\\|libmozjs.so\\|libmozldap.so\\|libmsgbaseutil.so\\|libnecko.so\\|libnecko2.so\\|libnkgnomevfs.so\\|libnsappshell.so\\|libnsprefm.so\\|libnullplugin.so\\|liboji.so\\|libp3p.so\\|libpermissions.so\\|libpipboot.so\\|libpipnss.so\\|libpippki.so\\|libpref.so\\|libprldap50.so\\|libprofile.so\\|librdf.so\\|libremoteservice.so\\|libschemavalidation.so\\|libsearchservice.so\\|libsql.so\\|libsroaming.so\\|libstoragecomps.so\\|libsystem-pref.so\\|libtransformiix.so\\|libtxmgr.so\\|libtypeaheadfind.so\\|libuconv.so\\|libucvmath.so\\|libuniversalchardet.so\\|libunixprintplugin.so\\|libwallet.so\\|libwalletviewers.so\\|libwebbrwsr.so\\|libwebsrvcs.so\\|libwidget_gtk2.so\\|libxforms.so\\|libxmlextras.so\\|libxpcom.so\\|libxpcom_compat.so\\|libxpcom_compat_c.so\\|libxpcom_core.so\\|libxpconnect.so\\|libxpinstall.so\\|libxpistub.so\\|libxremoteservice\\|libaddrbook.so\\|libbayesflt.so\\|libimpComm4xMail.so\\|libimport.so\\|libimpText.so\\|liblocalmail.so\\|libmailnews.so\\|libmailview.so\\|libmimeemitter.so\\|libmime.so\\|libmsgbaseutil.so\\|libmsgcompose.so\\|libmsgdb.so\\|libmsgimap.so\\|libmsgmdn.so\\|libmsgnews.so\\|libmsgsmime.so\\|libvcard.so\\|libmyspell.so\\|libspellchecker.so\\|libenigmime.so
+
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
 Version:   1.1.9
-Release:   %mkrel 1
+Release:   %mkrel 2
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
@@ -100,24 +103,25 @@ Source99:  locale.alias
 %define l10ns be-BY ca-AD cs-CZ de-AT el-GR en-GB es-ES fr-FR he-IL hi-IN it-IT ja-JP nl-NL pl-PL ru-RU sv-SE pt-BR ur-PK
 # not up-to-date: eu-ES ka-GE nb-NO ne-NP tr-TR
 
-Source100: %{name}-1.1.2.be-BY.langpack.xpi
+Source100: %{name}-1.1.9.be-BY.langpack.xpi
 Source101: %{name}-1.1.4.ca-AD.langpack.xpi
 Source102: %{name}-1.1.9.cs-CZ.langpack.xpi
 Source103: %{name}-1.1.9.de-AT.langpack.xpi
 Source104: %{name}-1.1.2.el-GR.langpack.xpi
 Source105: %{name}-1.1.en-GB.langpack.xpi
 Source106: %{name}-1.1.8.es-ES.langpack.xpi
-Source108: %{name}-1.1.7.fr-FR.langpack.xpi
+Source108: %{name}-1.1.9.fr-FR.langpack.xpi
 Source109: %{name}-1.1.2.he-IL.langpack.xpi
-Source110: %{name}-1.1.6.it-IT.langpack.xpi
-Source114: %{name}-1.1.8.pl-PL.langpack.xpi
+Source110: %{name}-1.1.9.it-IT.langpack.xpi
+Source114: %{name}-1.1.9.pl-PL.langpack.xpi
 Source115: %{name}-1.1.9.ru-RU.langpack.xpi
-Source116: %{name}-1.1.8.sv-SE.langpack.xpi
-Source118: %{name}-1.1.7.pt-BR.langpack.xpi
-Source119: %{name}-1.1.7.ja-JP.langpack.xpi
+Source116: %{name}-1.1.9.sv-SE.langpack.xpi
+Source118: %{name}-1.1.9.pt-BR.langpack.xpi
+Source119: %{name}-1.1.9.ja-JP.langpack.xpi
 Source120: %{name}-1.1.4.nl-NL.langpack.xpi
-Source121: %{name}-1.1.4.ur-PK.langpack.xpi
+Source121: %{name}-1.1.9.ur-PK.langpack.xpi
 Source122: %{name}-1.1.7.hi-IN.langpack.xpi
+Source123: %{name}-1.1.9.hu-HU.langpack.xpi
 
 #Source107: %{name}-1.0.eu-ES.langpack.xpi
 #Source111: %{name}-1.0.ka-GE.langpack.xpi
@@ -214,6 +218,8 @@ Patch299:  seamonkey-1.0.3-gcc41.patch
 Patch300:  mozilla-182670.patch
 # (cjw) some X11 libs missing for libgklayout link command
 Patch301:  seamonkey-1.1-layout-link-fix.patch
+# (cjw) from mozilla-firefox package: fix buffer overflow crash with glibc 2.8
+Patch302:  firefox-3.0rc1-glibc28-max_path-fix.patch
 Epoch:     %{epoch_mozilla}
 Conflicts: j2re = 1.4.0-beta3
 Conflicts: j2sdk = 1.4.0-beta3
@@ -533,6 +539,7 @@ rm -rf $RPM_BUILD_ROOT
 %patch299 -p2 -b .gcc41
 %patch300 -p1 -b .182670
 %patch301 -p1 -b .x11_xrender
+%patch302 -p1 -b .glibc28
 
 rm -f profile/defaults/bookmarks.html
 touch profile/defaults/bookmarks.html
@@ -819,6 +826,7 @@ unzip -o %{SOURCE119}
 unzip -o %{SOURCE120}
 unzip -o %{SOURCE121}
 unzip -o %{SOURCE122}
+unzip -o %{SOURCE123}
 
 #unzip -o %{SOURCE107}
 #unzip -o %{SOURCE111}
@@ -1032,6 +1040,19 @@ Terminal=false
 Type=Application
 StartupNotify=true
 Categories=GTK;X-MandrivaLinux-Internet-News;Network;News;
+StartupWMClass=Seamonkey-bin
+EOF
+
+cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}-chat.desktop << EOF
+[Desktop Entry]
+Name=ChatZilla
+Comment=Seamonkey IRC client
+Exec=%{_bindir}/seamonkey -chat
+Icon=seamonkey
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=GTK;X-MandrivaLinux-Internet-Chat;Network;IRCClient;
 StartupWMClass=Seamonkey-bin
 EOF
 
@@ -1399,6 +1420,7 @@ fi
 
 %files irc -f %{_tmppath}/mozilla-chat.list
 %defattr(-,root,root)
+%{_datadir}/applications/mandriva-%{name}-chat.desktop
 
 
 %files devel -f %{_tmppath}/mozilla-devel.list
