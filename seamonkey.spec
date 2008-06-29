@@ -208,8 +208,6 @@ Patch276:  mozilla-1.7.5-lang.patch
 Patch278:  mozilla-1.7.5-unknownmousebutton.patch
 # (fc) 1.7.6-3mdk add env variable to disable GNOME uri handler (Fedora)
 Patch281:  mozilla-1.6-gnome-uriloader.patch
-# (cjw) from mozilla-firefox package: disable visibility, applied for arch != x86
-Patch292:  mozilla-firefox-1.5-visibility.patch
 #
 Patch295:  mozilla-1.7.12-pango-direction.patch
 Patch298:  mozilla-1.7.12-g-application-name.patch
@@ -220,6 +218,8 @@ Patch300:  mozilla-182670.patch
 Patch301:  seamonkey-1.1-layout-link-fix.patch
 # (cjw) from mozilla-firefox package: fix buffer overflow crash with glibc 2.8
 Patch302:  firefox-3.0rc1-glibc28-max_path-fix.patch
+# (cjw) fix build error from enigmail due to a visibility problem
+Patch303:  enigmail-0.95.6-visibility.patch
 Epoch:     %{epoch_mozilla}
 Conflicts: j2re = 1.4.0-beta3
 Conflicts: j2sdk = 1.4.0-beta3
@@ -527,9 +527,6 @@ rm -rf $RPM_BUILD_ROOT
 #patch277 -p1 -b .fixrandom
 %patch278 -p1 -b .unknownmousebutton
 %patch281 -p1 -b .gnome-uriloader
-%ifnarch %{ix86}
-%patch292 -p1 -b .visibility
-%endif
 
 %if %build_pango
 %patch295 -p1 -b .pango-direction
@@ -540,6 +537,7 @@ rm -rf $RPM_BUILD_ROOT
 %patch300 -p1 -b .182670
 %patch301 -p1 -b .x11_xrender
 %patch302 -p1 -b .glibc28
+%patch303 -p1 -b .enigmail-visibility
 
 rm -f profile/defaults/bookmarks.html
 touch profile/defaults/bookmarks.html
