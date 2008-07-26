@@ -9,7 +9,7 @@
 %define devel_nss_name %mklibname nss
 #warning : always end release date with 00 
 # (it should be the hour of build but it is not significant for rpm)
-%define releasedate 2007112800
+%define releasedate 2008071500
 %define french_policy 0
 %define dirversion  %{version}
 %define mozillalibdir %{_libdir}/seamonkey-%{dirversion}
@@ -89,8 +89,8 @@
 
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
-Version:   1.1.9
-Release:   %mkrel 2
+Version:   1.1.11
+Release:   %mkrel 1
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
