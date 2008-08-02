@@ -100,7 +100,7 @@ Source5:   mozilla-firefox-bookmarks-mdk2006.tar.bz2
 Source6:   mozilla-1.7-libart_lgpl.tar.bz2
 %if %{enable_l10n}
 Source99:  locale.alias
-%define l10ns be-BY ca-AD cs-CZ de-AT el-GR en-GB es-ES fr-FR he-IL hi-IN it-IT ja-JP nl-NL pl-PL ru-RU sv-SE pt-BR ur-PK
+%define l10ns be-BY ca-AD cs-CZ de-AT el-GR en-GB es-ES fr-FR he-IL hi-IN hu-HU it-IT ja-JP nl-NL pl-PL ru-RU sv-SE pt-BR ur-PK
 # not up-to-date: eu-ES ka-GE nb-NO ne-NP tr-TR
 
 Source100: %{name}-1.1.9.be-BY.langpack.xpi
@@ -378,6 +378,7 @@ Obsoletes:		mozilla-chatzilla mozilla-chat mozilla-irc
 %description irc
 IRC support for SeaMonkey.
 
+%if %{build_xmlterm}
 %package xmlterm
 Summary:		XML enabled Terminal Client for SeaMonkey
 Group:			Networking/Other
@@ -391,6 +392,7 @@ This is a terminal client written for SeaMonkey that has special capabilities.
 When combined with the xls, and xcat programs, you can get directory listings 
 with thumbnails for images, and you can cat known file types 
 and view them inline.
+%endif
 
 %package js-debugger
 Summary:		JavaScript debugger for use with SeaMonkey
@@ -1230,6 +1232,7 @@ if [ -x %{mozillalibdir}seamonkey-rebuild-databases.pl ]; then
     %{mozillalibdir}/seamonkey-rebuild-databases.pl
 fi
 
+%if %{build_xmlterm}
 %post xmlterm
 %if %mdkversion < 200900
 %{update_menus}
@@ -1246,6 +1249,7 @@ fi
 if [ -x %{mozillalibdir}/seamonkey-rebuild-databases.pl ]; then
     %{mozillalibdir}/seamonkey-rebuild-databases.pl
 fi
+%endif
 
 %post js-debugger
 if [ -f %{mozillalibdir}/seamonkey-rebuild-databases.pl ]; then
