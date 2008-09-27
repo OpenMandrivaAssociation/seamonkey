@@ -9,7 +9,7 @@
 %define devel_nss_name %mklibname nss
 #warning : always end release date with 00 
 # (it should be the hour of build but it is not significant for rpm)
-%define releasedate 2008071500
+%define releasedate 2008092300
 %define french_policy 0
 %define dirversion  %{version}
 %define mozillalibdir %{_libdir}/seamonkey-%{dirversion}
@@ -33,7 +33,7 @@
 %define toolkit		 gtk2
 
 # used for enigmail and protozilla sources:
-%define enigmail_version 0.95.6
+%define enigmail_version 0.95.7
 
 %{?_with_enigmail: %global build_enigmail 1}
 
@@ -89,7 +89,7 @@
 
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
-Version:   1.1.11
+Version:   1.1.12
 Release:   %mkrel 1
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
