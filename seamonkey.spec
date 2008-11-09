@@ -90,7 +90,7 @@
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
 Version:   1.1.12
-Release:   %mkrel 1
+Release:   %mkrel 2
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
@@ -236,6 +236,7 @@ BuildRequires:  gtk+2-devel >= 2.4.0
 BuildRequires:  gnome-vfs2-devel
 BuildRequires:	libgnomeui2-devel
 BuildRequires:  krb-devel
+BuildRequires:	gcc4.2-c++
 
 %if %{mdkversion} >= 200610
 BuildRequires:	rootcerts >= 20060621
@@ -576,7 +577,7 @@ GCC_VERSION=`gcc -dumpversion | perl -pe '/(\d+)\.(\d)\.?(\d)?/; $_="$1$2".($3||
 
 OPT_FLAGS="$RPM_OPT_FLAGS"
 
-BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 MOZ_INTERNAL_LIBART_LGPL=1 ./configure \
+BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 MOZ_INTERNAL_LIBART_LGPL=1 CC=gcc4.2 CXX=g++4.2 CPP=cpp4.2 ./configure \
 	--enable-application=suite \
 	--prefix=%{_prefix} --libdir=%{_libdir} \
 	--enable-optimize="$OPT_FLAGS" \
