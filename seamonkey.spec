@@ -105,8 +105,8 @@ Source99:  locale.alias
 
 Source100: %{name}-1.1.9.be-BY.langpack.xpi
 Source101: %{name}-1.1.4.ca-AD.langpack.xpi
-Source102: %{name}-1.1.9.cs-CZ.langpack.xpi
-Source103: %{name}-1.1.9.de-AT.langpack.xpi
+Source102: %{name}-1.1.14.cs-CZ.langpack.xpi
+Source103: %{name}-1.1.14.de-AT.langpack.xpi
 Source104: %{name}-1.1.2.el-GR.langpack.xpi
 Source105: %{name}-1.1.en-GB.langpack.xpi
 Source106: %{name}-1.1.8.es-ES.langpack.xpi
