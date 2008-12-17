@@ -89,8 +89,8 @@
 
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
-Version:   1.1.13
-Release:   %mkrel 2
+Version:   1.1.14
+Release:   %mkrel 1
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
@@ -113,10 +113,10 @@ Source106: %{name}-1.1.8.es-ES.langpack.xpi
 Source108: %{name}-1.1.9.fr-FR.langpack.xpi
 Source109: %{name}-1.1.2.he-IL.langpack.xpi
 Source110: %{name}-1.1.9.it-IT.langpack.xpi
-Source114: %{name}-1.1.9.pl-PL.langpack.xpi
+Source114: %{name}-1.1.14.pl-PL.langpack.xpi
 Source115: %{name}-1.1.9.ru-RU.langpack.xpi
 Source116: %{name}-1.1.9.sv-SE.langpack.xpi
-Source118: %{name}-1.1.9.pt-BR.langpack.xpi
+Source118: %{name}-1.1.14.pt-BR.langpack.xpi
 Source119: %{name}-1.1.9.ja-JP.langpack.xpi
 Source120: %{name}-1.1.4.nl-NL.langpack.xpi
 Source121: %{name}-1.1.9.ur-PK.langpack.xpi
