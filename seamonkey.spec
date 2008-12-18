@@ -143,6 +143,7 @@ Source28:  mozilla-psm-exclude-list
 
 # (fc) 1.1-0.beta.1mdk remove Debug menu
 Patch0:    mozilla-1.7-no-debug-overlay-menu.patch
+Patch1:    seamonkey-1.1.14-fix-string-format.patch
 Patch7:    mozilla-browser-home-page.patch
 Patch12:   mozilla-1.7-psfonts.patch
 Patch13:   mozilla-nspr-packages.patch
@@ -480,6 +481,8 @@ rm -rf $RPM_BUILD_ROOT
 %patch0 -p1 -b .nodebug
 %patch23 -p1 -b .nobuildid
 %endif
+
+%patch1 -p1 -b .strfmt
 
 %patch7 -p1 -b .browser-home-page
 
