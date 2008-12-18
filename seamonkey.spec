@@ -160,7 +160,7 @@ Patch43:   mozilla-mathml-times.patch
 # (fc) 1.1-0.branch.1mdk use standard mozilla packaging tool for enigmail/enigmime
 Patch46:   mozilla-1.7-enigmail-package.patch
 # (fc) 1.1-0.branch.1mdk fix spellchecker includes
-Patch47:   mozilla-1.1-spellcheckerinclude.patch
+Patch47:   mozilla-1.1.14-spellcheckerinclude.patch
 # (gb) 1.1-4mdk myspell dictionaries are in /usr/share/dict/ooo/
 # (fc) 1.3-0.alpha.2mdk google is now search engine by default, add mdk bugzilla in search engines list
 Patch59:   mozilla-1.7-search.patch
