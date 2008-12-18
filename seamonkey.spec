@@ -583,7 +583,7 @@ BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 MOZ_INTERNAL_LIBART_LGPL=1 \
 %if %{mdkversion} >= 200900
 	CC=gcc4.2 CXX=g++4.2 CPP=cpp4.2 \
 %endif
-	./configure \
+	./configure --build=%{_target_platform} \
 	--enable-application=suite \
 	--prefix=%{_prefix} --libdir=%{_libdir} \
 	--enable-optimize="$OPT_FLAGS" \
