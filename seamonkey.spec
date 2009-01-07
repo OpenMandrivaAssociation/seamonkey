@@ -9,7 +9,7 @@
 %define devel_nss_name %mklibname nss
 #warning : always end release date with 00 
 # (it should be the hour of build but it is not significant for rpm)
-%define releasedate 2008111200
+%define releasedate 2008121600
 %define french_policy 0
 %define dirversion  %{version}
 %define mozillalibdir %{_libdir}/seamonkey-%{dirversion}
@@ -90,7 +90,7 @@
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
 Version:   1.1.14
-Release:   %mkrel 1
+Release:   %mkrel 2
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
@@ -143,7 +143,6 @@ Source28:  mozilla-psm-exclude-list
 
 # (fc) 1.1-0.beta.1mdk remove Debug menu
 Patch0:    mozilla-1.7-no-debug-overlay-menu.patch
-Patch1:    seamonkey-1.1.14-fix-string-format.patch
 Patch7:    mozilla-browser-home-page.patch
 Patch12:   mozilla-1.7-psfonts.patch
 Patch13:   mozilla-nspr-packages.patch
@@ -221,6 +220,8 @@ Patch301:  seamonkey-1.1-layout-link-fix.patch
 Patch302:  firefox-3.0rc1-glibc28-max_path-fix.patch
 # (cjw) fix build error from enigmail due to a visibility problem
 Patch303:  enigmail-0.95.6-visibility.patch
+# fix build with -Werror=format-security in compile flags
+Patch304:  seamonkey-1.1.14-fix-string-format.patch
 Epoch:     %{epoch_mozilla}
 Conflicts: j2re = 1.4.0-beta3
 Conflicts: j2sdk = 1.4.0-beta3
@@ -482,8 +483,6 @@ rm -rf $RPM_BUILD_ROOT
 %patch23 -p1 -b .nobuildid
 %endif
 
-%patch1 -p1 -b .strfmt
-
 %patch7 -p1 -b .browser-home-page
 
 %patch12 -p1 -b .psfont
@@ -546,6 +545,7 @@ rm -rf $RPM_BUILD_ROOT
 %patch301 -p1 -b .x11_xrender
 %patch302 -p1 -b .glibc28
 %patch303 -p1 -b .enigmail-visibility
+%patch304 -p1 -b .strfmt
 
 rm -f profile/defaults/bookmarks.html
 touch profile/defaults/bookmarks.html
