@@ -90,7 +90,7 @@
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
 Version:   1.1.15
-Release:   %mkrel 1
+Release:   %mkrel 2
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
@@ -139,6 +139,8 @@ Source25:  mozilla-make-package.pl
 Source26:  seamonkey-rebuild-databases.pl.in
 Source27:  mozilla-xpcom-exclude-list
 Source28:  mozilla-psm-exclude-list
+# Enigmail 0.95.7 is broken in x86_64 (#44426)
+Source29:  http://www.mozilla-enigmail.org/download/source/enigmail-0.95.6.tar.gz
 #Source31:  enigmail-%{enigmail_version}-l10n.tar.bz2
 
 # (fc) 1.1-0.beta.1mdk remove Debug menu
@@ -473,7 +475,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %if %build_enigmail
 #setup -T -D -n %{name}-%{version}/mozilla/extensions -q -a21
+%ifarch x86_64
+%setup -T -D -n %{name}-%{version}/mozilla/mailnews/extensions -q -a29
+%else
 %setup -T -D -n %{name}-%{version}/mozilla/mailnews/extensions -q -a22
+%endif
 %setup -T -D -n %{name}-%{version}/mozilla -q
 %endif
 
