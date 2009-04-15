@@ -9,7 +9,7 @@
 %define devel_nss_name %mklibname nss
 #warning : always end release date with 00 
 # (it should be the hour of build but it is not significant for rpm)
-%define releasedate 2008121600
+%define releasedate 2009040800
 %define french_policy 0
 %define dirversion  %{version}
 %define mozillalibdir %{_libdir}/seamonkey-%{dirversion}
@@ -89,8 +89,8 @@
 
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
-Version:   1.1.15
-Release:   %mkrel 2
+Version:   1.1.16
+Release:   %mkrel 1
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
@@ -100,28 +100,29 @@ Source5:   mozilla-firefox-bookmarks-mdk2006.tar.bz2
 Source6:   mozilla-1.7-libart_lgpl.tar.bz2
 %if %{enable_l10n}
 Source99:  locale.alias
-%define l10ns be-BY ca-AD cs-CZ de-AT el-GR en-GB es-ES fr-FR he-IL hi-IN hu-HU it-IT ja-JP nl-NL pl-PL ru-RU sv-SE pt-BR ur-PK
+%define l10ns be-BY ca-AD cs-CZ de-AT el-GR en-GB es-ES fr-FR he-IL hi-IN hu-HU it-IT ja-JP lt-LT nl-NL pl-PL ru-RU sv-SE pt-BR ur-PK
 # not up-to-date: eu-ES ka-GE nb-NO ne-NP tr-TR
 
 Source100: %{name}-1.1.9.be-BY.langpack.xpi
-Source101: %{name}-1.1.4.ca-AD.langpack.xpi
-Source102: %{name}-1.1.15.cs-CZ.langpack.xpi
-Source103: %{name}-1.1.15.de-AT.langpack.xpi
+Source101: %{name}-1.1.15.ca-AD.langpack.xpi
+Source102: %{name}-1.1.16.cs-CZ.langpack.xpi
+Source103: %{name}-1.1.16.de-AT.langpack.xpi
 Source104: %{name}-1.1.2.el-GR.langpack.xpi
 Source105: %{name}-1.1.en-GB.langpack.xpi
-Source106: %{name}-1.1.8.es-ES.langpack.xpi
-Source108: %{name}-1.1.9.fr-FR.langpack.xpi
+Source106: %{name}-1.1.14.es-ES.langpack.xpi
+Source108: %{name}-1.1.15.fr-FR.langpack.xpi
 Source109: %{name}-1.1.2.he-IL.langpack.xpi
-Source110: %{name}-1.1.9.it-IT.langpack.xpi
-Source114: %{name}-1.1.15.pl-PL.langpack.xpi
-Source115: %{name}-1.1.9.ru-RU.langpack.xpi
-Source116: %{name}-1.1.9.sv-SE.langpack.xpi
-Source118: %{name}-1.1.15.pt-BR.langpack.xpi
-Source119: %{name}-1.1.9.ja-JP.langpack.xpi
-Source120: %{name}-1.1.4.nl-NL.langpack.xpi
+Source110: %{name}-1.1.15.it-IT.langpack.xpi
+Source114: %{name}-1.1.16.pl-PL.langpack.xpi
+Source115: %{name}-1.1.16.ru-RU.langpack.xpi
+Source116: %{name}-1.1.12.sv-SE.langpack.xpi
+Source118: %{name}-1.1.16.pt-BR.langpack.xpi
+Source119: %{name}-1.1.16.ja-JP.langpack.xpi
+Source120: %{name}-1.1.15.nl-NL.langpack.xpi
 Source121: %{name}-1.1.9.ur-PK.langpack.xpi
 Source122: %{name}-1.1.7.hi-IN.langpack.xpi
-Source123: %{name}-1.1.9.hu-HU.langpack.xpi
+Source123: %{name}-1.1.11.hu-HU.langpack.xpi
+Source124: %{name}-1.1.12.lt-LT.langpack.xpi
 
 #Source107: %{name}-1.0.eu-ES.langpack.xpi
 #Source111: %{name}-1.0.ka-GE.langpack.xpi
@@ -843,6 +844,7 @@ unzip -o %{SOURCE120}
 unzip -o %{SOURCE121}
 unzip -o %{SOURCE122}
 unzip -o %{SOURCE123}
+unzip -o %{SOURCE124}
 
 #unzip -o %{SOURCE107}
 #unzip -o %{SOURCE111}
