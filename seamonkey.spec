@@ -89,7 +89,7 @@
 
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
-Version:   1.1.16
+Version:   1.1.17
 Release:   %mkrel 1
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
@@ -105,18 +105,18 @@ Source99:  locale.alias
 
 Source100: %{name}-1.1.9.be-BY.langpack.xpi
 Source101: %{name}-1.1.15.ca-AD.langpack.xpi
-Source102: %{name}-1.1.16.cs-CZ.langpack.xpi
-Source103: %{name}-1.1.16.de-AT.langpack.xpi
+Source102: %{name}-1.1.17.cs-CZ.langpack.xpi
+Source103: %{name}-1.1.17.de-AT.langpack.xpi
 Source104: %{name}-1.1.2.el-GR.langpack.xpi
 Source105: %{name}-1.1.en-GB.langpack.xpi
 Source106: %{name}-1.1.14.es-ES.langpack.xpi
-Source108: %{name}-1.1.15.fr-FR.langpack.xpi
+Source108: %{name}-1.1.17.fr-FR.langpack.xpi
 Source109: %{name}-1.1.2.he-IL.langpack.xpi
-Source110: %{name}-1.1.15.it-IT.langpack.xpi
-Source114: %{name}-1.1.16.pl-PL.langpack.xpi
-Source115: %{name}-1.1.16.ru-RU.langpack.xpi
+Source110: %{name}-1.1.17.it-IT.langpack.xpi
+Source114: %{name}-1.1.17.pl-PL.langpack.xpi
+Source115: %{name}-1.1.17.ru-RU.langpack.xpi
 Source116: %{name}-1.1.12.sv-SE.langpack.xpi
-Source118: %{name}-1.1.16.pt-BR.langpack.xpi
+Source118: %{name}-1.1.17.pt-BR.langpack.xpi
 Source119: %{name}-1.1.16.ja-JP.langpack.xpi
 Source120: %{name}-1.1.15.nl-NL.langpack.xpi
 Source121: %{name}-1.1.9.ur-PK.langpack.xpi
