@@ -9,7 +9,7 @@
 %define devel_nss_name %mklibname nss
 #warning : always end release date with 00 
 # (it should be the hour of build but it is not significant for rpm)
-%define releasedate 2009040800
+%define releasedate 2009090300
 %define french_policy 0
 %define dirversion  %{version}
 %define mozillalibdir %{_libdir}/seamonkey-%{dirversion}
@@ -89,8 +89,8 @@
 
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
-Version:   1.1.17
-Release:   %mkrel 2
+Version:   1.1.18
+Release:   %mkrel 1
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
@@ -638,7 +638,8 @@ BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 MOZ_INTERNAL_LIBART_LGPL=1 \
 %if %build_pango
 	--enable-pango \
 %endif
-	--enable-default-toolkit=%{toolkit}
+	--enable-default-toolkit=%{toolkit} \
+	--disable-storage
 
 BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 make -s export
 #only this part should be parallel (ie use make macro)
