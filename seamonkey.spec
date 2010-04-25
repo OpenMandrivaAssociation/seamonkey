@@ -9,8 +9,7 @@
 %define devel_nss_name %mklibname nss
 #warning : always end release date with 00 
 # (it should be the hour of build but it is not significant for rpm)
-%define releasedate 2009090300
-%define french_policy 0
+%define releasedate 2010033000
 %define dirversion  %{version}
 %define mozillalibdir %{_libdir}/seamonkey-%{dirversion}
 %define mozillaplugindir %{_libdir}/mozilla/plugins
@@ -30,10 +29,10 @@
 %define build_nspr_nss   0
 %define build_gre	 0
 
-%define toolkit		 gtk2
+%define toolkit		 cairo-gtk2
 
 # used for enigmail and protozilla sources:
-%define enigmail_version 0.95.7
+%define enigmail_version 1.0.1
 
 %{?_with_enigmail: %global build_enigmail 1}
 
@@ -89,86 +88,67 @@
 
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
-Version:   1.1.18
-Release:   %mkrel 2
+Version:   2.0.4
+Release:   %mkrel 1
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
 Source3:   seamonkey32.png
 Source4:   seamonkey64.png
-Source5:   mozilla-firefox-bookmarks-mdk2006.tar.bz2
-Source6:   mozilla-1.7-libart_lgpl.tar.bz2
 %if %{enable_l10n}
 Source99:  locale.alias
-%define l10ns be-BY ca-AD cs-CZ de-AT el-GR en-GB es-ES fr-FR he-IL hi-IN hu-HU it-IT ja-JP lt-LT nl-NL pl-PL ru-RU sv-SE pt-BR ur-PK
-# not up-to-date: eu-ES ka-GE nb-NO ne-NP tr-TR
+%define l10ns be ca cs de es-AR es-ES fr gl hu it ja ka lt nb-NO nl pl pt-PT ru sk sv-SE tr
+# not up-to-date: el-GR en-GB eu-ES he-IL hi-IN ne-NP pt-BR ur-PK
 
-Source100: %{name}-1.1.9.be-BY.langpack.xpi
-Source101: %{name}-1.1.15.ca-AD.langpack.xpi
-Source102: %{name}-1.1.17.cs-CZ.langpack.xpi
-Source103: %{name}-1.1.17.de-AT.langpack.xpi
-Source104: %{name}-1.1.2.el-GR.langpack.xpi
-Source105: %{name}-1.1.en-GB.langpack.xpi
-Source106: %{name}-1.1.14.es-ES.langpack.xpi
-Source108: %{name}-1.1.17.fr-FR.langpack.xpi
-Source109: %{name}-1.1.2.he-IL.langpack.xpi
-Source110: %{name}-1.1.17.it-IT.langpack.xpi
-Source114: %{name}-1.1.17.pl-PL.langpack.xpi
-Source115: %{name}-1.1.17.ru-RU.langpack.xpi
-Source116: %{name}-1.1.12.sv-SE.langpack.xpi
-Source118: %{name}-1.1.17.pt-BR.langpack.xpi
-Source119: %{name}-1.1.16.ja-JP.langpack.xpi
-Source120: %{name}-1.1.15.nl-NL.langpack.xpi
-Source121: %{name}-1.1.9.ur-PK.langpack.xpi
-Source122: %{name}-1.1.7.hi-IN.langpack.xpi
-Source123: %{name}-1.1.11.hu-HU.langpack.xpi
-Source124: %{name}-1.1.12.lt-LT.langpack.xpi
+Source100: %{name}-2.0.4.be.langpack.xpi
+Source101: %{name}-2.0.4.ca.langpack.xpi
+Source102: %{name}-2.0.4.cs.langpack.xpi
+Source103: %{name}-2.0.4.de.langpack.xpi
+Source106: %{name}-2.0.4.es-ES.langpack.xpi
+Source108: %{name}-2.0.4.fr.langpack.xpi
+Source110: %{name}-2.0.4.it.langpack.xpi
+Source111: %{name}-2.0.4.ka.langpack.xpi
+Source112: %{name}-2.0.4.nb-NO.langpack.xpi
+Source114: %{name}-2.0.4.pl.langpack.xpi
+Source115: %{name}-2.0.4.ru.langpack.xpi
+Source116: %{name}-2.0.4.sv-SE.langpack.xpi
+Source117: %{name}-2.0.4.tr.langpack.xpi
+Source119: %{name}-2.0.4.ja.langpack.xpi
+Source120: %{name}-2.0.4.nl.langpack.xpi
+Source123: %{name}-2.0.4.hu.langpack.xpi
+Source124: %{name}-2.0.4.lt.langpack.xpi
+Source125: %{name}-2.0.4.pt-PT.langpack.xpi
+Source126: %{name}-2.0.4.es-AR.langpack.xpi
+Source127: %{name}-2.0.4.gl.langpack.xpi
+Source128: %{name}-2.0.4.sk.langpack.xpi
 
+#Source104: %{name}-1.1.2.el-GR.langpack.xpi
+#Source105: %{name}-1.1.en-GB.langpack.xpi
 #Source107: %{name}-1.0.eu-ES.langpack.xpi
-#Source111: %{name}-1.0.ka-GE.langpack.xpi
-#Source112: %{name}-1.0.nb-NO.langpack.xpi
+#Source109: %{name}-1.1.2.he-IL.langpack.xpi
 #Source113: %{name}-1.0.2.ne-NP.langpack.xpi
-#Source117: %{name}-1.0.tr-TR.langpack.xpi
+#Source118: %{name}-1.1.17.pt-BR.langpack.xpi
+#Source121: %{name}-1.1.9.ur-PK.langpack.xpi
+#Source122: %{name}-1.1.7.hi-IN.langpack.xpi
 %endif
 # (fc) 0.9.8-1mdk fix loading of file through command line (contributed by Chmouel) ,
 # set MOZ_PLUGIN_PATH to $HOME/.mozilla/plugins, autodetect locale, add -splash parameter
 Source10:  seamonkey-1.0.0-sh.in.bz2
-Source22:  http://www.mozilla-enigmail.org/downloads/src/enigmail-%{enigmail_version}.tar.bz2
+Source22:  http://www.mozilla-enigmail.org/download/source/enigmail-%{enigmail_version}.tar.gz
 Source23:  mdkbugzilla.gif
-Source24:  mozilla-1.6-startmail.tar.bz2
 Source25:  mozilla-make-package.pl
 Source26:  seamonkey-rebuild-databases.pl.in
 Source27:  mozilla-xpcom-exclude-list
 Source28:  mozilla-psm-exclude-list
-# Enigmail 0.95.7 is broken in x86_64 (#44426)
-Source29:  http://www.mozilla-enigmail.org/download/source/enigmail-0.95.6.tar.gz
-#Source31:  enigmail-%{enigmail_version}-l10n.tar.bz2
 
 # (fc) 1.1-0.beta.1mdk remove Debug menu
 Patch0:    mozilla-1.7-no-debug-overlay-menu.patch
 Patch7:    mozilla-browser-home-page.patch
-Patch12:   mozilla-1.7-psfonts.patch
-Patch13:   mozilla-nspr-packages.patch
 # (fc) 0.9.6-3mdk remove buildid from titlebar (Ximian)
 Patch23:   mozilla-1.1-remove-buildid-from-title.patch
-# (fc) 0.9.6-3mdk fix french policy
-Patch24:   mozilla-0.9.6-frenchpolicy.patch
-# (fc) 1.0.rc2.1mdk make default plugin less annoying (Mozilla official RPM)
-Patch27:   mozilla-default-plugin-less-annoying.patch
-# (gg) 1.4-14mdk use Standard Symbols L too for MathML
-Patch42:   mozilla-1.6-mathml-standardsymbolsl.patch
-# (gg) 1.4-14mdk fix problem with time font in MathML
-Patch43:   mozilla-mathml-times.patch
 
 # (fc) 1.1-0.branch.1mdk use standard mozilla packaging tool for enigmail/enigmime
 Patch46:   mozilla-1.7-enigmail-package.patch
-# (fc) 1.1-0.branch.1mdk fix spellchecker includes
-Patch47:   mozilla-1.1.14-spellcheckerinclude.patch
-# (gb) 1.1-4mdk myspell dictionaries are in /usr/share/dict/ooo/
-# (fc) 1.3-0.alpha.2mdk google is now search engine by default, add mdk bugzilla in search engines list
-Patch59:   mozilla-1.7-search.patch
-# (fc) 1.4-0.alpha.1mdk allow to change UI font (rawhide + ghibo)
-Patch62:   mozilla-1.3-uifont.patch
 #
 # (gg) 1.3-2mdk enabled default pipelining
 Patch100:  mozilla-1.7-pipelining.patch
@@ -180,70 +160,47 @@ Patch102:  mozilla-1.7-freetype2-antialias-path.patch
 Patch104:  mozilla-1.7-a4paper.patch
 # (gg) Patch for default font names for x-western
 Patch105:  mozilla-1.7-corefonts-fontnames.patch
-# (gg) 1.4-4mdk patches for MathML (bug #176290)
-Patch113:  mozilla-176290_127030.patch
 # (fc) 1.4-10mdk use xvt instead of xterm
 Patch132:  mozilla-1.7-xvt.patch
-# (gg) 1.4-15mdk workaround problems with prdtoa (merged from RH)
-Patch174:  mozilla-1.4-prdtoa.patch
 # (gg) 1.4-15mdk patch for using -pie for linking mozilla-bin (merged from RH)
 Patch178:  mozilla-1.4.1-pie.patch
-# (fc) 1.7.2-10mdk initial startup as maximized 
-Patch251:  mozilla-1.7.5-defaultsize.patch
-# (fc) 1.7.3-1mdk try to load castella PKCS#11 module if available
-Patch257:  mozilla-1.6-castella.patch
 # (fc) 1.7.3-2mdk fix compilation with latest freetype2 (Moz bug #234035)
 Patch258:  mozilla-1.7.7-freetype-compile.patch
-# (fc) 1.7.3-2mdk prevent inlining of stack direction detection (RH bug #135255)
-Patch267:  mozilla-1.7.3-stack-direction.patch
-# (fc) 1.7.3-2mdk Fix problem where default apps aren't showing up in the download dialog (RH bug #136261) (Fedora)
-Patch268:  mozilla-1.7.3-gnome-vfs-default-app.patch
 # (fc) 1.7.3-2mdk fix dynamic library loading on 64bit system (gb)
 Patch270:  mozilla-1.6-lib64.patch
 # (gb) 1.7.5-5mdk fix loading of libXext.so.6 and libXt.so.6 
 Patch274:  mozilla-load-full-dso.patch
 # (fc) 1.7.5-5mdk enable automatic language detection at startup (Debian)
 Patch276:  mozilla-1.7.5-lang.patch
-# (fc) 1.7.5-5mdk don't call netstat to set entropy (Debian) (Mdk bug #9427)
-# (cjw) doesn't apply to seamonkey 1.1
-#Patch277:  mozilla-1.7.5-fixrandom.patch.bz2
-# (fc) 1.7.5-5mdk ignore unknown mouse button event (Debian)
-Patch278:  mozilla-1.7.5-unknownmousebutton.patch
-# (fc) 1.7.6-3mdk add env variable to disable GNOME uri handler (Fedora)
-Patch281:  mozilla-1.6-gnome-uriloader.patch
 #
-Patch295:  mozilla-1.7.12-pango-direction.patch
-Patch298:  mozilla-1.7.12-g-application-name.patch
 Patch299:  seamonkey-1.0.3-gcc41.patch
-# (gg) fix for rounding error in style values https://bugzilla.mozilla.org/show_bug.cgi?id=182670
-Patch300:  mozilla-182670.patch
-# (cjw) some X11 libs missing for libgklayout link command
-Patch301:  seamonkey-1.1-layout-link-fix.patch
-# (cjw) from mozilla-firefox package: fix buffer overflow crash with glibc 2.8
-Patch302:  firefox-3.0rc1-glibc28-max_path-fix.patch
 # (cjw) fix build error from enigmail due to a visibility problem
 Patch303:  enigmail-0.95.6-visibility.patch
 # fix build with -Werror=format-security in compile flags
-Patch304:  seamonkey-1.1.14-fix-string-format.patch
+Patch304:  seamonkey-2.0-fix-string-format.patch
+# (cjw) fix opt flags passing to mozilla subdir's configure script
+Patch305:  seamonkey-2.0-configure-optflags-fix.patch
 Epoch:     %{epoch_mozilla}
 Conflicts: j2re = 1.4.0-beta3
 Conflicts: j2sdk = 1.4.0-beta3
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 BuildRequires:	autoconf2.1
-BuildRequires:	libjpeg-devel libpng-devel libIDL-devel
-BuildRequires:  zip tcsh
-%if %{mdkversion} >= 200610
-BuildRequires:  libxft-devel
-BuildRequires:	libxt-devel
-%endif
 BuildRequires:  gtk+2-devel >= 2.4.0
 BuildRequires:  gnome-vfs2-devel
-BuildRequires:	libgnomeui2-devel
 BuildRequires:  krb-devel
-%if %{mdkversion} >= 200900
-BuildRequires:	gcc4.2-c++
-%endif
+BuildRequires:	libalsa-devel
+BuildRequires:	libcurl-devel
+BuildRequires:	wget
+BuildRequires:	libIDL-devel
+BuildRequires:	libbzip2-devel
+BuildRequires:	libgnomeui2-devel
+BuildRequires:	libhunspell-devel
+BuildRequires:	libjpeg-devel
+BuildRequires:	libpng-devel
+BuildRequires:  libxft-devel
+BuildRequires:	libxt-devel
+BuildRequires:  zip tcsh
 
 %if %{mdkversion} >= 200610
 BuildRequires:	rootcerts >= 20060621
@@ -353,6 +310,7 @@ Provides:	nss-devel = %{version}-%{release}
 Header files to doing development with Network Security Services.
 %endif 
 
+%if 0
 %package devel
 Summary:	SeaMonkey development files
 Group:		Development/Other
@@ -362,6 +320,7 @@ Provides:	mozilla-devel = 0:1.8-1mdk
 Obsoletes:	mozilla-devel
 %description devel
 Mozilla development files
+%endif
 
 %package mail
 Summary:		SeaMonkey-based mail system
@@ -469,19 +428,12 @@ Inter-process communication required for enigmail
 %prep
 rm -rf $RPM_BUILD_ROOT
 
-%setup -q -c %{name}-%{version} -a 6
-%setup -q -T -D -n %{name}-%{version}/mozilla
-
-%patch47 -p1 -b .spellcheckinclude
+%setup -q -c %{name}-%{version}
+%setup -q -T -D -n %{name}-%{version}/comm-1.9.1
 
 %if %build_enigmail
-#setup -T -D -n %{name}-%{version}/mozilla/extensions -q -a21
-%ifarch x86_64
-%setup -T -D -n %{name}-%{version}/mozilla/mailnews/extensions -q -a29
-%else
-%setup -T -D -n %{name}-%{version}/mozilla/mailnews/extensions -q -a22
-%endif
-%setup -T -D -n %{name}-%{version}/mozilla -q
+%setup -T -D -n %{name}-%{version}/comm-1.9.1/mailnews/extensions -q -a22
+%setup -T -D -n %{name}-%{version}/comm-1.9.1 -q
 %endif
 
 #those patches are commented for "final" version of mozilla
@@ -492,20 +444,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %patch7 -p1 -b .browser-home-page
 
-%patch12 -p1 -b .psfont
-%patch13 -p1 -b .nspr
-%if %french_policy
-%patch24 -p1 -b .frenchpolicy
-%endif
-%patch27 -p1 -b .defaultplugin
-%patch42 -p1 -b .standardsym
-%patch43 -p1 -b .mathmltimes
-
-%patch46 -p1 -b .enigmailpackage
+#patch46 -p1 -b .enigmailpackage
 #patch53 -p1 -b .spellcheck-system-dicts
 #patch54 -p1 -b .spellcheck-full-langname
-%patch59 -p1 -b .search
-%patch62 -p1 -b .uifont
 
 %if %build_ggdefaults
 %patch100 -p1 -b .pipelining
@@ -518,47 +459,27 @@ rm -rf $RPM_BUILD_ROOT
 %patch105 -p1 -b .corefonts
 %endif
 
-# MathML patches
-%patch113 -p1 -b .mathml
-
 # Other patches
 %patch132 -p1 -b .xvt
-%patch174 -p1 -b .prdtoa
 %if %build_pie
 %patch178 -p1 -b .pie
 %endif
 
-%patch251 -p1 -b .defaultsize
-%patch257 -p1 -b .castella
 %if %build_ggdefaults
 %patch258 -p0 -b .freetype-compile
 %endif
-%patch267 -p1 -b .stackdirection
-%patch268 -p1 -b .gnomevfsdefaultapp
-%patch270 -p1 -b .lib64
-%patch274 -p1 -b .load-full-dso
+%patch270 -p0 -b .lib64
+%patch274 -p0 -b .load-full-dso
 %patch276 -p1 -b .lang
-#patch277 -p1 -b .fixrandom
-%patch278 -p1 -b .unknownmousebutton
-%patch281 -p1 -b .gnome-uriloader
 
-%if %build_pango
-%patch295 -p1 -b .pango-direction
-%endif
-#
-%patch298 -p1 -b .g-application-name
 %patch299 -p2 -b .gcc41
-%patch300 -p1 -b .182670
-%patch301 -p1 -b .x11_xrender
-%patch302 -p1 -b .glibc28
 %patch303 -p1 -b .enigmail-visibility
-%patch304 -p1 -b .strfmt
+%patch304 -p0 -b .strfmt
+%patch305 -p1 -b .subdir-optflags
 
-rm -f profile/defaults/bookmarks.html
-touch profile/defaults/bookmarks.html
-cp %{SOURCE23} xpfe/components/search/datasets
-
-tar xjf %{SOURCE24} -C mailnews/base/resources/locale/en-US
+#rm -f profile/defaults/bookmarks.html
+#touch profile/defaults/bookmarks.html
+#cp %{SOURCE23} xpfe/components/search/datasets
 
 # let jars get compressed
 %__perl -p -i -e 's|\-0|\-9|g' config/make-jars.pl
@@ -566,6 +487,13 @@ tar xjf %{SOURCE24} -C mailnews/base/resources/locale/en-US
 %build
 #needed by patch 178, 182 & 205 & 262
 autoconf-2.13
+#needed by patch305
+pushd mozilla
+autoconf-2.13
+pushd js/src
+autoconf-2.13
+popd
+popd
 
 # needed by patch291
 pushd directory/c-sdk
@@ -576,23 +504,15 @@ popd
 
 # needed to regenerate certdata.c
 %if %{mdkversion} >= 200610
-cd security/nss/lib/ckfw/builtins
+cd mozilla/security/nss/lib/ckfw/builtins
 perl ./certdata.perl < /etc/pki/tls/mozilla/certdata.txt
 cd -
 %endif
 export MOZ_BUILD_DATE="%{releasedate}"
 
-# Build with -fabi-version=1 when compiling with gcc3.4+ so that a
-# certain level of compatibility is kept to run Sun's Java plugin
-GCC_VERSION=`gcc -dumpversion | perl -pe '/(\d+)\.(\d)\.?(\d)?/; $_="$1$2".($3||0)'`
-[[ $GCC_VERSION -ge 340 ]] && export CXXFLAGS="-fabi-version=1"
-
 OPT_FLAGS="$RPM_OPT_FLAGS"
 
-BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 MOZ_INTERNAL_LIBART_LGPL=1 \
-%if %{mdkversion} >= 200900
-	CC=gcc4.2 CXX=g++4.2 CPP=cpp4.2 \
-%endif
+BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 \
 	./configure --build=%{_target_platform} \
 	--enable-application=suite \
 	--prefix=%{_prefix} --libdir=%{_libdir} \
@@ -618,12 +538,16 @@ BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 MOZ_INTERNAL_LIBART_LGPL=1 \
 	--with-system-nss \
 %endif
 	--with-default-mozilla-five-home=%{mozillalibdir} \
-	--enable-extensions --disable-short-wchar \
+	--disable-short-wchar \
 	--enable-xinerama \
 	--enable-mathml \
 	--with-system-zlib --with-system-png \
-	--enable-system-cairo \
-	--with-system-jpeg --enable-ipv6 \
+	--disable-system-cairo \
+	--with-system-bz2 \
+	--with-system-jpeg \
+	--enable-ipv6 \
+	--enable-system-sqlite \
+	--enable-system-hunspell \
 	--enable-old-abi-compat-wrappers --mandir=%{_mandir} \
 %if %enable_svg
 	--enable-svg \
@@ -638,12 +562,17 @@ BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 MOZ_INTERNAL_LIBART_LGPL=1 \
 %if %build_pango
 	--enable-pango \
 %endif
-	--enable-default-toolkit=%{toolkit} \
-	--disable-storage
+	--enable-default-toolkit=%{toolkit}
 
 BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 make -s export
+pushd directory/c-sdk/ldap
+BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 make -s export
+popd
 #only this part should be parallel (ie use make macro)
 BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 make -s libs
+pushd mozilla/xpcom/tools/registry
+BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 make -s libs
+popd
 
 %if %build_enigmail
 #cd extensions/ipc
@@ -675,14 +604,14 @@ rm -f %{_tmppath}/mozilla-nspr.list
 
 %{SOURCE25} --package nspr \
     --output-file %{_tmppath}/mozilla-nspr.list \
-    --package-file xpinstall/packager/packages-unix \
+    --package-file suite/installer/packages \
     --install-dir $RPM_BUILD_ROOT%{_libdir} \
     --install-root %{_libdir}
 
 rm -f %{_tmppath}/mozilla-nss.list
 %{SOURCE25} --package nss \
     --output-file %{_tmppath}/mozilla-nss.list \
-    --package-file xpinstall/packager/packages-unix \
+    --package-file suite/installer/packages \
     --install-dir $RPM_BUILD_ROOT%{_libdir} \
     --install-root %{_libdir}
 %endif
@@ -690,32 +619,32 @@ rm -f %{_tmppath}/mozilla-nss.list
 rm -f %{_tmppath}/mozilla.list
 %{SOURCE25} --package langenus \
     --output-file %{_tmppath}/mozilla.list \
-    --package-file xpinstall/packager/packages-unix \
+    --package-file suite/installer/packages \
     --install-dir $RPM_BUILD_ROOT%{mozillalibdir} \
     --install-root %{mozillalibdir}
 
 %{SOURCE25} --package regus \
     --output-file %{_tmppath}/mozilla.list \
-    --package-file xpinstall/packager/packages-unix \
+    --package-file suite/installer/packages \
     --install-dir $RPM_BUILD_ROOT%{mozillalibdir} \
     --install-root %{mozillalibdir}
 
 %{SOURCE25} --package deflenus \
     --output-file %{_tmppath}/mozilla.list \
-    --package-file xpinstall/packager/packages-unix \
+    --package-file suite/installer/packages \
     --install-dir $RPM_BUILD_ROOT%{mozillalibdir} \
     --install-root %{mozillalibdir}
 
 %{SOURCE25} --package xpcom \
     --output-file %{_tmppath}/mozilla.list \
-    --package-file xpinstall/packager/packages-unix \
+    --package-file suite/installer/packages \
     --install-dir $RPM_BUILD_ROOT%{mozillalibdir} \
     --install-root %{mozillalibdir} \
     --exclude-file=%{SOURCE27}
 
 %{SOURCE25} --package browser \
     --output-file %{_tmppath}/mozilla.list \
-    --package-file xpinstall/packager/packages-unix \
+    --package-file suite/installer/packages \
     --install-dir $RPM_BUILD_ROOT%{mozillalibdir} \
     --install-root %{mozillalibdir}
 
@@ -727,34 +656,34 @@ ln -s ../libnssckbi.so libnssckbi.so
 
 rm -f %{_tmppath}/mozilla-mail.list
 %{SOURCE25} --package mail --output-file %{_tmppath}/mozilla-mail.list \
-    --package-file xpinstall/packager/packages-unix \
+    --package-file suite/installer/packages \
     --install-dir $RPM_BUILD_ROOT%{mozillalibdir} \
     --install-root %{mozillalibdir}
 
 %{SOURCE25} --package psm \
     --output-file %{_tmppath}/mozilla.list \
-    --package-file xpinstall/packager/packages-unix \
+    --package-file suite/installer/packages \
     --install-dir $RPM_BUILD_ROOT%{mozillalibdir} \
     --install-root %{mozillalibdir} \
     --exclude-file=%{SOURCE28}
 
 rm -f %{_tmppath}/mozilla-chat.list
 %{SOURCE25} --package chatzilla --output-file %{_tmppath}/mozilla-chat.list \
-    --package-file xpinstall/packager/packages-unix \
+    --package-file suite/installer/packages \
     --install-dir $RPM_BUILD_ROOT%{mozillalibdir} \
     --install-root %{mozillalibdir}
 
 rm -f %{_tmppath}/mozilla-js-debugger.list
 %{SOURCE25} --package venkman \
     --output-file %{_tmppath}/mozilla-js-debugger.list \
-    --package-file xpinstall/packager/packages-unix \
+    --package-file suite/installer/packages \
     --install-dir $RPM_BUILD_ROOT%{mozillalibdir} \
     --install-root %{mozillalibdir}
 
 rm -f %{_tmppath}/mozilla-dom-inspector.list
 %{SOURCE25} --package inspector \
     --output-file %{_tmppath}/mozilla-dom-inspector.list \
-    --package-file xpinstall/packager/packages-unix \
+    --package-file suite/installer/packages \
     --install-dir $RPM_BUILD_ROOT%{mozillalibdir} \
     --install-root %{mozillalibdir}
 
@@ -766,7 +695,7 @@ EOF
 rm -f %{_tmppath}/mozilla-spellchecker.list
 %{SOURCE25} --package spellcheck \
     --output-file %{_tmppath}/mozilla-spellchecker.list \
-    --package-file xpinstall/packager/packages-unix \
+    --package-file suite/installer/packages \
     --install-dir $RPM_BUILD_ROOT%{mozillalibdir} \
     --install-root %{mozillalibdir} \
     --exclude-file=%{_tmppath}/mozilla-spellchecker-exclude.list
@@ -775,10 +704,12 @@ rm -f %{_tmppath}/mozilla-spellchecker.list
 #hack to get the enigmail stuff to install:
 for i in components/enigmime.xpt components/ipc.xpt components/libenigmime.so \
 	components/enigmail.js components/enigmail.xpt chrome/enigmail.jar \
-	components/enigprefs-service.js chrome/enigmail-skin.jar \
-	chrome/enigmime.jar defaults/pref/enigmail.js chrome/enigmail-en-US.jar ; do 
-		install dist/bin/$i $RPM_BUILD_ROOT/%{mozillalibdir}/$i;
+	components/enigprefs-service.js \
+	chrome/enigmime.jar defaults/pref/enigmail.js ; do 
+		install mozilla/dist/bin/$i $RPM_BUILD_ROOT/%{mozillalibdir}/$i;
 done
+
+# chrome/enigmail-skin.jar chrome/enigmail-en-US.jar
 
 chmod 644 $RPM_BUILD_ROOT/%{mozillalibdir}/defaults/pref/enigmail.js
 perl -pi -e 's|agentPath",""|agentPath","/usr/bin/gpg"|' $RPM_BUILD_ROOT/%{mozillalibdir}/defaults/pref/enigmail.js 
@@ -786,26 +717,14 @@ perl -pi -e 's|agentPath",""|agentPath","/usr/bin/gpg"|' $RPM_BUILD_ROOT/%{mozil
 rm -f %{_tmppath}/mozilla-enigmail.list
 %{SOURCE25} --package enigmail \
     --output-file %{_tmppath}/mozilla-enigmail.list \
-    --package-file xpinstall/packager/packages-unix \
+    --package-file suite/installer/packages \
     --install-dir $RPM_BUILD_ROOT%{mozillalibdir} \
     --install-root %{mozillalibdir}
-
-cd $RPM_BUILD_ROOT%{mozillalibdir}/chrome
-#tar -xjf %{SOURCE31} 
-for i in enigmail-*-*.jar ; do 
- RPMLANG=`echo $i | cut -d '-' -f 2`
- if [ "$RPMLANG" = "en" ]; then 
-  echo "%{mozillalibdir}/chrome/$i" >> %{_tmppath}/mozilla-enigmail.list
- else
-  echo "%lang($RPMLANG) %{mozillalibdir}/chrome/$i" >> %{_tmppath}/mozilla-enigmail.list
- fi
-done
-cd -
 
 rm -f %{_tmppath}/mozilla-enigmime.list
 %{SOURCE25} --package enigmime \
     --output-file %{_tmppath}/mozilla-enigmime.list \
-    --package-file xpinstall/packager/packages-unix \
+    --package-file suite/installer/packages \
     --install-dir $RPM_BUILD_ROOT%{mozillalibdir} \
     --install-root %{mozillalibdir}
 %endif
@@ -825,75 +744,53 @@ rm -f %{_tmppath}/mozilla-enigmime.list
 cat %{SOURCE99} >$RPM_BUILD_ROOT%{mozillalibdir}/chrome/locale.alias
 mkdir -p ../l10n
 pushd ../l10n
+%if 0
 # should be done in prep....
 unzip -o %{SOURCE100}
 unzip -o %{SOURCE101}
 unzip -o %{SOURCE102}
 unzip -o %{SOURCE103}
-unzip -o %{SOURCE104}
-unzip -o %{SOURCE105}
 unzip -o %{SOURCE106}
 unzip -o %{SOURCE108}
-unzip -o %{SOURCE109}
 unzip -o %{SOURCE110}
+unzip -o %{SOURCE111}
+unzip -o %{SOURCE112}
 unzip -o %{SOURCE114}
 unzip -o %{SOURCE115}
 unzip -o %{SOURCE116}
-unzip -o %{SOURCE118}
+unzip -o %{SOURCE117}
 unzip -o %{SOURCE119}
 unzip -o %{SOURCE120}
-unzip -o %{SOURCE121}
-unzip -o %{SOURCE122}
 unzip -o %{SOURCE123}
 unzip -o %{SOURCE124}
+unzip -o %{SOURCE125}
+unzip -o %{SOURCE126}
+unzip -o %{SOURCE127}
+unzip -o %{SOURCE128}
 
+#unzip -o %{SOURCE104}
+#unzip -o %{SOURCE105}
 #unzip -o %{SOURCE107}
-#unzip -o %{SOURCE111}
-#unzip -o %{SOURCE112}
+#unzip -o %{SOURCE109}
 #unzip -o %{SOURCE113}
-#unzip -o %{SOURCE117}
+#unzip -o %{SOURCE118}
+#unzip -o %{SOURCE121}
+#unzip -o %{SOURCE122}
+%endif
 
 for lang in %{l10ns}; do
+  unzip -o %{_sourcedir}/%{name}-%{version}.${lang}.langpack.xpi
   RPMLANG=$(echo $lang|cut -d '-' -f 1)
   JARFILE=${lang}.jar
-  UNIXFILE=${RPMLANG}-unix.jar
-  if ! ( [ -f ./chrome/$UNIXFILE ] || [ -f bin/chrome/$UNIXFILE ] ); then
-    UNIXFILE=${lang}-unix.jar
-  fi
   if [ -f bin/chrome/$JARFILE ]; then
-    cp bin/chrome/$JARFILE bin/chrome/$UNIXFILE $RPM_BUILD_ROOT%{mozillalibdir}/chrome/
+    cp bin/chrome/$JARFILE $RPM_BUILD_ROOT%{mozillalibdir}/chrome/
   else
-    cp ./chrome/$JARFILE ./chrome/$UNIXFILE $RPM_BUILD_ROOT%{mozillalibdir}/chrome/
+    cp ./chrome/$JARFILE $RPM_BUILD_ROOT%{mozillalibdir}/chrome/
   fi
-  chmod 644 $RPM_BUILD_ROOT%{mozillalibdir}/chrome/$JARFILE $RPM_BUILD_ROOT%{mozillalibdir}/chrome/$UNIXFILE
+  cp ./chrome.manifest $RPM_BUILD_ROOT%{mozillalibdir}/chrome/${lang}.manifest
+  chmod 644 $RPM_BUILD_ROOT%{mozillalibdir}/chrome/$JARFILE
   echo "%lang($RPMLANG) %{mozillalibdir}/chrome/$JARFILE" >> %{_tmppath}/mozilla.list
-  echo "%lang($RPMLANG) %{mozillalibdir}/chrome/$UNIXFILE" >> %{_tmppath}/mozilla.list
-  cat << EOF | sed -e "s/@LOCALE@/$lang/g" -e "s/@LANG@/$RPMLANG/g" >> $RPM_BUILD_ROOT%{mozillalibdir}/chrome/installed-chrome.txt
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/autoconfig/
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/chatzilla/
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/communicator/
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/content-packs/
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/cookie/
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/editor/
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/embed/
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/forms/
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/inspector/
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/global/
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/help/
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/messenger/
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/messenger-smime/
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/messenger-mapi/
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/mozldap/
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/navigator/
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/necko/
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/pipnss/
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/pippki/
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/venkman/
-locale,install,url,jar:resource:/chrome/@LOCALE@.jar!/locale/@LOCALE@/wallet/
-locale,install,url,jar:resource:/chrome/@LANG@-unix.jar!/locale/@LOCALE@/global-platform/
-locale,install,url,jar:resource:/chrome/@LANG@-unix.jar!/locale/@LOCALE@/communicator-platform/
-locale,install,url,jar:resource:/chrome/@LANG@-unix.jar!/locale/@LOCALE@/navigator-platform/
-EOF
+  echo "%lang($RPMLANG) %{mozillalibdir}/chrome/${lang}.manifest" >> %{_tmppath}/mozilla.list
 done
 echo "%{mozillalibdir}/chrome/locale.alias" >> %{_tmppath}/mozilla.list
 popd
@@ -905,18 +802,18 @@ cat %{_tmppath}/mozilla.list | sort -k 2 | \
 	uniq > %{_tmppath}/mozilla.list.uniq
 mv -f %{_tmppath}/mozilla.list.uniq %{_tmppath}/mozilla.list
 
+cp mozilla/dist/bin/regxpcom $RPM_BUILD_ROOT%{mozillalibdir}/
+
 # build our initial component and chrome registry
 # we don't need to do this anymore
 pushd `pwd`
   cd $RPM_BUILD_ROOT%{mozillalibdir}
   # register our components
-  LD_LIBRARY_PATH=`pwd`/..:`pwd` MOZILLA_FIVE_HOME=`pwd` ./regxpcom
+#  LD_LIBRARY_PATH=`pwd`/..:`pwd` MOZILLA_FIVE_HOME=`pwd` ./regxpcom
   # set up the default skin and locale to trigger the generation of
   # the user-locales and users-skins.rdf
   echo "skin,install,select,classic/1.0" >> chrome/installed-chrome.txt
   echo "locale,install,select,en-US" >> chrome/installed-chrome.txt
-  # set up the chrome rdf files
-  LD_LIBRARY_PATH=`pwd`/..:`pwd` MOZILLA_FIVE_HOME=`pwd` ./regchrome
   # fix permissions of the chrome directories
   find . -type d -perm 0700 -exec chmod 755 {} \; || :
 popd
@@ -936,11 +833,13 @@ rm -f %{_tmppath}/mozilla-devel.list
 rm -f %{_tmppath}/mozilla-nss-devel.list
 rm -f %{_tmppath}/mozilla-nspr-devel.list
 
+%if 0
 find $RPM_BUILD_ROOT%{mozillaincludedir}/ -type f | \
   sed -e "s,$RPM_BUILD_ROOT,," | \
   grep -v "%{mozillaincludedir}/nss" | \
   grep -v "%{mozillaincludedir}/nspr" > \
   %{_tmppath}/mozilla-devel.list
+%endif
 
 %if %{build_nspr_nss}
 find $RPM_BUILD_ROOT%{mozillaincludedir}/ -type f | \
@@ -956,11 +855,11 @@ find $RPM_BUILD_ROOT%{mozillaincludedir}/ -type f | \
 
 
 # copy our devel tools
-install -c -m 755 dist/bin/xpcshell \
-  dist/bin/xpidl \
-  dist/bin/xpt_dump \
-  dist/bin/xpt_link \
-  $RPM_BUILD_ROOT%{mozillalibdir}
+#install -c -m 755 dist/bin/xpcshell \
+#  dist/bin/xpidl \
+#  dist/bin/xpt_dump \
+#  dist/bin/xpt_link \
+#  $RPM_BUILD_ROOT%{mozillalibdir}
 
 mkdir -p $RPM_BUILD_ROOT%{_miconsdir} $RPM_BUILD_ROOT%{_liconsdir}
 
@@ -973,6 +872,7 @@ cp -f %SOURCE4 $RPM_BUILD_ROOT%{_liconsdir}/%{name}.png
 #mv $RPM_BUILD_ROOT/usr/man/man1/* $RPM_BUILD_ROOT%{_mandir}/man1/
 
 # install our mozilla.sh file
+rm -f $RPM_BUILD_ROOT%{_bindir}/seamonkey
 bzcat %{SOURCE10} | sed -e "s|SEAMONKEY_VERSION|%{dirversion}|g;s|LIBDIR|%{_libdir}|g" > $RPM_BUILD_ROOT%{_bindir}/seamonkey
 chmod 755 $RPM_BUILD_ROOT%{_bindir}/seamonkey
 
@@ -1091,13 +991,11 @@ StartupWMClass=Seamonkey-bin
 EOF
 %endif
 
-bzcat %{SOURCE5} | tar -C $RPM_BUILD_ROOT%{mozillalibdir}/defaults/profile/US -xf - 
-
 # .js files should not be executable
 chmod a-x $RPM_BUILD_ROOT%{mozillalibdir}/components/*.js
 
 # disable check for new versions
-sed -i -re 's/("update_notifications.enabled", )true/\1false/' $RPM_BUILD_ROOT%{mozillalibdir}/defaults/pref/browser-prefs.js
+sed -i -re 's/("app.update.enabled", )true/\1false/' $RPM_BUILD_ROOT%{mozillalibdir}/defaults/pref/browser-prefs.js
 
 # remove unpackaged files
 rm -rf $RPM_BUILD_ROOT%{mozillalibdir}/chrome/{cview,embed-sample,layoutdebug,tasks}.jar \
@@ -1115,10 +1013,10 @@ rm -rf $RPM_BUILD_ROOT%{mozillalibdir}/chrome/{cview,embed-sample,layoutdebug,ta
  $RPM_BUILD_ROOT%{mozillalibdir}/ipc/modules/{liblockmodule,libtestmodule,libtransmgr}.so \
  $RPM_BUILD_ROOT%{mozillalibdir}/{liblockmodule,libtestmodule,libtr\ansmngr}.so \
  $RPM_BUILD_ROOT%{mozillalibdir}/mozilla-installer-bin \
- $RPM_BUILD_ROOT%{mozillalibdir}/extensions \
  $RPM_BUILD_ROOT%{mozillalibdir}/res/samples \
  $RPM_BUILD_ROOT%{mozillalibdir}/dictionaries
 
+# $RPM_BUILD_ROOT%{mozillalibdir}/extensions \
 # $RPM_BUILD_ROOT%{mozillalibdir}/res/samples/sampleimages
 
 %if %{build_xmlterm}
@@ -1136,14 +1034,14 @@ rm -rf $RPM_BUILD_ROOT%{mozillaincludedir}/nspr \
  $RPM_BUILD_ROOT%{mozillalibdir}/{libplc4.so,libplds4.so,libsmime3.so,libsoftokn3.so,libssl3.so,libnspr4.so,libnss3.so,libnssckbi.so} \
  $RPM_BUILD_ROOT%{_libdir}/pkgconfig/seamonkey-{nspr,nss}.pc \
  $RPM_BUILD_ROOT%{_datadir}/aclocal/nspr.m4
-sed -i -e 's/mozilla-nspr = %{version}/mozilla-nspr/'   $RPM_BUILD_ROOT%{_libdir}/pkgconfig/seamonkey-xpcom.pc $RPM_BUILD_ROOT%{_libdir}/pkgconfig/seamonkey-js.pc
-ln -s nspr.pc %{buildroot}%{_libdir}/pkgconfig/seamonkey-nspr.pc
-ln -s nss.pc %{buildroot}%{_libdir}/pkgconfig/seamonkey-nss.pc
+##sed -i -e 's/mozilla-nspr = %{version}/mozilla-nspr/'   $RPM_BUILD_ROOT%{_libdir}/pkgconfig/seamonkey-xpcom.pc $RPM_BUILD_ROOT%{_libdir}/pkgconfig/seamonkey-js.pc
+##ln -s nspr.pc %{buildroot}%{_libdir}/pkgconfig/seamonkey-nspr.pc
+##ln -s nss.pc %{buildroot}%{_libdir}/pkgconfig/seamonkey-nss.pc
 %endif
 
 # multiarch
-%multiarch_binaries $RPM_BUILD_ROOT%{_bindir}/seamonkey-config
-%multiarch_includes $RPM_BUILD_ROOT%{_includedir}/seamonkey-%{version}/{mozilla-config.h,js/jsautocfg.h}
+##multiarch_binaries $RPM_BUILD_ROOT%{_bindir}/seamonkey-config
+##multiarch_includes $RPM_BUILD_ROOT%{_includedir}/seamonkey-%{version}/{mozilla-config.h,js/jsautocfg.h}
 
 # myspell dictionaries
 ln -s ../../share/dict/mozilla $RPM_BUILD_ROOT%{mozillalibdir}/dictionaries
@@ -1191,7 +1089,7 @@ if [ ! -r /etc/sysconfig/oem ]; then
   *PowerPack)  bookmark="mozilla-powerpack.html" ;;
   *) bookmark="mozilla-discovery-download.html";;
   esac
-  ln -s -f $bookmark  %{mozillalibdir}/defaults/profile/US/bookmarks.html
+  ln -s -f $bookmark  %{mozillalibdir}/defaults/profile/bookmarks.html
 fi
 
 %preun
@@ -1307,8 +1205,8 @@ if [ -f %{mozillalibdir}/chrome/installed-chrome.txt ]; then
    perl -pi -e 's/.*enigmail.*\n//' %{mozillalibdir}/chrome/installed-chrome.txt
   cat << EOF >> %{mozillalibdir}/chrome/installed-chrome.txt
 content,install,url,jar:resource:/chrome/enigmail.jar!/content/enigmail/
-skin,install,url,jar:resource:/chrome/enigmail-skin.jar!/skin/modern/enigmail/
-skin,install,url,jar:resource:/chrome/enigmail-skin.jar!/skin/classic/enigmail/
+skin,install,url,jar:resource:/chrome/enigmail.jar!/skin/modern/enigmail/
+skin,install,url,jar:resource:/chrome/enigmail.jar!/skin/classic/enigmail/
 EOF
   cd %{mozillalibdir}/chrome/
   for i in enigmail-*-*.jar ; do
@@ -1367,7 +1265,7 @@ fi
 %if %build_gre
 %config(noreplace) %{_sysconfdir}/gre.conf
 %endif
-%{_mandir}/man1/*
+##{_mandir}/man1/*
 %{_datadir}/applications/mandriva-%{name}.desktop
 %{_datadir}/applications/mandriva-%{name}-composer.desktop
 %{_miconsdir}/*.png
@@ -1376,23 +1274,23 @@ fi
 %dir %{_libdir}/mozilla
 %dir %{mozillaplugindir}
 
-%ghost %{mozillalibdir}/defaults/profile/US/bookmarks.html
-%{mozillalibdir}/defaults/profile/US/mozilla-*.html
+%ghost %{mozillalibdir}/defaults/profile/bookmarks.html
+##{mozillalibdir}/defaults/profile/US/mozilla-*.html
 
 %dir %{mozillalibdir}/defaults/autoconfig
 %dir %{mozillalibdir}/defaults/pref
-%dir %{mozillalibdir}/defaults/messenger/US
+##dir %{mozillalibdir}/defaults/messenger/US
 %dir %{mozillalibdir}/defaults/messenger
-%dir %{mozillalibdir}/defaults/profile/US
+##dir %{mozillalibdir}/defaults/profile/US
 %dir %{mozillalibdir}/defaults/profile
-%dir %{mozillalibdir}/defaults/wallet
+##dir %{mozillalibdir}/defaults/wallet
 %dir %{mozillalibdir}/defaults
 %dir %{mozillalibdir}/chrome
 %dir %{mozillalibdir}/chrome/icons
 %dir %{mozillalibdir}/chrome/icons/default
 %dir %{mozillalibdir}/components
 %dir %{mozillalibdir}/greprefs
-%dir %{mozillalibdir}/init.d
+##dir %{mozillalibdir}/init.d
 %dir %{mozillalibdir}/res/dtd
 %dir %{mozillalibdir}/res/html
 #dir %{mozillalibdir}/res/samples
@@ -1403,33 +1301,52 @@ fi
 %dir %{mozillalibdir}/searchplugins
 %dir %{mozillalibdir}/plugins
 %dir %{mozillalibdir}
-%verify (not md5 mtime size) %{mozillalibdir}/components/compreg.dat
-%verify (not md5 mtime size) %{mozillalibdir}/components/xpti.dat
-%verify (not md5 mtime size) %{mozillalibdir}/chrome/*.rdf
+##verify (not md5 mtime size) %{mozillalibdir}/components/compreg.dat
+##verify (not md5 mtime size) %{mozillalibdir}/components/xpti.dat
+##verify (not md5 mtime size) %{mozillalibdir}/chrome/*.rdf
 #ghost %{mozillalibdir}/chrome/overlayinfo
-%verify (not md5 mtime size) %{mozillalibdir}/greprefs/all.js
+##verify (not md5 mtime size) %{mozillalibdir}/greprefs/all.js
 %if %{enable_svg}
 #{mozillalibdir}/chrome/svg.jar
 #{mozillalibdir}/components/gksvgrenderer.xpt
 #{mozillalibdir}/res/svg.css
 %endif
-%{mozillalibdir}/plugins/libunixprintplugin.so
+##{mozillalibdir}/plugins/libunixprintplugin.so
 %{mozillalibdir}/chrome/reporter.jar
-%{mozillalibdir}/chrome/xforms.jar
-%{mozillalibdir}/components/xforms.xpt
-%{mozillalibdir}/components/libxforms.so
-%{mozillalibdir}/components/schemavalidation.xpt
-%{mozillalibdir}/components/libschemavalidation.so
-%{mozillalibdir}/components/nsSchemaValidatorRegexp.js
-%{mozillalibdir}/components/nsURLFormatter.js
-%{mozillalibdir}/components/saxparser.xpt
-%{mozillalibdir}/components/urlformatter.xpt
-%{mozillalibdir}/chrome/sql.jar
-%{mozillalibdir}/components/sql.xpt
-%{mozillalibdir}/components/libsql.so
-%{mozillalibdir}/chrome/xforms.manifest
-%{mozillalibdir}/chrome/inspector.manifest
+##{mozillalibdir}/chrome/xforms.jar
+##{mozillalibdir}/components/xforms.xpt
+##{mozillalibdir}/components/libxforms.so
+##{mozillalibdir}/components/schemavalidation.xpt
+##{mozillalibdir}/components/libschemavalidation.so
+##{mozillalibdir}/components/nsSchemaValidatorRegexp.js
+##{mozillalibdir}/components/nsURLFormatter.js
+##{mozillalibdir}/components/saxparser.xpt
+##{mozillalibdir}/components/urlformatter.xpt
+##{mozillalibdir}/chrome/sql.jar
+##{mozillalibdir}/components/sql.xpt
+##{mozillalibdir}/components/libsql.so
+##{mozillalibdir}/chrome/xforms.manifest
+##{mozillalibdir}/chrome/inspector.manifest
 %{mozillalibdir}/chrome/reporter.manifest
+%{mozillalibdir}/.autoreg
+%{mozillalibdir}/chrome/en-US.jar
+%{mozillalibdir}/chrome/en-US.manifest
+%{mozillalibdir}/chrome/installed-chrome.txt
+%{mozillalibdir}/components/browser.xpt
+%{mozillalibdir}/defaults/profile/localstore.rdf
+%{mozillalibdir}/defaults/profile/mimeTypes.rdf
+%{mozillalibdir}/defaults/profile/panels.rdf
+%{mozillalibdir}/defaults/profile/search.rdf
+%{mozillalibdir}/regxpcom
+%{mozillalibdir}/removed-files
+%{mozillalibdir}/searchplugins/dmoz.png
+%{mozillalibdir}/searchplugins/dmoz.src
+%{mozillalibdir}/searchplugins/google.png
+%{mozillalibdir}/searchplugins/google.src
+%{mozillalibdir}/searchplugins/jeeves.png
+%{mozillalibdir}/searchplugins/jeeves.src
+%{mozillalibdir}/update.locale
+%{mozillalibdir}/updater.ini
 
 %files mail -f %{_tmppath}/mozilla-mail.list
 %defattr(-,root,root)
@@ -1437,13 +1354,15 @@ fi
 %{_datadir}/applications/mandriva-%{name}-news.desktop
 %{_datadir}/applications/mandriva-%{name}-addressbook.desktop
 %dir %{mozillalibdir}
-%{mozillalibdir}/isp
+%{mozillalibdir}/components/mail.xpt
+%{mozillalibdir}/defaults/messenger/mailViews.dat
+##{mozillalibdir}/isp
 
 %files irc -f %{_tmppath}/mozilla-chat.list
 %defattr(-,root,root)
 %{_datadir}/applications/mandriva-%{name}-chat.desktop
 
-
+%if 0
 %files devel -f %{_tmppath}/mozilla-devel.list
 %defattr (-,root,root)
 %{_bindir}/seamonkey-config
@@ -1497,7 +1416,6 @@ fi
 %dir  %{mozillaincludedir}/layout
 %dir  %{mozillaincludedir}/layout_debug
 %dir  %{mozillaincludedir}/ldap
-#dir  %{mozillaincludedir}/libart_lgpl
 %dir  %{mozillaincludedir}/libreg
 %dir  %{mozillaincludedir}/liveconnect
 %dir  %{mozillaincludedir}/locale
@@ -1595,6 +1513,7 @@ fi
 %{_libdir}/pkgconfig/seamonkey-nss.pc
 %endif
 %{mozillaidldir}
+%endif
 
 %if %{build_xmlterm}
 %files xmlterm
@@ -1621,9 +1540,17 @@ fi
 %if %build_enigmail
 %files enigmail -f %{_tmppath}/mozilla-enigmail.list
 %defattr(-,root,root)
+%{mozillalibdir}/chrome/enigmail.jar
+%{mozillalibdir}/components/enigmail.js
+%{mozillalibdir}/components/enigmail.xpt
+%{mozillalibdir}/components/ipc.xpt
+%{mozillalibdir}/components/enigprefs-service.js
 
 %files enigmime -f %{_tmppath}/mozilla-enigmime.list
 %defattr(-,root,root)
+%{mozillalibdir}/chrome/enigmime.jar
+%{mozillalibdir}/components/enigmime.xpt
+%{mozillalibdir}/components/libenigmime.so
 %endif
 
 %if %{build_nspr_nss}
