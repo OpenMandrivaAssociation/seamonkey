@@ -89,7 +89,7 @@
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
 Version:   2.0.4
-Release:   %mkrel 1
+Release:   %mkrel 2
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
@@ -180,6 +180,8 @@ Patch303:  enigmail-0.95.6-visibility.patch
 Patch304:  seamonkey-2.0-fix-string-format.patch
 # (cjw) fix opt flags passing to mozilla subdir's configure script
 Patch305:  seamonkey-2.0-configure-optflags-fix.patch
+# (cjw) fix crashes with cairo 1.9.6 - from https://bugzilla.mozilla.org/show_bug.cgi?id=522635
+Patch306:  seamonkey-2.0-cairo.patch
 Epoch:     %{epoch_mozilla}
 Conflicts: j2re = 1.4.0-beta3
 Conflicts: j2sdk = 1.4.0-beta3
@@ -476,6 +478,9 @@ rm -rf $RPM_BUILD_ROOT
 %patch303 -p1 -b .enigmail-visibility
 %patch304 -p0 -b .strfmt
 %patch305 -p1 -b .subdir-optflags
+pushd mozilla
+%patch306 -p1 -b .cairo
+popd
 
 #rm -f profile/defaults/bookmarks.html
 #touch profile/defaults/bookmarks.html
@@ -542,7 +547,7 @@ BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 \
 	--enable-xinerama \
 	--enable-mathml \
 	--with-system-zlib --with-system-png \
-	--disable-system-cairo \
+	--enable-system-cairo \
 	--with-system-bz2 \
 	--with-system-jpeg \
 	--enable-ipv6 \
