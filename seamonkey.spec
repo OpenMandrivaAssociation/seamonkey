@@ -9,7 +9,7 @@
 %define devel_nss_name %mklibname nss
 #warning : always end release date with 00 
 # (it should be the hour of build but it is not significant for rpm)
-%define releasedate 2010033000
+%define releasedate 2010062200
 %define dirversion  %{version}
 %define mozillalibdir %{_libdir}/seamonkey-%{dirversion}
 %define mozillaplugindir %{_libdir}/mozilla/plugins
@@ -24,7 +24,6 @@
 %define build_corefonts	 0
 %define build_ggdefaults 0
 %define build_gtk	 0
-%define build_pie	 0
 %define build_pango	 1
 %define build_nspr_nss   0
 %define build_gre	 0
@@ -54,10 +53,6 @@
 # Build with gtk (gtk1) toolkit instead of gtk2
 %{?_with_gtk: %global build_gtk 1}
 %{?_without_gtk: %global build_gtk 0}
-
-# Enable pie (Position Independent Executable)
-%{?_with_pie: %global build_pie 1}
-%{?_without_pie: %global build_pie 0}
 
 # Enable Pango 
 %{?_with_pango: %global build_pango 1}
@@ -89,7 +84,7 @@
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
 Version:   2.0.5
-Release:   %mkrel 1
+Release:   %mkrel 2
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
@@ -163,12 +158,8 @@ Patch104:  mozilla-1.7-a4paper.patch
 Patch105:  mozilla-1.7-corefonts-fontnames.patch
 # (fc) 1.4-10mdk use xvt instead of xterm
 Patch132:  mozilla-1.7-xvt.patch
-# (gg) 1.4-15mdk patch for using -pie for linking mozilla-bin (merged from RH)
-Patch178:  mozilla-1.4.1-pie.patch
 # (fc) 1.7.3-2mdk fix compilation with latest freetype2 (Moz bug #234035)
 Patch258:  mozilla-1.7.7-freetype-compile.patch
-# (fc) 1.7.3-2mdk fix dynamic library loading on 64bit system (gb)
-Patch270:  mozilla-1.6-lib64.patch
 # (gb) 1.7.5-5mdk fix loading of libXext.so.6 and libXt.so.6 
 Patch274:  mozilla-load-full-dso.patch
 # (fc) 1.7.5-5mdk enable automatic language detection at startup (Debian)
@@ -183,6 +174,9 @@ Patch304:  seamonkey-2.0-fix-string-format.patch
 Patch305:  seamonkey-2.0-configure-optflags-fix.patch
 # (cjw) fix crashes with cairo 1.9.6 - from https://bugzilla.mozilla.org/show_bug.cgi?id=522635
 Patch306:  seamonkey-2.0-cairo.patch
+# (cjw) from fedora
+Patch307:  mozilla-jemalloc.patch
+Patch308:  mozilla-191-path.patch
 Epoch:     %{epoch_mozilla}
 Conflicts: j2re = 1.4.0-beta3
 Conflicts: j2sdk = 1.4.0-beta3
@@ -464,24 +458,22 @@ rm -rf $RPM_BUILD_ROOT
 
 # Other patches
 %patch132 -p1 -b .xvt
-%if %build_pie
-%patch178 -p1 -b .pie
-%endif
 
-%if %build_ggdefaults
-%patch258 -p0 -b .freetype-compile
-%endif
-%patch270 -p0 -b .lib64
+#if %build_ggdefaults
+#patch258 -p0 -b .freetype-compile
+#endif
 %patch274 -p0 -b .load-full-dso
-%patch276 -p1 -b .lang
+#patch276 -p1 -b .lang
 
-%patch299 -p2 -b .gcc41
-%patch303 -p1 -b .enigmail-visibility
+#patch299 -p2 -b .gcc41
+#patch303 -p1 -b .enigmail-visibility
 %patch304 -p0 -b .strfmt
 %patch305 -p1 -b .subdir-optflags
-pushd mozilla
-%patch306 -p1 -b .cairo
-popd
+#pushd mozilla
+#patch306 -p1 -b .cairo
+#popd
+%patch307 -p0 -b .jemalloc
+%patch308 -p0 -b .path
 
 #rm -f profile/defaults/bookmarks.html
 #touch profile/defaults/bookmarks.html
@@ -530,9 +522,6 @@ BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 \
 	--disable-debug \
 %endif
 	--disable-pedantic \
-%if %build_pie
-	--enable-pie \
-%endif
 	--disable-tests \
 	--enable-crypto \
 %if %{build_nspr_nss}
@@ -748,67 +737,20 @@ rm -f %{_tmppath}/mozilla-enigmime.list
 # install l10n files
 %if %{enable_l10n}
 cat %{SOURCE99} >$RPM_BUILD_ROOT%{mozillalibdir}/chrome/locale.alias
-mkdir -p ../l10n
-pushd ../l10n
-%if 0
-# should be done in prep....
-unzip -o %{SOURCE100}
-unzip -o %{SOURCE101}
-unzip -o %{SOURCE102}
-unzip -o %{SOURCE103}
-unzip -o %{SOURCE106}
-unzip -o %{SOURCE108}
-unzip -o %{SOURCE110}
-unzip -o %{SOURCE111}
-unzip -o %{SOURCE112}
-unzip -o %{SOURCE114}
-unzip -o %{SOURCE115}
-unzip -o %{SOURCE116}
-unzip -o %{SOURCE117}
-unzip -o %{SOURCE119}
-unzip -o %{SOURCE120}
-unzip -o %{SOURCE123}
-unzip -o %{SOURCE124}
-unzip -o %{SOURCE125}
-unzip -o %{SOURCE126}
-unzip -o %{SOURCE127}
-unzip -o %{SOURCE128}
-unzip -o %{SOURCE129}
-unzip -o %{SOURCE130}
-
-#unzip -o %{SOURCE104}
-#unzip -o %{SOURCE105}
-#unzip -o %{SOURCE107}
-#unzip -o %{SOURCE109}
-#unzip -o %{SOURCE113}
-#unzip -o %{SOURCE118}
-#unzip -o %{SOURCE121}
-#unzip -o %{SOURCE122}
-%endif
-
+mkdir -p $RPM_BUILD_ROOT%{mozillalibdir}/extensions
+pushd $RPM_BUILD_ROOT%{mozillalibdir}/extensions
 for lang in %{l10ns}; do
-  unzip -o %{_sourcedir}/%{name}-%{version}.${lang}.langpack.xpi
   RPMLANG=$(echo $lang|cut -d '-' -f 1)
-  JARFILE=${lang}.jar
-  if [ -f bin/chrome/$JARFILE ]; then
-    cp bin/chrome/$JARFILE $RPM_BUILD_ROOT%{mozillalibdir}/chrome/
-  else
-    cp ./chrome/$JARFILE $RPM_BUILD_ROOT%{mozillalibdir}/chrome/
-  fi
-  cp ./chrome.manifest $RPM_BUILD_ROOT%{mozillalibdir}/chrome/${lang}.manifest
-  chmod 644 $RPM_BUILD_ROOT%{mozillalibdir}/chrome/$JARFILE
-  echo "%lang($RPMLANG) %{mozillalibdir}/chrome/$JARFILE" >> %{_tmppath}/mozilla.list
-  echo "%lang($RPMLANG) %{mozillalibdir}/chrome/${lang}.manifest" >> %{_tmppath}/mozilla.list
+  l10ndir=langpack-${lang}@seamonkey.mozilla.org
+  mkdir -p ${l10ndir}
+  pushd ${l10ndir}
+    unzip -o %{_sourcedir}/%{name}-%{version}.${lang}.langpack.xpi
+  popd
+  echo "%lang($RPMLANG) %{mozillalibdir}/extensions/${l10ndir}" >> %{_tmppath}/mozilla.list
 done
 echo "%{mozillalibdir}/chrome/locale.alias" >> %{_tmppath}/mozilla.list
 popd
 %endif
-
-# remove duplicated entries
-cat %{_tmppath}/mozilla.list | sort -k 2 | \
-	grep -v "%lang(en) %{mozillalibdir}/chrome/en-unix.jar" | \
-	uniq > %{_tmppath}/mozilla.list.uniq
-mv -f %{_tmppath}/mozilla.list.uniq %{_tmppath}/mozilla.list
 
 cp mozilla/dist/bin/regxpcom $RPM_BUILD_ROOT%{mozillalibdir}/
 
