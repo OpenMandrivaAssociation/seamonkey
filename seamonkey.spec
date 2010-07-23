@@ -83,8 +83,8 @@
 
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
-Version:   2.0.5
-Release:   %mkrel 2
+Version:   2.0.6
+Release:   %mkrel 1
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
@@ -95,29 +95,29 @@ Source99:  locale.alias
 %define l10ns be ca cs de en-GB es-AR es-ES fr gl hu it ja ka lt nb-NO nl pl pt-PT ru sk sv-SE tr zh-CN
 # not up-to-date: el-GR en-GB eu-ES he-IL hi-IN ne-NP pt-BR ur-PK
 
-Source100: %{name}-2.0.5.be.langpack.xpi
-Source101: %{name}-2.0.5.ca.langpack.xpi
-Source102: %{name}-2.0.5.cs.langpack.xpi
-Source103: %{name}-2.0.5.de.langpack.xpi
-Source106: %{name}-2.0.5.es-ES.langpack.xpi
-Source108: %{name}-2.0.5.fr.langpack.xpi
-Source110: %{name}-2.0.5.it.langpack.xpi
-Source111: %{name}-2.0.5.ka.langpack.xpi
-Source112: %{name}-2.0.5.nb-NO.langpack.xpi
-Source114: %{name}-2.0.5.pl.langpack.xpi
-Source115: %{name}-2.0.5.ru.langpack.xpi
-Source116: %{name}-2.0.5.sv-SE.langpack.xpi
-Source117: %{name}-2.0.5.tr.langpack.xpi
-Source119: %{name}-2.0.5.ja.langpack.xpi
-Source120: %{name}-2.0.5.nl.langpack.xpi
-Source123: %{name}-2.0.5.hu.langpack.xpi
-Source124: %{name}-2.0.5.lt.langpack.xpi
-Source125: %{name}-2.0.5.pt-PT.langpack.xpi
-Source126: %{name}-2.0.5.es-AR.langpack.xpi
-Source127: %{name}-2.0.5.gl.langpack.xpi
-Source128: %{name}-2.0.5.sk.langpack.xpi
-Source129: %{name}-2.0.5.en-GB.langpack.xpi
-Source130: %{name}-2.0.5.zh-CN.langpack.xpi
+Source100: %{name}-2.0.6.be.langpack.xpi
+Source101: %{name}-2.0.6.ca.langpack.xpi
+Source102: %{name}-2.0.6.cs.langpack.xpi
+Source103: %{name}-2.0.6.de.langpack.xpi
+Source106: %{name}-2.0.6.es-ES.langpack.xpi
+Source108: %{name}-2.0.6.fr.langpack.xpi
+Source110: %{name}-2.0.6.it.langpack.xpi
+Source111: %{name}-2.0.6.ka.langpack.xpi
+Source112: %{name}-2.0.6.nb-NO.langpack.xpi
+Source114: %{name}-2.0.6.pl.langpack.xpi
+Source115: %{name}-2.0.6.ru.langpack.xpi
+Source116: %{name}-2.0.6.sv-SE.langpack.xpi
+Source117: %{name}-2.0.6.tr.langpack.xpi
+Source119: %{name}-2.0.6.ja.langpack.xpi
+Source120: %{name}-2.0.6.nl.langpack.xpi
+Source123: %{name}-2.0.6.hu.langpack.xpi
+Source124: %{name}-2.0.6.lt.langpack.xpi
+Source125: %{name}-2.0.6.pt-PT.langpack.xpi
+Source126: %{name}-2.0.6.es-AR.langpack.xpi
+Source127: %{name}-2.0.6.gl.langpack.xpi
+Source128: %{name}-2.0.6.sk.langpack.xpi
+Source129: %{name}-2.0.6.en-GB.langpack.xpi
+Source130: %{name}-2.0.6.zh-CN.langpack.xpi
 #Source104: %{name}-1.1.2.el-GR.langpack.xpi
 #Source105: %{name}-1.1.en-GB.langpack.xpi
 #Source107: %{name}-1.0.eu-ES.langpack.xpi
@@ -559,14 +559,14 @@ BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 \
 %endif
 	--enable-default-toolkit=%{toolkit}
 
-BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 make -s export
+BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 %make -s export
 pushd directory/c-sdk/ldap
-BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 make -s export
+BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 %make -s export
 popd
 #only this part should be parallel (ie use make macro)
-BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 make -s libs
+BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 %make -s libs
 pushd mozilla/xpcom/tools/registry
-BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 make -s libs
+BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 %make -s libs
 popd
 
 %if %build_enigmail
@@ -575,9 +575,9 @@ popd
 #BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 %make -s
 cd mailnews/extensions/enigmail
 ./makemake -r
-BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 make -s
+BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 %make -s
 (cd lang
- BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 make -s
+ BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 %make -s
 )
 cd ../../..
 %endif
