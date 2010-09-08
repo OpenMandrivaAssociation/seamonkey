@@ -84,7 +84,7 @@
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
 Version:   2.0.7
-Release:   %mkrel 1
+Release:   %mkrel 2
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
