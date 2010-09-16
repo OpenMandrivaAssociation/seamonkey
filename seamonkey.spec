@@ -83,8 +83,8 @@
 
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
-Version:   2.0.7
-Release:   %mkrel 2
+Version:   2.0.8
+Release:   %mkrel 1
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
@@ -95,29 +95,29 @@ Source99:  locale.alias
 %define l10ns be ca cs de en-GB es-AR es-ES fr gl hu it ja ka lt nb-NO nl pl pt-PT ru sk sv-SE tr zh-CN
 # not up-to-date: el-GR en-GB eu-ES he-IL hi-IN ne-NP pt-BR ur-PK
 
-Source100: %{name}-2.0.7.be.langpack.xpi
-Source101: %{name}-2.0.7.ca.langpack.xpi
-Source102: %{name}-2.0.7.cs.langpack.xpi
-Source103: %{name}-2.0.7.de.langpack.xpi
-Source106: %{name}-2.0.7.es-ES.langpack.xpi
-Source108: %{name}-2.0.7.fr.langpack.xpi
-Source110: %{name}-2.0.7.it.langpack.xpi
-Source111: %{name}-2.0.7.ka.langpack.xpi
-Source112: %{name}-2.0.7.nb-NO.langpack.xpi
-Source114: %{name}-2.0.7.pl.langpack.xpi
-Source115: %{name}-2.0.7.ru.langpack.xpi
-Source116: %{name}-2.0.7.sv-SE.langpack.xpi
-Source117: %{name}-2.0.7.tr.langpack.xpi
-Source119: %{name}-2.0.7.ja.langpack.xpi
-Source120: %{name}-2.0.7.nl.langpack.xpi
-Source123: %{name}-2.0.7.hu.langpack.xpi
-Source124: %{name}-2.0.7.lt.langpack.xpi
-Source125: %{name}-2.0.7.pt-PT.langpack.xpi
-Source126: %{name}-2.0.7.es-AR.langpack.xpi
-Source127: %{name}-2.0.7.gl.langpack.xpi
-Source128: %{name}-2.0.7.sk.langpack.xpi
-Source129: %{name}-2.0.7.en-GB.langpack.xpi
-Source130: %{name}-2.0.7.zh-CN.langpack.xpi
+Source100: %{name}-2.0.8.be.langpack.xpi
+Source101: %{name}-2.0.8.ca.langpack.xpi
+Source102: %{name}-2.0.8.cs.langpack.xpi
+Source103: %{name}-2.0.8.de.langpack.xpi
+Source106: %{name}-2.0.8.es-ES.langpack.xpi
+Source108: %{name}-2.0.8.fr.langpack.xpi
+Source110: %{name}-2.0.8.it.langpack.xpi
+Source111: %{name}-2.0.8.ka.langpack.xpi
+Source112: %{name}-2.0.8.nb-NO.langpack.xpi
+Source114: %{name}-2.0.8.pl.langpack.xpi
+Source115: %{name}-2.0.8.ru.langpack.xpi
+Source116: %{name}-2.0.8.sv-SE.langpack.xpi
+Source117: %{name}-2.0.8.tr.langpack.xpi
+Source119: %{name}-2.0.8.ja.langpack.xpi
+Source120: %{name}-2.0.8.nl.langpack.xpi
+Source123: %{name}-2.0.8.hu.langpack.xpi
+Source124: %{name}-2.0.8.lt.langpack.xpi
+Source125: %{name}-2.0.8.pt-PT.langpack.xpi
+Source126: %{name}-2.0.8.es-AR.langpack.xpi
+Source127: %{name}-2.0.8.gl.langpack.xpi
+Source128: %{name}-2.0.8.sk.langpack.xpi
+Source129: %{name}-2.0.8.en-GB.langpack.xpi
+Source130: %{name}-2.0.8.zh-CN.langpack.xpi
 #Source104: %{name}-1.1.2.el-GR.langpack.xpi
 #Source105: %{name}-1.1.en-GB.langpack.xpi
 #Source107: %{name}-1.0.eu-ES.langpack.xpi
