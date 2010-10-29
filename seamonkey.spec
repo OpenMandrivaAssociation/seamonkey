@@ -197,6 +197,7 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:  libxft-devel
 BuildRequires:	libxt-devel
+BuildRequires:	python-devel
 BuildRequires:  zip tcsh
 
 %if %{mdkversion} >= 200610
