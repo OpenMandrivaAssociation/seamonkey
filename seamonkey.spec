@@ -559,6 +559,7 @@ BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 \
 %if %build_pango
 	--enable-pango \
 %endif
+	--disable-crashreporter \
 	--enable-default-toolkit=%{toolkit}
 
 BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 %make -s export
