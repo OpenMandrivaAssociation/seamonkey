@@ -84,7 +84,7 @@
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
 Version:   2.0.10
-Release:   %mkrel 1
+Release:   %mkrel 2
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
@@ -177,6 +177,9 @@ Patch306:  seamonkey-2.0-cairo.patch
 # (cjw) from fedora
 Patch307:  mozilla-jemalloc.patch
 Patch308:  mozilla-191-path.patch
+# (cjw) block enigprefs account preferences extension from loading 
+#       since it breaks the seamonkey account preferences dialog
+Patch309:  enigmail-1.0.1-block-enigprefs.patch
 Epoch:     %{epoch_mozilla}
 Conflicts: j2re = 1.4.0-beta3
 Conflicts: j2sdk = 1.4.0-beta3
@@ -475,6 +478,7 @@ rm -rf $RPM_BUILD_ROOT
 #popd
 %patch307 -p0 -b .jemalloc
 %patch308 -p0 -b .path
+%patch309 -p1 -b .block-enigprefs
 
 #rm -f profile/defaults/bookmarks.html
 #touch profile/defaults/bookmarks.html
