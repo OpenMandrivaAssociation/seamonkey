@@ -9,7 +9,7 @@
 %define devel_nss_name %mklibname nss
 #warning : always end release date with 00 
 # (it should be the hour of build but it is not significant for rpm)
-%define releasedate 2010102800
+%define releasedate 2010120900
 %define dirversion  %{version}
 %define mozillalibdir %{_libdir}/seamonkey-%{dirversion}
 %define mozillaplugindir %{_libdir}/mozilla/plugins
@@ -83,8 +83,8 @@
 
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
-Version:   2.0.10
-Release:   %mkrel 2
+Version:   2.0.11
+Release:   %mkrel 1
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
@@ -92,32 +92,33 @@ Source3:   seamonkey32.png
 Source4:   seamonkey64.png
 %if %{enable_l10n}
 Source99:  locale.alias
-%define l10ns be ca cs de en-GB es-AR es-ES fr gl hu it ja ka lt nb-NO nl pl pt-PT ru sk sv-SE tr zh-CN
+%define l10ns be ca cs de en-GB es-AR es-ES fi fr gl hu it ja ka lt nb-NO nl pl pt-PT ru sk sv-SE tr zh-CN
 # not up-to-date: el-GR en-GB eu-ES he-IL hi-IN ne-NP pt-BR ur-PK
 
-Source100: %{name}-2.0.10.be.langpack.xpi
-Source101: %{name}-2.0.10.ca.langpack.xpi
-Source102: %{name}-2.0.10.cs.langpack.xpi
-Source103: %{name}-2.0.10.de.langpack.xpi
-Source106: %{name}-2.0.10.es-ES.langpack.xpi
-Source108: %{name}-2.0.10.fr.langpack.xpi
-Source110: %{name}-2.0.10.it.langpack.xpi
-Source111: %{name}-2.0.10.ka.langpack.xpi
-Source112: %{name}-2.0.10.nb-NO.langpack.xpi
-Source114: %{name}-2.0.10.pl.langpack.xpi
-Source115: %{name}-2.0.10.ru.langpack.xpi
-Source116: %{name}-2.0.10.sv-SE.langpack.xpi
-Source117: %{name}-2.0.10.tr.langpack.xpi
-Source119: %{name}-2.0.10.ja.langpack.xpi
-Source120: %{name}-2.0.10.nl.langpack.xpi
-Source123: %{name}-2.0.10.hu.langpack.xpi
-Source124: %{name}-2.0.10.lt.langpack.xpi
-Source125: %{name}-2.0.10.pt-PT.langpack.xpi
-Source126: %{name}-2.0.10.es-AR.langpack.xpi
-Source127: %{name}-2.0.10.gl.langpack.xpi
-Source128: %{name}-2.0.10.sk.langpack.xpi
-Source129: %{name}-2.0.10.en-GB.langpack.xpi
-Source130: %{name}-2.0.10.zh-CN.langpack.xpi
+Source100: %{name}-2.0.11.be.langpack.xpi
+Source101: %{name}-2.0.11.ca.langpack.xpi
+Source102: %{name}-2.0.11.cs.langpack.xpi
+Source103: %{name}-2.0.11.de.langpack.xpi
+Source106: %{name}-2.0.11.es-ES.langpack.xpi
+Source108: %{name}-2.0.11.fr.langpack.xpi
+Source110: %{name}-2.0.11.it.langpack.xpi
+Source111: %{name}-2.0.11.ka.langpack.xpi
+Source112: %{name}-2.0.11.nb-NO.langpack.xpi
+Source114: %{name}-2.0.11.pl.langpack.xpi
+Source115: %{name}-2.0.11.ru.langpack.xpi
+Source116: %{name}-2.0.11.sv-SE.langpack.xpi
+Source117: %{name}-2.0.11.tr.langpack.xpi
+Source119: %{name}-2.0.11.ja.langpack.xpi
+Source120: %{name}-2.0.11.nl.langpack.xpi
+Source123: %{name}-2.0.11.hu.langpack.xpi
+Source124: %{name}-2.0.11.lt.langpack.xpi
+Source125: %{name}-2.0.11.pt-PT.langpack.xpi
+Source126: %{name}-2.0.11.es-AR.langpack.xpi
+Source127: %{name}-2.0.11.gl.langpack.xpi
+Source128: %{name}-2.0.11.sk.langpack.xpi
+Source129: %{name}-2.0.11.en-GB.langpack.xpi
+Source130: %{name}-2.0.11.zh-CN.langpack.xpi
+Source131: %{name}-2.0.11.fi.langpack.xpi
 #Source104: %{name}-1.1.2.el-GR.langpack.xpi
 #Source105: %{name}-1.1.en-GB.langpack.xpi
 #Source107: %{name}-1.0.eu-ES.langpack.xpi
@@ -1172,7 +1173,7 @@ EOF
 locale,install,url,jar:resource:/chrome/$i!/locale/$LOC/enigmail/
 EOF
   done
-  cd -
+  cd - >/dev/null
 fi
 if [ -f %{mozillalibdir}/seamonkey-rebuild-databases.pl ]; then
     %{mozillalibdir}/seamonkey-rebuild-databases.pl
