@@ -83,7 +83,7 @@
 
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
-Version:   2.0.12
+Version:   2.0.13
 Release:   %mkrel 1
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
@@ -95,30 +95,30 @@ Source99:  locale.alias
 %define l10ns be ca cs de en-GB es-AR es-ES fi fr gl hu it ja ka lt nb-NO nl pl pt-PT ru sk sv-SE tr zh-CN
 # not up-to-date: el-GR en-GB eu-ES he-IL hi-IN ne-NP pt-BR ur-PK
 
-Source100: %{name}-2.0.12.be.langpack.xpi
-Source101: %{name}-2.0.12.ca.langpack.xpi
-Source102: %{name}-2.0.12.cs.langpack.xpi
-Source103: %{name}-2.0.12.de.langpack.xpi
-Source106: %{name}-2.0.12.es-ES.langpack.xpi
-Source108: %{name}-2.0.12.fr.langpack.xpi
-Source110: %{name}-2.0.12.it.langpack.xpi
-Source111: %{name}-2.0.12.ka.langpack.xpi
-Source112: %{name}-2.0.12.nb-NO.langpack.xpi
-Source114: %{name}-2.0.12.pl.langpack.xpi
-Source115: %{name}-2.0.12.ru.langpack.xpi
-Source116: %{name}-2.0.12.sv-SE.langpack.xpi
-Source117: %{name}-2.0.12.tr.langpack.xpi
-Source119: %{name}-2.0.12.ja.langpack.xpi
-Source120: %{name}-2.0.12.nl.langpack.xpi
-Source123: %{name}-2.0.12.hu.langpack.xpi
-Source124: %{name}-2.0.12.lt.langpack.xpi
-Source125: %{name}-2.0.12.pt-PT.langpack.xpi
-Source126: %{name}-2.0.12.es-AR.langpack.xpi
-Source127: %{name}-2.0.12.gl.langpack.xpi
-Source128: %{name}-2.0.12.sk.langpack.xpi
-Source129: %{name}-2.0.12.en-GB.langpack.xpi
-Source130: %{name}-2.0.12.zh-CN.langpack.xpi
-Source131: %{name}-2.0.12.fi.langpack.xpi
+Source100: %{name}-2.0.13.be.langpack.xpi
+Source101: %{name}-2.0.13.ca.langpack.xpi
+Source102: %{name}-2.0.13.cs.langpack.xpi
+Source103: %{name}-2.0.13.de.langpack.xpi
+Source106: %{name}-2.0.13.es-ES.langpack.xpi
+Source108: %{name}-2.0.13.fr.langpack.xpi
+Source110: %{name}-2.0.13.it.langpack.xpi
+Source111: %{name}-2.0.13.ka.langpack.xpi
+Source112: %{name}-2.0.13.nb-NO.langpack.xpi
+Source114: %{name}-2.0.13.pl.langpack.xpi
+Source115: %{name}-2.0.13.ru.langpack.xpi
+Source116: %{name}-2.0.13.sv-SE.langpack.xpi
+Source117: %{name}-2.0.13.tr.langpack.xpi
+Source119: %{name}-2.0.13.ja.langpack.xpi
+Source120: %{name}-2.0.13.nl.langpack.xpi
+Source123: %{name}-2.0.13.hu.langpack.xpi
+Source124: %{name}-2.0.13.lt.langpack.xpi
+Source125: %{name}-2.0.13.pt-PT.langpack.xpi
+Source126: %{name}-2.0.13.es-AR.langpack.xpi
+Source127: %{name}-2.0.13.gl.langpack.xpi
+Source128: %{name}-2.0.13.sk.langpack.xpi
+Source129: %{name}-2.0.13.en-GB.langpack.xpi
+Source130: %{name}-2.0.13.zh-CN.langpack.xpi
+Source131: %{name}-2.0.13.fi.langpack.xpi
 #Source104: %{name}-1.1.2.el-GR.langpack.xpi
 #Source105: %{name}-1.1.en-GB.langpack.xpi
 #Source107: %{name}-1.0.eu-ES.langpack.xpi
