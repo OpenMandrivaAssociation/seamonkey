@@ -84,7 +84,7 @@
 Name:      seamonkey
 Summary:   SeaMonkey, all-in-one internet application suite
 Version:   2.0.13
-Release:   %mkrel 1
+Release:   %mkrel 2
 License:   MPL
 Source0:   ftp://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/%{version}/seamonkey-%{version}.source.tar.bz2
 Source2:   seamonkey16.png
@@ -167,6 +167,7 @@ Patch274:  mozilla-load-full-dso.patch
 Patch276:  mozilla-1.7.5-lang.patch
 #
 Patch299:  seamonkey-1.0.3-gcc41.patch
+Patch301:  xulrunner-2.0-os2cc.patch
 # (cjw) fix build error from enigmail due to a visibility problem
 Patch303:  enigmail-0.95.6-visibility.patch
 # fix build with -Werror=format-security in compile flags
@@ -471,6 +472,7 @@ rm -rf $RPM_BUILD_ROOT
 #patch276 -p1 -b .lang
 
 #patch299 -p2 -b .gcc41
+%patch301 -p0
 #patch303 -p1 -b .enigmail-visibility
 %patch304 -p0 -b .strfmt
 %patch305 -p1 -b .subdir-optflags
@@ -514,13 +516,11 @@ cd -
 %endif
 export MOZ_BUILD_DATE="%{releasedate}"
 
-OPT_FLAGS="$RPM_OPT_FLAGS"
+export CXXFLAGS=$(echo %optflags -fpermissive | %{__sed} -e 's/-fexceptions//')
+%setup_compile_flags
 
-BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 \
-	./configure --build=%{_target_platform} \
+%configure2_5x \
 	--enable-application=suite \
-	--prefix=%{_prefix} --libdir=%{_libdir} \
-	--enable-optimize="$OPT_FLAGS" \
 	--disable-strip \
 %if %build_debug
 	--enable-debug \
@@ -544,13 +544,13 @@ BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 \
 	--enable-mathml \
 	--with-system-zlib \
 	--with-system-png \
-	--disable-system-cairo \
+	--enable-system-cairo \
 	--with-system-bz2 \
 	--with-system-jpeg \
 	--enable-ipv6 \
 	--enable-system-sqlite \
 	--enable-system-hunspell \
-	--enable-old-abi-compat-wrappers --mandir=%{_mandir} \
+	--enable-old-abi-compat-wrappers \
 %if %enable_svg
 	--enable-svg \
 	--enable-svg-renderer-libart \
