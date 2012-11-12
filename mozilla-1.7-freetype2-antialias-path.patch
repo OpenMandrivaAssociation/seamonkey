@@ -1,0 +1,23 @@
+--- mozilla/modules/libpref/src/init/all.js.orig	2004-08-11 10:40:26.153841000 +0200
++++ mozilla/modules/libpref/src/init/all.js	2004-08-11 11:33:50.054445255 +0200
+@@ -1644,9 +1644,9 @@
+ // if libfreetype was built without hinting compiled in
+ // it is best to leave hinting off
+ pref("font.FreeType2.autohinted", false);
+-pref("font.FreeType2.unhinted", true);
++pref("font.FreeType2.unhinted", false);
+ // below a certian pixel size anti-aliased fonts produce poor results
+-pref("font.antialias.min",        10);
++pref("font.antialias.min",        8);
+ pref("font.embedded_bitmaps.max", 1000000);
+ pref("font.scale.tt_bitmap.dark_text.min", 64);
+ pref("font.scale.tt_bitmap.dark_text.gain", "0.8");
+@@ -1654,6 +1654,8 @@
+ //pref("font.directory.truetype.1", "/u/sam/tt_font1");
+ //pref("font.directory.truetype.2", "/u/sam/tt_font2");
+ //pref("font.directory.truetype.3", "/u/sam/tt_font3");
++pref("font.directory.truetype.1", "/usr/share/fonts/ttf");
++pref("font.directory.truetype.1", "/usr/share/fonts/TTF");
+ pref("font.FreeType2.printing", true);
+ 
+ // below a certian pixel size anti-aliased bitmat scaled fonts 

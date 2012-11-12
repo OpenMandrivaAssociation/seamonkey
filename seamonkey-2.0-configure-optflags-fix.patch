@@ -1,0 +1,31 @@
+--- seamonkey-2.0/mozilla/configure.in.bak	2009-02-23 22:41:38.000000000 +0100
++++ seamonkey-2.0/mozilla/configure.in	2009-06-23 19:49:25.339840266 +0200
+@@ -6235,7 +6235,7 @@
+ [ if test "$enableval" != "no"; then
+     MOZ_OPTIMIZE=1
+     if test -n "$enableval" && test "$enableval" != "yes"; then
+-        MOZ_OPTIMIZE_FLAGS=`echo "$enableval" | sed -e 's|\\\ | |g'`
++        MOZ_OPTIMIZE_FLAGS=`echo "$enableval" | sed -e 's|\\\\\\\ | |g'`
+         MOZ_OPTIMIZE=2
+     fi
+ else
+--- comm-1.9.1/mozilla/js/src/configure.in.bak	2009-10-25 15:33:33.000000000 +0100
++++ comm-1.9.1/mozilla/js/src/configure.in	2009-11-18 15:14:14.127248854 +0100
+@@ -3992,7 +3992,7 @@
+ [ if test "$enableval" != "no"; then
+     MOZ_DEBUG=1
+     if test -n "$enableval" && test "$enableval" != "yes"; then
+-        MOZ_DEBUG_FLAGS=`echo $enableval | sed -e 's|\\\ | |g'`
++        MOZ_DEBUG_FLAGS=`echo $enableval | sed -e 's|\\\\\\\ | |g'`
+     fi
+   else
+     MOZ_DEBUG=
+@@ -4043,7 +4043,7 @@
+ [ if test "$enableval" != "no"; then
+     MOZ_OPTIMIZE=1
+     if test -n "$enableval" && test "$enableval" != "yes"; then
+-        MOZ_OPTIMIZE_FLAGS=`echo "$enableval" | sed -e 's|\\\ | |g'`
++        MOZ_OPTIMIZE_FLAGS=`echo "$enableval" | sed -e 's|\\\\\\\ | |g'`
+         MOZ_OPTIMIZE=2
+     fi
+ else

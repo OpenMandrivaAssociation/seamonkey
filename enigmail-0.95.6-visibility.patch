@@ -1,0 +1,12 @@
+--- comm-1.9.1/mailnews/extensions/enigmail/build/nsEnigModule.cpp.enigmail-visibility	2008-12-29 15:18:30.000000000 +0100
++++ comm-1.9.1/mailnews/extensions/enigmail/build/nsEnigModule.cpp	2009-11-17 18:11:51.125414071 +0100
+@@ -39,7 +39,9 @@
+ #include "nsCOMPtr.h"
+ 
+ #include "nsIFactory.h"
++#pragma GCC visibility push(default)
+ #include "nsIGenericFactory.h"
++#pragma GCC visibility pop
+ #include "nsIServiceManager.h"
+ #include "nsIModule.h"
+ 

@@ -1,0 +1,12 @@
+--- mozilla/modules/plugin/base/src/nsPluginsDirUnix.cpp.load-full-dso	2003-11-22 22:19:35.000000000 +0100
++++ mozilla/modules/plugin/base/src/nsPluginsDirUnix.cpp	2004-11-03 19:50:16.572527774 +0100
+@@ -143,7 +143,8 @@ static PRBool LoadExtraSharedLib(const c
+ #if defined(SOLARIS) || defined(HPUX)
+ #define DEFAULT_EXTRA_LIBS_LIST "libXt" LOCAL_PLUGIN_DLL_SUFFIX ":libXext" LOCAL_PLUGIN_DLL_SUFFIX ":libXm" LOCAL_PLUGIN_DLL_SUFFIX
+ #else
+-#define DEFAULT_EXTRA_LIBS_LIST "libXt" LOCAL_PLUGIN_DLL_SUFFIX ":libXext" LOCAL_PLUGIN_DLL_SUFFIX
++// (gb) explicitly load libXt.so.6 and libXext.so.6, could be better to guesstimate full SONAME
++#define DEFAULT_EXTRA_LIBS_LIST "libXt" LOCAL_PLUGIN_DLL_SUFFIX ".6" ":libXext" LOCAL_PLUGIN_DLL_SUFFIX ".6"
+ #endif
+ /*
+  this function looks for

@@ -1,0 +1,21 @@
+--- mozilla/xpcom/base/nsTraceRefcntImpl.cpp.orig	2009-10-25 15:34:14.000000000 +0100
++++ mozilla/xpcom/base/nsTraceRefcntImpl.cpp	2009-11-18 16:20:12.242047896 +0100
+@@ -834,7 +834,7 @@
+ 
+   NS_DescribeCodeAddress(aPC, &details);
+   NS_FormatCodeAddressDetails(aPC, &details, buf, sizeof(buf));
+-  fprintf(stream, buf);
++  fprintf(stream, "%s", buf);
+ }
+ 
+ }
+--- mozilla/widget/src/gtk2/nsFilePicker.cpp.orig	2008-12-18 01:08:12.000000000 -0500
++++ mozilla/widget/src/gtk2/nsFilePicker.cpp	2008-12-18 01:08:48.000000000 -0500
+@@ -574,6 +574,7 @@
+                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                   GTK_MESSAGE_QUESTION,
+                                   GTK_BUTTONS_YES_NO,
++				  "%s",
+                                   NS_ConvertUTF16toUTF8(message).get());
+   gtk_window_set_title(GTK_WINDOW(dialog), NS_ConvertUTF16toUTF8(title).get());
+   if (parent_window && parent_window->group) {

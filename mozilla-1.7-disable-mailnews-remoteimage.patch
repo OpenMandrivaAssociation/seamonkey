@@ -1,0 +1,11 @@
+--- mozilla/mailnews/mailnews.js~	2004-08-11 10:36:23.941117781 +0200
++++ mozilla/mailnews/mailnews.js	2004-08-11 10:36:23.941117781 +0200
+@@ -541,7 +541,7 @@
+ pref("mailnews.fakeaccount.server", "");
+ 
+ // message display properties
+-pref("mailnews.message_display.disable_remote_image", false);
++pref("mailnews.message_display.disable_remote_image", true);
+ pref("mailnews.message_display.allow.plugins", true);
+ 
+ // default msg compose font prefs

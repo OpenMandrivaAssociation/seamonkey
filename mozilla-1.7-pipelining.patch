@@ -1,0 +1,13 @@
+--- mozilla/modules/libpref/src/init/all.js.orig	2004-08-11 10:08:09.009190644 +0200
++++ mozilla/modules/libpref/src/init/all.js	2004-08-11 10:11:06.691298448 +0200
+@@ -529,8 +529,8 @@
+ // NOTE: support for "compress" has been disabled per bug 196406.
+ pref("network.http.accept-encoding" ,"gzip,deflate");
+ 
+-pref("network.http.pipelining"      , false);
+-pref("network.http.proxy.pipelining", false);
++pref("network.http.pipelining"      , true);
++pref("network.http.proxy.pipelining", true);
+ 
+ // Max number of requests in the pipeline
+ pref("network.http.pipelining.maxrequests" , 4);
