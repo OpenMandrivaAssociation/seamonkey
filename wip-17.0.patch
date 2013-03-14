@@ -1,0 +1,49 @@
+# HG changeset patch
+# Parent ea2f892d94391494c13e907c1128a6ca9826d582
+# User Jeff Hammel <jhammel@mozilla.com>
+
+diff --git a/configure.in b/configure.in
+--- a/configure.in
++++ b/configure.in
+@@ -1052,16 +1052,41 @@ MOZ_PATH_PROG(SYSTEM_MAKEDEPEND, makedep
+ MOZ_PATH_PROG(XARGS, xargs)
+ if test -z "$XARGS" -o "$XARGS" = ":"; then
+     AC_MSG_ERROR([xargs not found in \$PATH .])
+ fi
+ 
+ MOZ_PATH_PROG(RPMBUILD, rpmbuild, :)
+ AC_SUBST(RPMBUILD)
+ 
++dnl ========================================================
++dnl = create a virtualenv for python
++dnl ========================================================
++
++MOZ_PATH_PROGS(VIRTUALENV, virtualenv virtualenv.py)
++if test -z "$VIRTUALENV"; then
++    AC_MSG_ERROR([virtualenv not found in \$PATH])
++fi
++AC_SUBST(VIRTUALENV)
++$PYTHON $VIRTUALENV $_objdir
++
++dnl link bin to Scripts for cross-platform interoperability
++if test -e $_objdir/bin; then
++    ln -s $_objdir/bin $_objdir/Scripts
++fi
++VIRTUALENV_SCRIPTS=$_objdir/Scripts
++
++dnl export PYTHON variable
++PATH="${VIRTUALENV_SCRIPTS}:${PATH}"
++MOZ_PATH_PROG(PYTHON, python, :)
++if test -z "$PYTHON"; then
++    AC_MSG_ERROR([virtualenv in $_objdir not created correctly])
++fi
++AC_SUBST(PYTHON)
++
+ if test "$COMPILE_ENVIRONMENT"; then
+ 
+ dnl ========================================================
+ dnl = Mac OS X toolchain support
+ dnl ========================================================
+ 
+ case "$target_os" in
+ darwin*)
