@@ -19,14 +19,13 @@
 %define __noautoreq 'libldap60.\\.so(.*)|libldif60\\.so(.*)|libmozalloc\\.so(.*)|libplc4\\.so(.*)|libplds4\\.so(.*)|libprldap60\\.so(.*)|libxpcom\\.so(.*)|libxul\\.so(.*)'
 %endif
 
-Name:		seamonkey
 Summary:	Web browser, e-mail, news, IRC client, HTML editor
+Name:		seamonkey
 Version:	2.16.2
-Release:	1
-URL:		http://www.mozilla.org/projects/seamonkey/
+Release:	2
 License:	MPLv1.1
 Group:		Networking/WWW
-
+Url:		http://www.mozilla.org/projects/seamonkey/
 Source0:	%{name}-%{version}.source.tar.bz2
 Source1:	%{name}-langpacks-%{version}.tar.bz2
 Source2:	%{name}.png
@@ -41,14 +40,10 @@ Patch2:		mozilla-2.16-prefer_plugin_pref.patch
 Patch3:		mozilla-2.16-shared-nss-db.patch
 Patch6:		mozilla-gstreamer.patch
 Patch8:		mozilla-2.14-ntlm-full-path.patch
-
 Patch12:	mozilla-2.16-nongnome-proxies.patch
 Patch13:	mozilla-MIB-2.0.5-homepage.patch
-
 Patch21:	seamonkey-2.16-shared-nss-db.patch
-
 Patch47:	autocomplete.patch
-
 Patch510:	wip-17.0.patch
 
 BuildRequires:	autoconf2.1
