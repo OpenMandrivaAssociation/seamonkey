@@ -22,7 +22,7 @@
 Summary:	Web browser, e-mail, news, IRC client, HTML editor
 Name:		seamonkey
 Version:	2.16.2
-Release:	2
+Release:	3
 License:	MPLv1.1
 Group:		Networking/WWW
 Url:		http://www.mozilla.org/projects/seamonkey/
