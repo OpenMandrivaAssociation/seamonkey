@@ -1,5 +1,6 @@
-%define homepage http://mib.pianetalinux.org/
+%define homepage http://www.openmandriva.org/
 
+%define _disable_lto 1
 %define default_bookmarks_file %{_datadir}/bookmarks/default-bookmarks.html
 #define Werror_cflags %nil
 
@@ -10,7 +11,6 @@
 
 %define builddir %{_builddir}/%{name}-%{version}
 %define mozdir %{_libdir}/%{name}-%{version}
-%define sources_subdir comm-release
 #beta
 #release
 
@@ -21,13 +21,13 @@
 
 Summary:	Web browser, e-mail, news, IRC client, HTML editor
 Name:		seamonkey
-Version:	2.16.2
-Release:	3
+Version:	2.40
+Release:	1
 License:	MPLv1.1
 Group:		Networking/WWW
-Url:		http://www.mozilla.org/projects/seamonkey/
-Source0:	%{name}-%{version}.source.tar.bz2
-Source1:	%{name}-langpacks-%{version}.tar.bz2
+Url:		http://http://www.seamonkey-project.org/
+Source0:	https://archive.mozilla.org/pub/seamonkey/releases/%{version}/source/seamonkey-%{version}.source.tar.xz
+Source1:	%{name}-langpacks-%{version}-20160315.tar.xz
 Source2:	%{name}.png
 Source3:	%{name}.sh.in
 Source7:	%{name}-make-package.pl
@@ -36,16 +36,7 @@ Source10:	%{name}-2.9.1-mozconfig
 Source17:	mozilla-psm-exclude-list
 Source18:	mozilla-xpcom-exclude-list
 Source20:	%{name}-mandriva-default-prefs.js
-Patch2:		mozilla-2.16-prefer_plugin_pref.patch
-Patch3:		mozilla-2.16-shared-nss-db.patch
-Patch6:		mozilla-gstreamer.patch
-Patch8:		mozilla-2.14-ntlm-full-path.patch
-Patch12:	mozilla-2.16-nongnome-proxies.patch
-Patch13:	mozilla-MIB-2.0.5-homepage.patch
-Patch21:	seamonkey-2.16-shared-nss-db.patch
-Patch47:	autocomplete.patch
-Patch510:	wip-17.0.patch
-
+Patch1:		mozilla-42.0-libproxy.patch
 BuildRequires:	autoconf2.1
 BuildRequires:	coreutils
 BuildRequires:	desktop-file-utils
@@ -78,18 +69,15 @@ BuildRequires:	pkgconfig(dbus-glib-1)
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glib-2.0)
-BuildRequires:	pkgconfig(gnome-vfs-2.0)
-BuildRequires:	pkgconfig(gstreamer-0.10)
-BuildRequires:	pkgconfig(gstreamer-plugins-base-0.10)
+BuildRequires:	pkgconfig(gstreamer-1.0)
+BuildRequires:	pkgconfig(gstreamer-plugins-base-1.0)
 BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	pkgconfig(hunspell)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libevent)
-BuildRequires:	pkgconfig(libgnome-2.0)
-BuildRequires:	pkgconfig(libgnomeui-2.0)
 BuildRequires:	pkgconfig(libIDL-2.0)
 BuildRequires:	pkgconfig(libnotify)
-BuildRequires:	pkgconfig(libpng15)
+BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(libproxy-1.0)
 BuildRequires:	pkgconfig(libstartup-notification-1.0)
 BuildRequires:	pkgconfig(nspr)
@@ -122,36 +110,18 @@ application formerly known as Mozilla Application Suite.
 
 
 %prep
-%setup -q -c
+%setup -q
 chmod +x %{SOURCE7}
-cd %{sources_subdir}
-mkdir mozilla/js/src/.deps
-%patch47 -p1
-
-%patch13 -p1
-
-# mozilla patches
-pushd mozilla
-# mozilla-nongnome-proxies
-%patch12 -p1
-%patch2 -p1
-# mozilla-shared-nss-db.patch
-%patch3 -p1
-%patch6 -p1
-%patch8 -p1
-
-%patch510 -p1
-popd
-##
-# seamonkey-shared-nss-db.patch
-%patch21 -p1
 
 rm -f .mozconfig
 cp %{SOURCE10} .mozconfig
 
-%build
-cd %{sources_subdir}
+%apply_patches
 
+%build
+
+export CC=%__cc
+export CXX=%__cxx
 # Mozilla builds with -Wall with exception of a few warnings which show up
 # everywhere in the code; so, don't override that.
 #
@@ -165,20 +135,14 @@ export CXXFLAGS=$MOZ_OPT_FLAGS
 export PREFIX='%{_prefix}'
 export LIBDIR='%{_libdir}'
 
-MOZ_SMP_FLAGS=-j1
-%ifnarch ppc ppc64 s390 s390x
-[ -z "$RPM_BUILD_NCPUS" ] && \
-     RPM_BUILD_NCPUS="`/usr/bin/getconf _NPROCESSORS_ONLN`"
-[ "$RPM_BUILD_NCPUS" -gt 1 ] && MOZ_SMP_FLAGS=-j2
-%endif
+MOZ_SMP_FLAGS=%{_smp_mflags}
 
 make -f client.mk build STRIP="/bin/true" MOZ_MAKE_FLAGS="$MOZ_SMP_FLAGS" MOZ_PKG_FATAL_WARNINGS=0
 
 
 %install
-cd %{sources_subdir}
 
-DESTDIR=%{buildroot} make install
+DESTDIR=%{buildroot} make -f client.mk install
 
 # create a list of all of the different package and the files that
 # will hold them
@@ -198,50 +162,6 @@ rm -f %{buildroot}/%{mozdir}/plugins/libnullplugin.so
 
 # the %%makeinstall_std macro also install files that we don't need (yet?)
 rm -rf %{buildroot}%{_datadir}/idl
-
-# build all of the default browser components 
-# base Seamonkey package (seamonkey.list) 
-%{SOURCE7} --package xpcom --output-file %{builddir}/seamonkey.list \
-    --package-file suite/installer/package-manifest \
-    --install-dir %{buildroot}/%{mozdir} \
-    --install-root %{mozdir} \
-    --exclude-file=%{SOURCE18}
-
-%{SOURCE7} --package browser --output-file %{builddir}/seamonkey.list \
-    --package-file suite/installer/package-manifest \
-    --install-dir %{buildroot}/%{mozdir} \
-    --install-root %{mozdir}
-
-%{SOURCE7} --package spellcheck --output-file %{builddir}/seamonkey.list \
-    --package-file suite/installer/package-manifest \
-    --install-dir %{buildroot}/%{mozdir} \
-    --install-root %{mozdir}
-
-%{SOURCE7} --package psm --output-file %{builddir}/seamonkey.list \
-    --package-file suite/installer/package-manifest \
-    --install-dir %{buildroot}/%{mozdir} \
-    --install-root %{mozdir} \
-    --exclude-file=%{SOURCE17}
-
-%{SOURCE7} --package mail --output-file %{builddir}/seamonkey.list \
-    --package-file suite/installer/package-manifest \
-    --install-dir %{buildroot}/%{mozdir} \
-    --install-root %{mozdir}
-
-%{SOURCE7} --package chatzilla --output-file %{builddir}/seamonkey.list \
-    --package-file suite/installer/package-manifest \
-    --install-dir %{buildroot}/%{mozdir} \
-    --install-root %{mozdir}
-
-%{SOURCE7} --package venkman --output-file %{builddir}/seamonkey.list \
-    --package-file suite/installer/package-manifest \
-    --install-dir %{buildroot}/%{mozdir} \
-    --install-root %{mozdir}
-
-%{SOURCE7} --package inspector --output-file %{builddir}/seamonkey.list \
-    --package-file suite/installer/package-manifest \
-    --install-dir %{buildroot}/%{mozdir} \
-    --install-root %{mozdir}
 
 echo > ../%{name}.lang
 %if %{build_langpacks}
@@ -329,9 +249,6 @@ cat %{SOURCE3} | sed -e 's/MOZILLA_VERSION/%{version}/g' \
   %{buildroot}%{_bindir}/%{name}
 
 chmod 0755 %{buildroot}%{_bindir}/%{name}
-
-# fix unstripped-binary-or-object rpmlint error (needed in 2.16.2)
-chmod 0755 %{buildroot}/%{mozdir}/libxpcom.so
 
 # set up our default preferences
 cat %{SOURCE20} | %{__sed} -e 's,SEAMONKEY_RPM_VR,%{version}-%{release},g' > \
