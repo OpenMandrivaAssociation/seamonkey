@@ -35,6 +35,7 @@ ac_add_options --disable-updater
 #ac_add_options --enable-url-classifier
 ac_add_options --enable-gio
 ac_add_options --disable-gnomevfs
+ac_add_options --disable-gconf
 ac_add_options --enable-chrome-format=omni
 ac_add_options --disable-necko-wifi
 # added
