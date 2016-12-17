@@ -37,13 +37,13 @@ Source17:	mozilla-psm-exclude-list
 Source18:	mozilla-xpcom-exclude-list
 Source20:	%{name}-mandriva-default-prefs.js
 Patch1:		mozilla-42.0-libproxy.patch
+Patch2:		seamonkey-no_java.patch
 BuildRequires:	autoconf2.1
 BuildRequires:	coreutils
 BuildRequires:	desktop-file-utils
 BuildRequires:	doxygen
 BuildRequires:	gcc-c++
 BuildRequires:	imagemagick
-BuildRequires:	java-rpmbuild
 BuildRequires:	makedepend
 BuildRequires:	perl
 BuildRequires:	python
