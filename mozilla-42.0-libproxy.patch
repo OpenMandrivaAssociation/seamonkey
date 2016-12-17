@@ -1,0 +1,10 @@
+--- seamonkey-2.40/mozilla/toolkit/system/unixproxy/nsLibProxySettings.cpp.orig	2016-12-17 14:37:27.201959020 +0000
++++ seamonkey-2.40/mozilla/toolkit/system/unixproxy/nsLibProxySettings.cpp	2016-12-17 14:38:09.099508181 +0000
+@@ -10,6 +10,7 @@
+ #include "nsString.h"
+ #include "nsCOMPtr.h"
+ #include "nspr.h"
++#include "nsNetUtil.h"
+ 
+ extern "C" {
+ #include <proxy.h>
