@@ -38,6 +38,7 @@ Source18:	mozilla-xpcom-exclude-list
 Source20:	%{name}-mandriva-default-prefs.js
 Patch1:		mozilla-42.0-libproxy.patch
 Patch2:		seamonkey-no_java.patch
+Patch3:		firefox-gcc-6.0.patch
 BuildRequires:	autoconf2.1
 BuildRequires:	coreutils
 BuildRequires:	desktop-file-utils
@@ -121,8 +122,13 @@ cp %{SOURCE10} .mozconfig
 
 %build
 
+%ifarch %ix86
+export CC=gcc
+export CXX=g++
+%else
 export CC=%__cc
 export CXX=%__cxx
+%endif
 # Mozilla builds with -Wall with exception of a few warnings which show up
 # everywhere in the code; so, don't override that.
 #
