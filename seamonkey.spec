@@ -39,6 +39,7 @@ Source20:	%{name}-mandriva-default-prefs.js
 Patch1:		mozilla-42.0-libproxy.patch
 Patch2:		seamonkey-no_java.patch
 Patch3:		firefox-gcc-6.0.patch
+Patch4:		mozilla-1245076.patch
 BuildRequires:	autoconf2.1
 BuildRequires:	coreutils
 BuildRequires:	desktop-file-utils
@@ -128,6 +129,10 @@ export CXX=g++
 %else
 export CC=%__cc
 export CXX=%__cxx
+%endif
+%if %mdvver > 201500
+export CC=gcc
+export CXX=g++
 %endif
 # Mozilla builds with -Wall with exception of a few warnings which show up
 # everywhere in the code; so, don't override that.
