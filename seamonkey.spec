@@ -21,13 +21,13 @@
 
 Summary:	Web browser, e-mail, news, IRC client, HTML editor
 Name:		seamonkey
-Version:	2.46
+Version:	2.49.4
 Release:	1
 License:	MPLv1.1
 Group:		Networking/WWW
 Url:		http://http://www.seamonkey-project.org/
 Source0:	https://archive.mozilla.org/pub/seamonkey/releases/%{version}/source/seamonkey-%{version}.source.tar.xz
-Source1:	%{name}-langpacks-%{version}-20161222.tar.xz
+Source1:	%{name}-langpacks-%{version}.tar.xz
 Source2:	%{name}.png
 Source3:	%{name}.sh.in
 Source7:	%{name}-make-package.pl
@@ -37,7 +37,6 @@ Source17:	mozilla-psm-exclude-list
 Source18:	mozilla-xpcom-exclude-list
 Source20:	%{name}-mandriva-default-prefs.js
 Patch1:		mozilla-42.0-libproxy.patch
-Patch2:		firefox-50-mozilla-1290037.patch
 BuildRequires:	autoconf2.1
 BuildRequires:	coreutils
 BuildRequires:	desktop-file-utils
