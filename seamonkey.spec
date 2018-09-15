@@ -47,7 +47,6 @@ BuildRequires:	makedepend
 BuildRequires:	perl
 BuildRequires:	python
 BuildRequires:	python-setuptools
-BuildRequires:	python-simplejson
 BuildRequires:	python-virtualenv >= 1.7.2
 BuildRequires:	rootcerts
 BuildRequires:	unzip
