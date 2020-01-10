@@ -116,7 +116,7 @@ chmod +x %{SOURCE7}
 rm -f .mozconfig
 cp %{SOURCE10} .mozconfig
 
-%apply_patches
+%autopatch -p1
 
 %build
 
