@@ -7,7 +7,7 @@
 %define minimum_build_nspr_version 4.8.8
 %define minimum_build_nss_version 3.12.10
 
-%define build_langpacks 1
+%define build_langpacks 0
 
 %define builddir %{_builddir}/%{name}-%{version}
 %define mozdir %{_libdir}/%{name}-%{version}
@@ -21,7 +21,7 @@
 
 Summary:	Web browser, e-mail, news, IRC client, HTML editor
 Name:		seamonkey
-Version:	2.49.4
+Version:	2.53.10.2
 Release:	1
 License:	MPLv1.1
 Group:		Networking/WWW
