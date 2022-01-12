@@ -27,7 +27,7 @@ License:	MPLv1.1
 Group:		Networking/WWW
 Url:		http://http://www.seamonkey-project.org/
 Source0:	https://archive.mozilla.org/pub/seamonkey/releases/%{version}/source/seamonkey-%{version}.source.tar.xz
-Source1:	%{name}-langpacks-%{version}.tar.xz
+#Source1:	%{name}-langpacks-%{version}.tar.xz
 Source2:	%{name}.png
 Source3:	%{name}.sh.in
 Source7:	%{name}-make-package.pl
