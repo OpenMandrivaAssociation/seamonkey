@@ -56,6 +56,7 @@ BuildRequires:	rootcerts
 BuildRequires:	unzip
 BuildRequires:	valgrind
 BuildRequires:	wget
+BuildRequires:	nasm
 BuildRequires:	yasm
 BuildRequires:	zip
 
