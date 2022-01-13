@@ -4,8 +4,8 @@
 %define default_bookmarks_file %{_datadir}/bookmarks/default-bookmarks.html
 #define Werror_cflags %nil
 
-%define minimum_build_nspr_version 4.8.8
-%define minimum_build_nss_version 3.12.10
+%define minimum_build_nspr_version 4.12
+%define minimum_build_nss_version 3.25
 
 %define build_langpacks 0
 
@@ -32,12 +32,13 @@ Source2:	%{name}.png
 Source3:	%{name}.sh.in
 Source7:	%{name}-make-package.pl
 Source8:	bookmarks.html
-Source10:	%{name}-2.9.1-mozconfig
+#Source10:	%{name}-2.9.1-mozconfig
 Source17:	mozilla-psm-exclude-list
 Source18:	mozilla-xpcom-exclude-list
 Source20:	%{name}-mandriva-default-prefs.js
-#Patch1:		mozilla-42.0-libproxy.patch
+
 BuildRequires:	autoconf2.1
+BuildRequires:	cargo
 BuildRequires:	coreutils
 BuildRequires:	desktop-file-utils
 BuildRequires:	doxygen
@@ -114,23 +115,44 @@ application formerly known as Mozilla Application Suite.
 chmod +x %{SOURCE7}
 
 rm -f .mozconfig
-cp %{SOURCE10} .mozconfig
 
 %autopatch -p1
 
 %build
 
-%ifarch %ix86
-export CC=gcc
-export CXX=g++
-%else
+MOZ_OPT_FLAGS='%{optflags}'
+export CFLAGS=$MOZ_OPT_FLAGS
+export CXXFLAGS=$MOZ_OPT_FLAGS
+export LDFLAGS="-Wl,--no-keep-memory"
+export BUILD_OFFICIAL=1
+export MOZILLA_OFFICIAL=1
+echo "mk_add_options BUILD_OFFICIAL=1" >> .mozconfig
+echo "mk_add_options MOZILLA_OFFICIAL=1" >> .mozconfig
+echo "mk_add_options MOZ_MAKE_FLAGS=%{_smp_mflags}" >> .mozconfig
+echo "mk_add_options MOZ_OBJDIR=../obj-@CONFIG_GUESS@" >> .mozconfig
+echo "ac_add_options --host=%{_host}" >> .mozconfig
+echo "ac_add_options --prefix=%{_prefix}" >> .mozconfig
+echo "ac_add_options --libdir=%{_libdir}" >> .mozconfig
+echo "ac_add_options --enable-application=comm/suite" >> .mozconfig
+echo "ac_add_options --enable-optimize=-O2" >> .mozconfig
+echo "ac_add_options --enable-release" >> .mozconfig
+echo "ac_add_options --enable-default-toolkit=cairo-gtk3" >> .mozconfig 
+echo "ac_add_options --disable-updater" >> .mozconfig
+echo "ac_add_options --disable-crashreporter" >> .mozconfig
+echo "ac_add_options --with-irc" >> .mozconfig
+echo "ac_add_options --with-dominspector" >> .mozconfig
+echo "ac_add_options --enable-calendar" >> .mozconfig
+echo "ac_add_options --with-system-nspr" >> .mozconfig
+echo "ac_add_options --with-system-nss" >> .mozconfig
+echo "ac_add_options --with-system-zlib" >> .mozconfig
+echo "ac_add_options --disable-tests" >> .mozconfig
+echo "ac_add_options --disable-install-strip" >> .mozconfig
+echo "ac_add_options --enable-js-shell" >> .mozconfig
+
+
 export CC=%__cc
 export CXX=%__cxx
-%endif
-%if %mdvver > 201500
-export CC=gcc
-export CXX=g++
-%endif
+
 # Mozilla builds with -Wall with exception of a few warnings which show up
 # everywhere in the code; so, don't override that.
 #
@@ -146,7 +168,9 @@ export LIBDIR='%{_libdir}'
 
 MOZ_SMP_FLAGS=%{_smp_mflags}
 
-make -f client.mk build STRIP="/bin/true" MOZ_MAKE_FLAGS="$MOZ_SMP_FLAGS" MOZ_PKG_FATAL_WARNINGS=0
+./mach build
+
+#make -f client.mk build STRIP="/bin/true" MOZ_MAKE_FLAGS="$MOZ_SMP_FLAGS" MOZ_PKG_FATAL_WARNINGS=0
 
 
 %install
