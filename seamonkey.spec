@@ -36,7 +36,7 @@ Source10:	%{name}-2.9.1-mozconfig
 Source17:	mozilla-psm-exclude-list
 Source18:	mozilla-xpcom-exclude-list
 Source20:	%{name}-mandriva-default-prefs.js
-Patch1:		mozilla-42.0-libproxy.patch
+#Patch1:		mozilla-42.0-libproxy.patch
 BuildRequires:	autoconf2.1
 BuildRequires:	coreutils
 BuildRequires:	desktop-file-utils
