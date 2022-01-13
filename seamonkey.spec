@@ -49,7 +49,7 @@ BuildRequires:	perl
 BuildRequires:	python
 BuildRequires:	pkgconfig(python2)
 BuildRequires:	python2-setuptools
-BuildRequires:	python2-simplejson
+#BuildRequires:	python2-simplejson
 BuildRequires:	python-setuptools
 BuildRequires:	python-virtualenv >= 1.7.2
 BuildRequires:	rootcerts
