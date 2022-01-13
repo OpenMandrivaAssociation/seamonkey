@@ -180,7 +180,11 @@ MOZ_SMP_FLAGS=%{_smp_mflags}
 
 %install
 
-DESTDIR=%{buildroot} make -f client.mk install
+#DESTDIR=%{buildroot} make -f client.mk install
+
+pushd ../obj-*
+%make_install
+popd
 
 # create a list of all of the different package and the files that
 # will hold them
