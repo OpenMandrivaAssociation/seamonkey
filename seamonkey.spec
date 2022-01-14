@@ -1,4 +1,4 @@
-%define homepage http://www.openmandriva.org/
+%define homepage https://www.openmandriva.org/
 
 %define _disable_lto 1
 %define default_bookmarks_file %{_datadir}/bookmarks/default-bookmarks.html
