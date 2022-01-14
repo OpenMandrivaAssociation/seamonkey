@@ -177,14 +177,7 @@ MOZ_SMP_FLAGS=%{_smp_mflags}
 
 ./mach build
 
-make -j1 locales
-
-#make -f client.mk build STRIP="/bin/true" MOZ_MAKE_FLAGS="$MOZ_SMP_FLAGS" MOZ_PKG_FATAL_WARNINGS=0
-
-
 %install
-
-#DESTDIR=%{buildroot} make -f client.mk install
 
 pushd ../obj-*
 %make_install
