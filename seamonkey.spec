@@ -32,10 +32,10 @@ Source2:	%{name}.png
 Source3:	%{name}.sh.in
 Source7:	%{name}-make-package.pl
 Source8:	bookmarks.html
-#Source10:	%{name}-2.9.1-mozconfig
 Source17:	mozilla-psm-exclude-list
 Source18:	mozilla-xpcom-exclude-list
-Source20:	%{name}-mandriva-default-prefs.js
+# No more config for Mandriva
+#Source20:	%{name}-mandriva-default-prefs.js
 
 BuildRequires:	autoconf2.1
 BuildRequires:	cargo
@@ -49,7 +49,6 @@ BuildRequires:	perl
 BuildRequires:	python
 BuildRequires:	pkgconfig(python2)
 BuildRequires:	python2-setuptools
-#BuildRequires:	python2-simplejson
 BuildRequires:	python-setuptools
 BuildRequires:	python-virtualenv >= 1.7.2
 BuildRequires:	rootcerts
@@ -59,7 +58,6 @@ BuildRequires:	wget
 BuildRequires:	nasm
 BuildRequires:	yasm
 BuildRequires:	zip
-
 
 BuildRequires:	jpeg-devel
 BuildRequires:	krb5-devel
@@ -153,6 +151,7 @@ echo "ac_add_options --with-system-zlib" >> .mozconfig
 echo "ac_add_options --disable-tests" >> .mozconfig
 echo "ac_add_options --disable-install-strip" >> .mozconfig
 echo "ac_add_options --enable-js-shell" >> .mozconfig
+echo "ac_add_options --enable-calendar" >> .mozconfig
 
 
 export CC=%__cc
