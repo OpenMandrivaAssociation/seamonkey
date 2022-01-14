@@ -118,10 +118,6 @@ application formerly known as Mozilla Application Suite.
 %setup -q
 chmod +x %{SOURCE7}
 
-mv %{sources_subdir} mozilla
-%setup -q -T -D -c -n %{name}-%{version}/l10n -a 1
-cd mozilla
-
 rm -f .mozconfig
 
 %autopatch -p1
@@ -177,8 +173,6 @@ export PREFIX='%{_prefix}'
 export LIBDIR='%{_libdir}'
 
 MOZ_SMP_FLAGS=%{_smp_mflags}
-
-cd mozilla
 
 ./mach build
 
