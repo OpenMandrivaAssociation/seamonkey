@@ -274,8 +274,8 @@ mkdir -p %{buildroot}{%{_liconsdir},%{_iconsdir},%{_miconsdir}}
 install -m 644 %{SOURCE2} %{buildroot}%{_miconsdir}/%{name}.png
 install -m 644 %{SOURCE2} %{buildroot}%{_iconsdir}/%{name}.png
 install -m 644 %{SOURCE2} %{buildroot}%{_liconsdir}/%{name}.png
-convert %{buildroot}%{_miconsdir}/%{name}.png -resize 16x16 %{buildroot}%{_miconsdir}/%{name}.png
-convert %{buildroot}%{_iconsdir}/%{name}.png -resize 32x32 %{buildroot}%{_iconsdir}/%{name}.png
+#convert %{buildroot}%{_miconsdir}/%{name}.png -resize 16x16 %{buildroot}%{_miconsdir}/%{name}.png
+#convert %{buildroot}%{_iconsdir}/%{name}.png -resize 32x32 %{buildroot}%{_iconsdir}/%{name}.png
 
 
 #Link to existing plugins
