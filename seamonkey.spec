@@ -293,10 +293,13 @@ cat %{SOURCE3} | sed -e 's/MOZILLA_VERSION/%{version}/g' \
 chmod 0755 %{buildroot}%{_bindir}/%{name}
 
 # set up our default preferences
-cat %{SOURCE20} | %{__sed} -e 's,SEAMONKEY_RPM_VR,%{version}-%{release},g' > \
-        %{buildroot}/mdv-default-prefs
-cp %{buildroot}/mdv-default-prefs %{buildroot}/%{mozdir}/defaults/pref/all-mandriva.js
-rm %{buildroot}/mdv-default-prefs
+cp -fr %{SOURCE20} %{buildroot}%{mozdir}/defaults/pref/all-mandriva.js
+sed -i -e 's,SEAMONKEY_RPM_VR,%{version}-%{release},g' %{buildroot}%{mozdir}/defaults/pref/all-mandriva.js
+
+#cat %{SOURCE20} | %{__sed} -e 's,SEAMONKEY_RPM_VR,%{version}-%{release},g' > \
+#        %{buildroot}/mdv-default-prefs
+#cp %{buildroot}/mdv-default-prefs %{buildroot}/%{mozdir}/defaults/pref/all-mandriva.js
+#rm %{buildroot}/mdv-default-prefs
 
 # set up our default bookmarks
 rm -f %{buildroot}/%{mozdir}/defaults/profile/bookmarks.html
