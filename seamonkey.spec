@@ -27,6 +27,7 @@ License:	MPLv1.1
 Group:		Networking/WWW
 Url:		http://http://www.seamonkey-project.org/
 Source0:	https://archive.mozilla.org/pub/seamonkey/releases/%{version}/source/seamonkey-%{version}.source.tar.xz
+Source1:	https://archive.mozilla.org/pub/seamonkey/releases/%{version}/source/seamonkey-%{version}.source-l10n.tar.xz
 #Source1:	%{name}-langpacks-%{version}.tar.xz
 Source2:	%{name}.png
 Source3:	%{name}.sh.in
@@ -117,6 +118,10 @@ application formerly known as Mozilla Application Suite.
 %setup -q
 chmod +x %{SOURCE7}
 
+mv %{sources_subdir} mozilla
+%setup -q -T -D -c -n %{name}-%{version}/l10n -a 1
+cd mozilla
+
 rm -f .mozconfig
 
 %autopatch -p1
@@ -152,6 +157,7 @@ echo "ac_add_options --disable-tests" >> .mozconfig
 echo "ac_add_options --disable-install-strip" >> .mozconfig
 echo "ac_add_options --enable-js-shell" >> .mozconfig
 echo "ac_add_options --enable-calendar" >> .mozconfig
+echo "ac_add_options --with-l10n-base=$RPM_BUILD_DIR/seamonkey-%{version}/l10n" >> .mozconfig
 
 
 export CC=%__cc
@@ -172,7 +178,11 @@ export LIBDIR='%{_libdir}'
 
 MOZ_SMP_FLAGS=%{_smp_mflags}
 
+cd mozilla
+
 ./mach build
+
+make -j1 locales
 
 #make -f client.mk build STRIP="/bin/true" MOZ_MAKE_FLAGS="$MOZ_SMP_FLAGS" MOZ_PKG_FATAL_WARNINGS=0
 
