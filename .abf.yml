@@ -1,4 +1,5 @@
 sources:
-  seamonkey-2.49.4.source.tar.xz: e9fa6d1c57e9141a299f6ec093683fb105ea6657
+  seamonkey-2.53.10.2.source.tar.xz: 9224a08ec105d3fe64e5c09213a759edaa093868
   seamonkey-langpacks-2.49.4.tar.xz: b9147c003d946d90bb1e3671f022b8e335fec7d1
-  seamonkey.png: a48fae5c81796b8dfff06314160303c085e06a22
+  #seamonkey.png: a48fae5c81796b8dfff06314160303c085e06a22
+  seamonkey-2.53.10.2.source-l10n.tar.xz: dff69d13485ce1f11ad045192d2d93ec25d1a8d9

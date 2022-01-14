@@ -1,13 +1,13 @@
-%define homepage http://www.openmandriva.org/
+%define homepage https://www.openmandriva.org/
 
 %define _disable_lto 1
 %define default_bookmarks_file %{_datadir}/bookmarks/default-bookmarks.html
 #define Werror_cflags %nil
 
-%define minimum_build_nspr_version 4.8.8
-%define minimum_build_nss_version 3.12.10
+%define minimum_build_nspr_version 4.12
+%define minimum_build_nss_version 3.25
 
-%define build_langpacks 1
+%define build_langpacks 0
 
 %define builddir %{_builddir}/%{name}-%{version}
 %define mozdir %{_libdir}/%{name}-%{version}
@@ -21,23 +21,25 @@
 
 Summary:	Web browser, e-mail, news, IRC client, HTML editor
 Name:		seamonkey
-Version:	2.49.4
+Version:	2.53.10.2
 Release:	1
 License:	MPLv1.1
 Group:		Networking/WWW
 Url:		http://http://www.seamonkey-project.org/
 Source0:	https://archive.mozilla.org/pub/seamonkey/releases/%{version}/source/seamonkey-%{version}.source.tar.xz
-Source1:	%{name}-langpacks-%{version}.tar.xz
+Source1:	https://archive.mozilla.org/pub/seamonkey/releases/%{version}/source/seamonkey-%{version}.source-l10n.tar.xz
+#Source1:	%{name}-langpacks-%{version}.tar.xz
 Source2:	%{name}.png
 Source3:	%{name}.sh.in
 Source7:	%{name}-make-package.pl
 Source8:	bookmarks.html
-Source10:	%{name}-2.9.1-mozconfig
 Source17:	mozilla-psm-exclude-list
 Source18:	mozilla-xpcom-exclude-list
-Source20:	%{name}-mandriva-default-prefs.js
-Patch1:		mozilla-42.0-libproxy.patch
+# No more config for Mandriva
+#Source20:	%{name}-mandriva-default-prefs.js
+
 BuildRequires:	autoconf2.1
+BuildRequires:	cargo
 BuildRequires:	coreutils
 BuildRequires:	desktop-file-utils
 BuildRequires:	doxygen
@@ -46,15 +48,17 @@ BuildRequires:	imagemagick
 BuildRequires:	makedepend
 BuildRequires:	perl
 BuildRequires:	python
+BuildRequires:	pkgconfig(python2)
+BuildRequires:	python2-setuptools
 BuildRequires:	python-setuptools
 BuildRequires:	python-virtualenv >= 1.7.2
 BuildRequires:	rootcerts
 BuildRequires:	unzip
 BuildRequires:	valgrind
 BuildRequires:	wget
+BuildRequires:	nasm
 BuildRequires:	yasm
 BuildRequires:	zip
-
 
 BuildRequires:	jpeg-devel
 BuildRequires:	krb5-devel
@@ -65,6 +69,7 @@ BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(cairo)
 BuildRequires:	pkgconfig(dbus-glib-1)
 BuildRequires:	pkgconfig(freetype2)
+BuildRequires:	pkgconfig(gconf-2.0)
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gstreamer-1.0)
@@ -114,23 +119,49 @@ application formerly known as Mozilla Application Suite.
 chmod +x %{SOURCE7}
 
 rm -f .mozconfig
-cp %{SOURCE10} .mozconfig
 
 %autopatch -p1
 
 %build
 
-%ifarch %ix86
-export CC=gcc
-export CXX=g++
-%else
+MOZ_OPT_FLAGS='%{optflags}'
+export CFLAGS=$MOZ_OPT_FLAGS
+export CXXFLAGS=$MOZ_OPT_FLAGS
+export LDFLAGS="-Wl,--no-keep-memory"
+export BUILD_OFFICIAL=1
+export MOZILLA_OFFICIAL=1
+echo "mk_add_options BUILD_OFFICIAL=1" >> .mozconfig
+echo "mk_add_options MOZILLA_OFFICIAL=1" >> .mozconfig
+echo "mk_add_options MOZ_MAKE_FLAGS=%{_smp_mflags}" >> .mozconfig
+echo "mk_add_options MOZ_OBJDIR=../obj-@CONFIG_GUESS@" >> .mozconfig
+echo "ac_add_options --host=%{_host}" >> .mozconfig
+echo "ac_add_options --prefix=%{_prefix}" >> .mozconfig
+echo "ac_add_options --libdir=%{_libdir}" >> .mozconfig
+echo "ac_add_options --enable-application=comm/suite" >> .mozconfig
+echo "ac_add_options --enable-optimize=-O2" >> .mozconfig
+echo "ac_add_options --enable-release" >> .mozconfig
+echo "ac_add_options --enable-default-toolkit=cairo-gtk3" >> .mozconfig 
+echo "ac_add_options --disable-updater" >> .mozconfig
+echo "ac_add_options --disable-crashreporter" >> .mozconfig
+echo "ac_add_options --with-irc" >> .mozconfig
+echo "ac_add_options --with-dominspector" >> .mozconfig
+echo "ac_add_options --enable-calendar" >> .mozconfig
+echo "ac_add_options --with-system-nspr" >> .mozconfig
+echo "ac_add_options --with-system-nss" >> .mozconfig
+echo "ac_add_options --with-system-zlib" >> .mozconfig
+echo "ac_add_options --disable-tests" >> .mozconfig
+echo "ac_add_options --disable-install-strip" >> .mozconfig
+echo "ac_add_options --enable-js-shell" >> .mozconfig
+echo "ac_add_options --enable-calendar" >> .mozconfig
+echo "ac_add_options --enable-dominspector" >> .mozconfig
+echo "ac_add_options --enable-irc" >> .mozconfig
+# Not ready yet
+#echo "ac_add_options --with-l10n-base=$RPM_BUILD_DIR/seamonkey-%{version}/l10n" >> .mozconfig
+
+
 export CC=%__cc
 export CXX=%__cxx
-%endif
-%if %mdvver > 201500
-export CC=gcc
-export CXX=g++
-%endif
+
 # Mozilla builds with -Wall with exception of a few warnings which show up
 # everywhere in the code; so, don't override that.
 #
@@ -146,12 +177,13 @@ export LIBDIR='%{_libdir}'
 
 MOZ_SMP_FLAGS=%{_smp_mflags}
 
-make -f client.mk build STRIP="/bin/true" MOZ_MAKE_FLAGS="$MOZ_SMP_FLAGS" MOZ_PKG_FATAL_WARNINGS=0
-
+./mach build
 
 %install
 
-DESTDIR=%{buildroot} make -f client.mk install
+pushd ../obj-*
+%make_install
+popd
 
 # create a list of all of the different package and the files that
 # will hold them
@@ -241,15 +273,15 @@ mkdir -p %{buildroot}{%{_liconsdir},%{_iconsdir},%{_miconsdir}}
 install -m 644 %{SOURCE2} %{buildroot}%{_miconsdir}/%{name}.png
 install -m 644 %{SOURCE2} %{buildroot}%{_iconsdir}/%{name}.png
 install -m 644 %{SOURCE2} %{buildroot}%{_liconsdir}/%{name}.png
-convert %{buildroot}%{_miconsdir}/%{name}.png -resize 16x16 %{buildroot}%{_miconsdir}/%{name}.png
-convert %{buildroot}%{_iconsdir}/%{name}.png -resize 32x32 %{buildroot}%{_iconsdir}/%{name}.png
+#convert %{buildroot}%{_miconsdir}/%{name}.png -resize 16x16 %{buildroot}%{_miconsdir}/%{name}.png
+#convert %{buildroot}%{_iconsdir}/%{name}.png -resize 32x32 %{buildroot}%{_iconsdir}/%{name}.png
 
 
 #Link to existing plugins
-if [ -d %{buildroot}/%{mozdir}/plugins ]; then
-rm -rf %{buildroot}/%{mozdir}/plugins
-fi
-ln -s %{_libdir}/mozilla/plugins %{buildroot}/%{mozdir}/plugins
+#if [ -d %{buildroot}/%{mozdir}/plugins ]; then
+#rm -rf %{buildroot}/%{mozdir}/plugins
+#fi
+#ln -s %{_libdir}/mozilla/plugins %{buildroot}/%{mozdir}/plugins
 
 # install our seamonkey.sh file
 rm -rf %{buildroot}/usr/bin/%{name}
@@ -260,10 +292,10 @@ cat %{SOURCE3} | sed -e 's/MOZILLA_VERSION/%{version}/g' \
 chmod 0755 %{buildroot}%{_bindir}/%{name}
 
 # set up our default preferences
-cat %{SOURCE20} | %{__sed} -e 's,SEAMONKEY_RPM_VR,%{version}-%{release},g' > \
-        %{buildroot}/mdv-default-prefs
-cp %{buildroot}/mdv-default-prefs %{buildroot}/%{mozdir}/defaults/pref/all-mandriva.js
-rm %{buildroot}/mdv-default-prefs
+#cat %{SOURCE20} | %{__sed} -e 's,SEAMONKEY_RPM_VR,%{version}-%{release},g' > \
+#        %{buildroot}/mdv-default-prefs
+#cp %{buildroot}/mdv-default-prefs %{buildroot}/%{mozdir}/defaults/pref/all-mandriva.js
+#rm %{buildroot}/mdv-default-prefs
 
 # set up our default bookmarks
 rm -f %{buildroot}/%{mozdir}/defaults/profile/bookmarks.html
@@ -282,7 +314,7 @@ rm -rf %{buildroot}%{_includedir}
 %files
 %{_bindir}/%{name}
 %{_datadir}/pixmaps/%{name}.png
-%{mozdir}
+%{_libdir}/seamonkey/
 %{_datadir}/applications/*.desktop
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
