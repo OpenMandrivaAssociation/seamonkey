@@ -153,6 +153,8 @@ echo "ac_add_options --disable-tests" >> .mozconfig
 echo "ac_add_options --disable-install-strip" >> .mozconfig
 echo "ac_add_options --enable-js-shell" >> .mozconfig
 echo "ac_add_options --enable-calendar" >> .mozconfig
+echo "ac_add_options --enable-dominspector" >> .mozconfig
+echo "ac_add_options --enable-irc" >> .mozconfig
 # Not ready yet
 #echo "ac_add_options --with-l10n-base=$RPM_BUILD_DIR/seamonkey-%{version}/l10n" >> .mozconfig
 
