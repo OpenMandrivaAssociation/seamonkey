@@ -315,7 +315,7 @@ rm -rf %{buildroot}%{_includedir}
 %files
 %{_bindir}/%{name}
 %{_datadir}/pixmaps/%{name}.png
-%{mozdir}
+#{mozdir}
 %{_datadir}/applications/*.desktop
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
