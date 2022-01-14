@@ -279,10 +279,10 @@ install -m 644 %{SOURCE2} %{buildroot}%{_liconsdir}/%{name}.png
 
 
 #Link to existing plugins
-if [ -d %{buildroot}/%{mozdir}/plugins ]; then
-rm -rf %{buildroot}/%{mozdir}/plugins
-fi
-ln -s %{_libdir}/mozilla/plugins %{buildroot}/%{mozdir}/plugins
+#if [ -d %{buildroot}/%{mozdir}/plugins ]; then
+#rm -rf %{buildroot}/%{mozdir}/plugins
+#fi
+#ln -s %{_libdir}/mozilla/plugins %{buildroot}/%{mozdir}/plugins
 
 # install our seamonkey.sh file
 rm -rf %{buildroot}/usr/bin/%{name}
