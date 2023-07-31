@@ -40,6 +40,7 @@ Source18:	mozilla-xpcom-exclude-list
 
 BuildRequires:	autoconf2.1
 BuildRequires:	cargo
+BuildRequires:	cbindgen
 BuildRequires:	coreutils
 BuildRequires:	desktop-file-utils
 BuildRequires:	doxygen
