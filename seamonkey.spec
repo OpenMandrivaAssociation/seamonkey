@@ -45,6 +45,7 @@ BuildRequires:	coreutils
 BuildRequires:	desktop-file-utils
 BuildRequires:	doxygen
 BuildRequires:	clang-devel
+BuildRequires:	llvm-devel
 BuildRequires:	gcc-c++
 BuildRequires:	imagemagick
 BuildRequires:	makedepend
