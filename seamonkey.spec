@@ -62,7 +62,7 @@ BuildRequires:	zip
 
 BuildRequires:	jpeg-devel
 BuildRequires:	krb5-devel
-BuildRequires:	libiw-devel
+#BuildRequires:	libiw-devel
 BuildRequires:	nss-static-devel
 
 BuildRequires:	pkgconfig(alsa)
