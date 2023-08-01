@@ -51,9 +51,8 @@ BuildRequires:	imagemagick
 BuildRequires:	makedepend
 BuildRequires:	perl
 BuildRequires:	python
-BuildRequires:	pkgconfig(python2)
-BuildRequires:	python2-setuptools
-BuildRequires:	python-setuptools
+BuildRequires:	pkgconfig(python3)
+BuildRequires:	python%{pyver}dist(setuptools)
 BuildRequires:	python-virtualenv >= 1.7.2
 BuildRequires:	rootcerts
 BuildRequires:	unzip
@@ -158,12 +157,13 @@ echo "ac_add_options --enable-js-shell" >> .mozconfig
 echo "ac_add_options --enable-calendar" >> .mozconfig
 echo "ac_add_options --enable-dominspector" >> .mozconfig
 echo "ac_add_options --enable-irc" >> .mozconfig
+echo "ac_add_options --disable-elf-hack" >> .mozconfig
 # Not ready yet
 #echo "ac_add_options --with-l10n-base=$RPM_BUILD_DIR/seamonkey-%{version}/l10n" >> .mozconfig
 
 
-export CC=%__cc
-export CXX=%__cxx
+export CC="%__cc"
+export CXX="%__cxx"
 
 # Mozilla builds with -Wall with exception of a few warnings which show up
 # everywhere in the code; so, don't override that.
