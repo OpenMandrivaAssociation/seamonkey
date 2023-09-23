@@ -21,7 +21,7 @@
 
 Summary:	Web browser, e-mail, news, IRC client, HTML editor
 Name:		seamonkey
-Version:	2.53.17
+Version:	2.53.17.1
 Release:	1
 License:	MPLv1.1
 Group:		Networking/WWW
@@ -87,6 +87,7 @@ BuildRequires:	pkgconfig(libnotify)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(libproxy-1.0)
 BuildRequires:	pkgconfig(libstartup-notification-1.0)
+BuildRequires:  pkgconfig(libssh2)
 BuildRequires:	pkgconfig(nspr)
 BuildRequires:	pkgconfig(nss)
 BuildRequires:	pkgconfig(pango)
