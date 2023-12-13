@@ -21,7 +21,7 @@
 
 Summary:	Web browser, e-mail, news, IRC client, HTML editor
 Name:		seamonkey
-Version:	2.53.17.1
+Version:	2.53.18
 Release:	1
 License:	MPLv1.1
 Group:		Networking/WWW
