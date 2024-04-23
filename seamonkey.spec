@@ -56,7 +56,7 @@ BuildRequires:	python%{pyver}dist(setuptools)
 BuildRequires:	python-virtualenv >= 1.7.2
 BuildRequires:	rootcerts
 BuildRequires:	unzip
-BuildRequires:	valgrind
+#BuildRequires:	valgrind
 BuildRequires:	wget
 BuildRequires:	which
 BuildRequires:	nasm
