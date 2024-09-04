@@ -21,13 +21,13 @@
 
 Summary:	Web browser, e-mail, news, IRC client, HTML editor
 Name:		seamonkey
-Version:	2.53.18.2
+Version:	2.53.19
 Release:	1
 License:	MPLv1.1
 Group:		Networking/WWW
 Url:		https://http://www.seamonkey-project.org/
-Source0:	https://archive.mozilla.org/pub/seamonkey/releases/%{version}/source/seamonkey-%{version}.source.tar.xz
-Source1:	https://archive.mozilla.org/pub/seamonkey/releases/%{version}/source/seamonkey-%{version}.source-l10n.tar.xz
+Source0:	https://archive.seamonkey-project.org/releases/%{version}/source/seamonkey-%{version}.source.tar.xz
+Source1:	https://archive.seamonkey-project.org/releases/%{version}/source/seamonkey-%{version}.source-l10n.tar.xz
 #Source1:	%{name}-langpacks-%{version}.tar.xz
 Source2:	%{name}.png
 Source3:	%{name}.sh.in
