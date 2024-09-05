@@ -127,6 +127,7 @@ rm -f .mozconfig
 %autopatch -p1
 
 %build
+sed -i -e 's/python3/python3.11/' mach configure
 
 MOZ_OPT_FLAGS='%{optflags}'
 export CFLAGS=$MOZ_OPT_FLAGS
